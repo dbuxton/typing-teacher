@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Nunito', 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  --color-sky-bg: #eef6ff;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: linear-gradient(180deg, #eef6ff 0%, #f6f2ff 100%);
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  /* A kid holding a key down shouldn't select the whole page. */
+  user-select: none;
+}
+
+/* The typing text is the one thing on screen that must be effortless to read. */
+.type-text {
+  font-family: 'Courier New', ui-monospace, monospace;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+@keyframes pulse-key {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.06); }
+}
+
+.key-next {
+  animation: pulse-key 1s ease-in-out infinite;
+}
+
+@keyframes star-drift {
+  0% { transform: translateX(-10%) translateY(0) rotate(-10deg); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(110%) translateY(-14px) rotate(20deg); opacity: 0; }
+}
+
+.sneaky-star {
+  animation: star-drift 1.2s linear forwards;
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pop-in {
+  animation: pop-in 0.35s ease-out both;
+}
+
+@keyframes wobble {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.wobble {
+  animation: wobble 0.25s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key-next,
+  .sneaky-star,
+  .pop-in,
+  .wobble {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}

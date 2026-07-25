@@ -1,0 +1,203 @@
+/**
+ * Words that trip up 7-9 year olds. British spellings — see `locale` in the save
+ * file if you ever need American ones.
+ *
+ * `minLevel` keeps a word out of the pool until its letters are all typeable.
+ * `hint` is a sentence shown on the reveal card with the word in place, so the kid
+ * meets the word in context rather than as an abstract string.
+ */
+
+export type SpellingWord = {
+  word: string
+  minLevel: number
+  hint: string
+}
+
+export const SPELLING_WORDS: SpellingWord[] = [
+  // --- available from level 6 (home row + e i r u t y g h) ---
+  { word: 'said', minLevel: 3, hint: 'She ___ hello to me.' },
+  { word: 'they', minLevel: 6, hint: '___ are my best friends.' },
+  { word: 'their', minLevel: 6, hint: 'It was ___ turn to play.' },
+  { word: 'there', minLevel: 6, hint: 'Put it over ___.' },
+  { word: 'here', minLevel: 6, hint: 'Come and sit ___.' },
+  { word: 'the', minLevel: 6, hint: '___ dog is asleep.' },
+  { word: 'that', minLevel: 6, hint: 'I like ___ one.' },
+  { word: 'this', minLevel: 6, hint: '___ is my house.' },
+  { word: 'shall', minLevel: 6, hint: '___ we go outside?' },
+  { word: 'eight', minLevel: 6, hint: 'I am ___ years old.' },
+  { word: 'great', minLevel: 6, hint: 'You did a ___ job!' },
+  { word: 'right', minLevel: 6, hint: 'Turn ___ at the shop.' },
+  { word: 'light', minLevel: 6, hint: 'Please turn on the ___.' },
+  { word: 'height', minLevel: 6, hint: 'We measured my ___.' },
+  { word: 'daughter', minLevel: 6, hint: 'She is his ___.' },
+  { word: 'laugh', minLevel: 6, hint: 'That joke made me ___.' },
+  { word: 'straight', minLevel: 6, hint: 'Draw a ___ line.' },
+  { word: 'thirsty', minLevel: 6, hint: 'Running makes me ___.' },
+
+  // --- level 7 adds o and n ---
+  { word: 'friend', minLevel: 7, hint: 'My best ___ came to play.' },
+  { word: 'thought', minLevel: 7, hint: 'I ___ it was Tuesday.' },
+  { word: 'through', minLevel: 7, hint: 'We walked ___ the tunnel.' },
+  { word: 'though', minLevel: 7, hint: 'It rained, ___ we still went out.' },
+  { word: 'enough', minLevel: 7, hint: 'I have had ___ dinner.' },
+  { word: 'again', minLevel: 7, hint: 'Can we play it ___?' },
+  { word: 'against', minLevel: 7, hint: 'Lean the bike ___ the wall.' },
+  { word: 'another', minLevel: 7, hint: 'Can I have ___ go?' },
+  { word: 'nothing', minLevel: 7, hint: 'There is ___ in the box.' },
+  { word: 'often', minLevel: 7, hint: 'We ___ go swimming.' },
+  { word: 'does', minLevel: 7, hint: 'What ___ this button do?' },
+  { word: 'done', minLevel: 7, hint: 'I have ___ my homework.' },
+  { word: 'goes', minLevel: 7, hint: 'She ___ to my school.' },
+  { word: 'front', minLevel: 7, hint: 'Stand at the ___ of the line.' },
+  { word: 'those', minLevel: 7, hint: 'I want ___ shoes.' },
+  { word: 'holiday', minLevel: 7, hint: 'We are going on ___.' },
+  { word: 'together', minLevel: 7, hint: 'Let us do it ___.' },
+  { word: 'young', minLevel: 7, hint: 'The puppy is very ___.' },
+  { word: 'earth', minLevel: 6, hint: 'We live on planet ___.' },
+  { word: 'heard', minLevel: 6, hint: 'I ___ a strange noise.' },
+  { word: 'learn', minLevel: 7, hint: 'I want to ___ to type.' },
+  { word: 'other', minLevel: 7, hint: 'Where is my ___ sock?' },
+  { word: 'father', minLevel: 6, hint: 'My ___ makes good soup.' },
+  { word: 'thirteen', minLevel: 7, hint: 'Ten plus three is ___.' },
+
+  // --- level 8 adds c, v, m ---
+  { word: 'because', minLevel: 10, hint: 'I am tired ___ I stayed up late.' },
+  { word: 'come', minLevel: 8, hint: 'Please ___ inside.' },
+  { word: 'some', minLevel: 8, hint: 'Can I have ___ juice?' },
+  { word: 'something', minLevel: 8, hint: 'I have ___ to tell you.' },
+  { word: 'sometimes', minLevel: 8, hint: '___ I forget my lunch.' },
+  { word: 'money', minLevel: 8, hint: 'I saved my pocket ___.' },
+  { word: 'many', minLevel: 8, hint: 'How ___ apples are there?' },
+  { word: 'much', minLevel: 8, hint: 'That is too ___ cake.' },
+  { word: 'move', minLevel: 8, hint: 'Can you ___ over a bit?' },
+  { word: 'love', minLevel: 8, hint: 'I ___ my cat.' },
+  { word: 'have', minLevel: 8, hint: 'I ___ two brothers.' },
+  { word: 'give', minLevel: 8, hint: 'Please ___ it back.' },
+  { word: 'live', minLevel: 8, hint: 'We ___ near the park.' },
+  { word: 'every', minLevel: 8, hint: 'I brush my teeth ___ day.' },
+  { word: 'everyone', minLevel: 8, hint: '___ is invited.' },
+  { word: 'very', minLevel: 8, hint: 'It is ___ cold today.' },
+  { word: 'centre', minLevel: 8, hint: 'Stand in the ___ of the room.' },
+  { word: 'once', minLevel: 8, hint: '___ upon a time.' },
+  { word: 'chocolate', minLevel: 8, hint: 'I ate the whole ___ bar.' },
+  { word: 'favourite', minLevel: 8, hint: 'Blue is my ___ colour.' },
+  { word: 'different', minLevel: 7, hint: 'Yours is ___ from mine.' },
+  { word: 'certain', minLevel: 8, hint: 'Are you ___ about that?' },
+  { word: 'minute', minLevel: 8, hint: 'Wait just a ___.' },
+  { word: 'machine', minLevel: 8, hint: 'The washing ___ is noisy.' },
+  { word: 'medicine', minLevel: 8, hint: 'Take your ___ before bed.' },
+  { word: 'material', minLevel: 8, hint: 'This ___ feels soft.' },
+  { word: 'notice', minLevel: 8, hint: 'Did you ___ my new shoes?' },
+  { word: 'stomach', minLevel: 8, hint: 'My ___ hurts.' },
+  { word: 'science', minLevel: 8, hint: '___ is my best subject.' },
+
+  // --- level 9 adds w, q, p ---
+  { word: 'people', minLevel: 9, hint: 'Lots of ___ came to the party.' },
+  { word: 'were', minLevel: 9, hint: 'We ___ late for school.' },
+  { word: 'where', minLevel: 9, hint: '___ did you put it?' },
+  { word: 'when', minLevel: 9, hint: '___ are we leaving?' },
+  { word: 'what', minLevel: 9, hint: '___ is your name?' },
+  { word: 'who', minLevel: 9, hint: '___ ate the last biscuit?' },
+  { word: 'why', minLevel: 9, hint: '___ is the sky blue?' },
+  { word: 'which', minLevel: 9, hint: '___ one do you want?' },
+  { word: 'would', minLevel: 9, hint: 'I ___ like a drink.' },
+  { word: 'could', minLevel: 8, hint: '___ you help me please?' },
+  { word: 'should', minLevel: 7, hint: 'We ___ go home now.' },
+  { word: 'want', minLevel: 9, hint: 'I ___ to go outside.' },
+  { word: 'went', minLevel: 9, hint: 'We ___ to the seaside.' },
+  { word: 'write', minLevel: 9, hint: 'I will ___ you a letter.' },
+  { word: 'wrote', minLevel: 9, hint: 'She ___ a funny story.' },
+  { word: 'wrong', minLevel: 9, hint: 'I got the answer ___.' },
+  { word: 'know', minLevel: 9, hint: 'I ___ the answer!' },
+  { word: 'knew', minLevel: 9, hint: 'I ___ it was you.' },
+  { word: 'whole', minLevel: 9, hint: 'I ate the ___ thing.' },
+  { word: 'quiet', minLevel: 9, hint: 'Please be ___ in the library.' },
+  { word: 'question', minLevel: 9, hint: 'I have a ___ to ask.' },
+  { word: 'important', minLevel: 9, hint: 'This is very ___.' },
+  { word: 'special', minLevel: 9, hint: 'Today is a ___ day.' },
+  { word: 'popular', minLevel: 9, hint: 'That game is very ___.' },
+  { word: 'peculiar', minLevel: 9, hint: 'What a ___ smell!' },
+  { word: 'complete', minLevel: 9, hint: 'I need to ___ my drawing.' },
+  { word: 'promise', minLevel: 9, hint: 'I ___ to be good.' },
+  { word: 'purpose', minLevel: 9, hint: 'You did that on ___!' },
+  { word: 'separate', minLevel: 9, hint: 'Keep them ___ from each other.' },
+  { word: 'perhaps', minLevel: 9, hint: '___ it will snow.' },
+  { word: 'weight', minLevel: 9, hint: 'What is the ___ of the parcel?' },
+  { word: 'weather', minLevel: 9, hint: 'The ___ is sunny today.' },
+  { word: 'whether', minLevel: 9, hint: 'I cannot decide ___ to go.' },
+  { word: 'answer', minLevel: 9, hint: 'I put my hand up to ___.' },
+  { word: 'towards', minLevel: 9, hint: 'She walked ___ the door.' },
+  { word: 'nature', minLevel: 7, hint: 'We went on a ___ walk.' },
+  { word: 'picture', minLevel: 9, hint: 'I drew a ___ of my dog.' },
+  { word: 'creature', minLevel: 8, hint: 'What a strange ___!' },
+
+  // --- level 10 adds b, x, z and punctuation: the full alphabet ---
+  { word: 'beautiful', minLevel: 10, hint: 'What a ___ rainbow!' },
+  { word: 'about', minLevel: 10, hint: 'Tell me ___ your day.' },
+  { word: 'before', minLevel: 10, hint: 'Wash your hands ___ dinner.' },
+  { word: 'believe', minLevel: 10, hint: 'I ___ you.' },
+  { word: 'build', minLevel: 10, hint: 'Let us ___ a den.' },
+  { word: 'busy', minLevel: 10, hint: 'The shop was very ___.' },
+  { word: 'business', minLevel: 10, hint: 'Mind your own ___!' },
+  { word: 'probably', minLevel: 10, hint: 'It will ___ rain later.' },
+  { word: 'remember', minLevel: 10, hint: 'Did you ___ your lunch?' },
+  { word: 'February', minLevel: 11, hint: 'My birthday is in ___.' },
+  { word: 'Wednesday', minLevel: 11, hint: 'Swimming is on ___.' },
+  { word: 'Saturday', minLevel: 11, hint: 'No school on ___!' },
+  { word: 'library', minLevel: 10, hint: 'I borrowed a book from the ___.' },
+  { word: 'breakfast', minLevel: 10, hint: 'I had toast for ___.' },
+  { word: 'exercise', minLevel: 10, hint: 'Running is good ___.' },
+  { word: 'excited', minLevel: 10, hint: 'I am so ___ about the trip!' },
+  { word: 'experiment', minLevel: 10, hint: 'We did an ___ in class.' },
+  { word: 'extreme', minLevel: 10, hint: 'That was ___ly fast.' },
+  { word: 'necessary', minLevel: 8, hint: 'Is all this mess ___?' },
+  { word: 'occasion', minLevel: 8, hint: 'A birthday is a special ___.' },
+  { word: 'accident', minLevel: 8, hint: 'It was an ___, sorry!' },
+  { word: 'address', minLevel: 4, hint: 'Write your ___ on the envelope.' },
+  { word: 'appear', minLevel: 9, hint: 'A rabbit can ___ from a hat.' },
+  { word: 'arrive', minLevel: 8, hint: 'What time will we ___?' },
+  { word: 'suppose', minLevel: 9, hint: 'I ___ you are right.' },
+  { word: 'surprise', minLevel: 9, hint: 'What a lovely ___!' },
+  { word: 'strange', minLevel: 7, hint: 'I heard a ___ noise.' },
+  { word: 'guard', minLevel: 6, hint: 'The ___ stood by the gate.' },
+  { word: 'guide', minLevel: 6, hint: 'Our ___ showed us the castle.' },
+  { word: 'island', minLevel: 7, hint: 'We sailed to a tiny ___.' },
+  { word: 'colour', minLevel: 8, hint: 'What ___ is your bike?' },
+  { word: 'neighbour', minLevel: 10, hint: 'My ___ has a loud dog.' },
+  { word: 'behaviour', minLevel: 10, hint: 'Good ___ gets a sticker.' },
+  { word: 'grammar', minLevel: 8, hint: 'We learn ___ at school.' },
+  { word: 'rhythm', minLevel: 8, hint: 'Clap along to the ___.' },
+  { word: 'height', minLevel: 6, hint: 'The ___ of the wall is two metres.' },
+  { word: 'weird', minLevel: 9, hint: 'That is a ___ shape.' },
+  { word: 'piece', minLevel: 9, hint: 'Can I have a ___ of cake?' },
+  { word: 'peace', minLevel: 9, hint: 'I just want some ___ and quiet.' },
+  { word: 'quite', minLevel: 9, hint: 'It is ___ cold outside.' },
+  { word: 'clothes', minLevel: 8, hint: 'Put your ___ in the drawer.' },
+  { word: 'famous', minLevel: 8, hint: 'She is a ___ singer.' },
+  { word: 'forwards', minLevel: 9, hint: 'Take two steps ___.' },
+  { word: 'group', minLevel: 9, hint: 'We worked in a ___.' },
+  { word: 'imagine', minLevel: 8, hint: 'Can you ___ being a bird?' },
+  { word: 'increase', minLevel: 8, hint: 'My pocket money will ___.' },
+  { word: 'natural', minLevel: 7, hint: 'Wood is a ___ material.' },
+  { word: 'ordinary', minLevel: 7, hint: 'It was just an ___ Tuesday.' },
+  { word: 'possible', minLevel: 10, hint: 'Is it ___ to fly?' },
+  { word: 'pressure', minLevel: 9, hint: 'Put ___ on the pedal.' },
+  { word: 'reign', minLevel: 7, hint: 'The queen had a long ___.' },
+  { word: 'sentence', minLevel: 8, hint: 'Write a full ___.' },
+  { word: 'strength', minLevel: 7, hint: 'It takes ___ to lift that.' },
+  { word: 'therefore', minLevel: 7, hint: 'It rained, ___ we stayed in.' },
+  { word: 'various', minLevel: 8, hint: 'There are ___ flavours.' },
+]
+
+/** Words available to a kid at `level`, de-duplicated by word. */
+export function wordsForLevel(level: number): SpellingWord[] {
+  const seen = new Set<string>()
+  const out: SpellingWord[] = []
+  for (const entry of SPELLING_WORDS) {
+    if (entry.minLevel > level) continue
+    if (seen.has(entry.word)) continue
+    seen.add(entry.word)
+    out.push(entry)
+  }
+  return out
+}
