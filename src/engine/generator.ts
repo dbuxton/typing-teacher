@@ -1,8 +1,9 @@
 import { getLevel, isTypeable, SPELLING_STARTS_AT_LEVEL } from '../data/curriculum'
 import { SPELLING_WORDS } from '../data/spellingWords'
-import type { Profile } from '../store/schema'
+import type { KeyStat, Profile } from '../store/schema'
 import { type Rng, makeRng, pick, shuffle, weightedSample } from './rng'
 import { selectSpellingWords } from './srs'
+import { keyErrorRate, lessonShapeFor } from './adaptive'
 
 /**
  * Builds a lesson: a list of items to type.
@@ -11,6 +12,10 @@ import { selectSpellingWords } from './srs'
  * boring, so they're capped at DRILL_ITEMS and framed as a warm-up; everything
  * after that is real words and sentences. Levels 1-2 are the exception — there
  * simply aren't words in "f j" — so those levels are kept short instead.
+ *
+ * Length and difficulty come from the kid's `difficulty` signal rather than the
+ * level, so a child who is struggling gets a shorter, gentler lesson instead of
+ * the identical one they just failed.
  */
 
 export type ItemKind = 'drill' | 'word' | 'sentence' | 'spelling'
@@ -21,6 +26,12 @@ export type LessonItem = {
   text: string
   /** For spelling items: the sentence shown on the reveal card. */
   hint?: string
+  /**
+   * For spelling items: has the kid never met this word before? A word has to be
+   * taught before it can be tested, so a first encounter shows the spelling.
+   * After that it's spoken and hidden, which is a real spelling test.
+   */
+  firstEncounter?: boolean
 }
 
 export const DRILL_ITEMS = 2
@@ -29,18 +40,27 @@ export const SPELLING_ITEMS = 2
 export function generateLesson(profile: Profile, levelId: number, seed?: number): LessonItem[] {
   const level = getLevel(levelId)
   const rng = makeRng(seed ?? Math.floor(Math.random() * 2 ** 31))
+  const shape = lessonShapeFor(profile.difficulty, level.itemCount)
   const items: LessonItem[] = []
 
+  // Keys the kid skipped past by accelerating: unlocked but never practised.
+  // They get the same emphasis as this level's own new keys so nothing is
+  // silently missed on the way up.
+  const focusKeys = [...new Set([...level.newKeys, ...unpractisedKeys(profile, level.allKeys)])]
+
   // 1. Warm-up drills, always first and always capped.
-  const drillCount = level.words.length === 0 ? level.itemCount : DRILL_ITEMS
+  const drillCount = level.words.length === 0 ? shape.itemCount : DRILL_ITEMS
   for (let i = 0; i < drillCount; i++) {
-    items.push({ kind: 'drill', text: makeDrill(rng, level.newKeys.length ? level.newKeys : level.allKeys) })
+    const drillKeys = focusKeys.filter((k) => k !== 'Shift')
+    items.push({ kind: 'drill', text: makeDrill(rng, drillKeys.length ? drillKeys : level.allKeys) })
   }
-  if (items.length >= level.itemCount) return items.slice(0, level.itemCount)
+  if (items.length >= shape.itemCount) return items.slice(0, shape.itemCount)
 
   // 2. Spelling Stars, once the kid has letters enough to spell with.
   const spellingCount =
-    levelId >= SPELLING_STARTS_AT_LEVEL ? Math.min(SPELLING_ITEMS, level.itemCount - items.length) : 0
+    levelId >= SPELLING_STARTS_AT_LEVEL
+      ? Math.min(shape.spellingItems, shape.itemCount - items.length)
+      : 0
   if (spellingCount > 0) {
     const words = selectSpellingWords(
       profile.spelling,
@@ -49,27 +69,35 @@ export function generateLesson(profile: Profile, levelId: number, seed?: number)
       spellingCount,
       rng,
     )
+    const seenWords = new Set(profile.spelling.map((s) => s.word))
     for (const word of words) {
       const entry = SPELLING_WORDS.find((w) => w.word === word)
-      items.push({ kind: 'spelling', text: word, hint: entry?.hint })
+      items.push({
+        kind: 'spelling',
+        text: word,
+        hint: entry?.hint,
+        firstEncounter: !seenWords.has(word),
+      })
     }
   }
 
-  // 3. One sentence if the level has any.
-  const remaining = level.itemCount - items.length
-  const wantSentence = level.sentences.length > 0 && remaining > 1
-  if (wantSentence) {
+  // 3. A sentence, but only once they're coping — sentences are the longest and
+  //    most punishing item to get wrong halfway through.
+  const remaining = shape.itemCount - items.length
+  if (shape.includeSentence && level.sentences.length > 0 && remaining > 1) {
     items.push({ kind: 'sentence', text: pick(rng, level.sentences) })
   }
 
-  // 4. Fill the rest with words, weighted toward new keys and this kid's weak keys.
-  const wordSlots = level.itemCount - items.length
+  // 4. Fill the rest with words, weighted toward focus keys and weak keys, and
+  //    kept short while the kid is finding it hard.
+  const wordSlots = shape.itemCount - items.length
   if (wordSlots > 0 && level.words.length > 0) {
-    const chosen = weightedSample(rng, level.words, wordSlots, (word) =>
-      wordWeight(word, level.newKeys, profile.keyErrors),
+    const bank = wordBankFor(level.words, shape.maxWordLength)
+    const chosen = weightedSample(rng, bank, wordSlots, (word) =>
+      wordWeight(word, focusKeys, profile.perKeyStats),
     )
     // weightedSample is without replacement, so a short bank can under-fill.
-    while (chosen.length < wordSlots) chosen.push(pick(rng, level.words))
+    while (chosen.length < wordSlots) chosen.push(pick(rng, bank))
     for (const word of chosen) items.push({ kind: 'word', text: word })
   }
 
@@ -80,6 +108,28 @@ export function generateLesson(profile: Profile, levelId: number, seed?: number)
     items.filter((i) => i.kind !== 'drill'),
   )
   return [...warmups, ...rest]
+}
+
+/**
+ * Prefer short words while the kid is struggling, but never hand back an empty
+ * bank — a level whose words are all long still has to produce a lesson.
+ */
+function wordBankFor(words: string[], maxLength: number): string[] {
+  if (!Number.isFinite(maxLength)) return words
+  const short = words.filter((w) => w.length <= maxLength)
+  return short.length >= 4 ? short : words
+}
+
+/**
+ * Keys that are unlocked at this level but that the kid has barely typed —
+ * which is exactly what happens after an acceleration jump skips a level or two.
+ */
+function unpractisedKeys(profile: Profile, allKeys: string[]): string[] {
+  return allKeys.filter((key) => {
+    if (key === 'Shift') return false
+    const stat = profile.perKeyStats[key]
+    return !stat || stat.attempts < 10
+  })
 }
 
 /** e.g. "fjf jfj ffj" — short bursts, three groups, never longer than a breath. */
@@ -94,15 +144,22 @@ function makeDrill(rng: Rng, keys: string[]): string {
 }
 
 /**
- * Words containing newly-taught keys score higher, as do words containing keys
- * this kid gets wrong a lot. That's how practice self-targets without the app
- * ever serving another dull drill.
+ * Words containing focus keys score higher, as do words containing keys this kid
+ * gets wrong *proportionally* often.
+ *
+ * The rate matters. Weighting on raw error counts — which is what this did
+ * originally — targets whichever letters appear most, because `e` and `a`
+ * accumulate errors just by turning up in every word. That's the opposite of
+ * targeting weak keys: it buries the rare letter they genuinely can't find.
  */
-function wordWeight(word: string, newKeys: string[], keyErrors: Record<string, number>): number {
+function wordWeight(word: string, focusKeys: string[], perKeyStats: Record<string, KeyStat>): number {
   let weight = 1
   for (const char of new Set(word.toLowerCase())) {
-    if (newKeys.includes(char)) weight += 2
-    weight += Math.min(keyErrors[char] ?? 0, 10) * 0.3
+    if (focusKeys.includes(char)) weight += 2
+    const rate = keyErrorRate(perKeyStats[char])
+    // null = not enough attempts to judge; leave those alone rather than
+    // treating "unknown" as "fine".
+    if (rate !== null) weight += rate * 6
   }
   return weight
 }

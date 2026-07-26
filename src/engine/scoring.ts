@@ -17,8 +17,12 @@ export const WEIGHT_ACCURACY = 0.5
 export const WEIGHT_EYES_UP = 0.3
 export const WEIGHT_SPEED = 0.2
 
-/** WPM that counts as full marks for the speed component. Deliberately gentle. */
-export const TARGET_WPM = 20
+/**
+ * Fallback speed target for a kid with no history yet. Real scoring uses the
+ * kid's own `personalWpm` (see `adaptive.nextPersonalWpm`) so that "fast enough"
+ * means "faster than you were", not "faster than some 9-year-old".
+ */
+export const DEFAULT_TARGET_WPM = 12
 
 export type LessonStats = {
   /** Characters typed correctly on the first attempt. */
@@ -29,6 +33,8 @@ export type LessonStats = {
   elapsedMs: number
   sneakyStarsCaught: number
   sneakyStarsTotal: number
+  /** The kid's personal speed target. Falls back when absent. */
+  targetWpm?: number
 }
 
 export function accuracyOf(stats: LessonStats): number {
@@ -44,20 +50,37 @@ export function wpmOf(stats: LessonStats): number {
   return stats.correctChars / 5 / minutes
 }
 
-/** Fraction of Sneaky Stars caught. A lesson with none offered scores full marks. */
-export function eyesUpScore(stats: LessonStats): number {
-  if (stats.sneakyStarsTotal === 0) return 1
+/** Fraction of Sneaky Stars caught, or null when none were offered to catch. */
+export function eyesUpScore(stats: LessonStats): number | null {
+  if (stats.sneakyStarsTotal === 0) return null
   return stats.sneakyStarsCaught / stats.sneakyStarsTotal
 }
 
-/** The weighted 0..1 score behind the star rating. */
+/** Speed as a fraction of this kid's own target, capped at 1. */
+export function speedScore(stats: LessonStats): number {
+  const target = stats.targetWpm && stats.targetWpm > 0 ? stats.targetWpm : DEFAULT_TARGET_WPM
+  return Math.min(wpmOf(stats) / target, 1)
+}
+
+/**
+ * The weighted 0..1 score behind the star rating.
+ *
+ * When no Sneaky Stars were offered — the kid switched them off, or the lesson
+ * was too short — the eyes-up weight is redistributed into accuracy rather than
+ * awarded for free. Otherwise switching off a comfort setting would hand over
+ * 30% and make every level easier to unlock, which would mean a toggle quietly
+ * changed how hard the app is.
+ */
 export function overallScore(stats: LessonStats): number {
-  const speed = Math.min(wpmOf(stats) / TARGET_WPM, 1)
-  return (
-    accuracyOf(stats) * WEIGHT_ACCURACY +
-    eyesUpScore(stats) * WEIGHT_EYES_UP +
-    speed * WEIGHT_SPEED
-  )
+  const eyesUp = eyesUpScore(stats)
+  const speed = speedScore(stats)
+  const accuracy = accuracyOf(stats)
+
+  if (eyesUp === null) {
+    const accuracyWeight = WEIGHT_ACCURACY + WEIGHT_EYES_UP
+    return accuracy * accuracyWeight + speed * WEIGHT_SPEED
+  }
+  return accuracy * WEIGHT_ACCURACY + eyesUp * WEIGHT_EYES_UP + speed * WEIGHT_SPEED
 }
 
 /** 1-3 stars. Never zero: finishing a lesson always earns something. */
@@ -98,10 +121,14 @@ export function praiseFor(summary: {
   return 'Good effort — every go makes it easier.'
 }
 
-/** Shown under the WPM number so speed stays in perspective. */
-export function speedComment(wpm: number): string {
-  if (wpm >= TARGET_WPM) return 'Speedy! But accuracy matters more.'
-  if (wpm >= 10) return 'A nice steady pace.'
+/**
+ * Shown under the WPM number so speed stays in perspective. Compares against the
+ * kid's own target, so it says "faster than you were" rather than measuring them
+ * against a stranger.
+ */
+export function speedComment(wpm: number, targetWpm = DEFAULT_TARGET_WPM): string {
+  if (wpm >= targetWpm) return 'Faster than last time! But accuracy matters more.'
+  if (wpm >= targetWpm * 0.6) return 'A nice steady pace.'
   return 'Slow and careful is exactly right for now.'
 }
 

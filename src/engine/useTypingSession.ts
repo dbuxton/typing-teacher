@@ -46,12 +46,17 @@ export type SessionState = {
    * the character they *should* have typed — that's the one needing practice.
    */
   keyErrors: Record<string, number>
+  /** Every key they were asked for, so error *rates* can be computed later. */
+  keyAttempts: Record<string, number>
+  /** Offer a way past a character they simply cannot find. */
+  offerSkip: boolean
   done: boolean
 }
 
 type Action =
   | { type: 'key'; char: string; now: number }
   | { type: 'backspace' }
+  | { type: 'skip-char' }
   | { type: 'advance'; now: number }
   | { type: 'reveal-done' }
   | { type: 'show-star' }
@@ -79,9 +84,20 @@ function initialState(items: LessonItem[]): SessionState {
     spellingAnswers: [],
     itemClean: true,
     keyErrors: {},
+    keyAttempts: {},
+    offerSkip: false,
     done: false,
   }
 }
+
+/**
+ * Consecutive misses on the SAME character before we offer a way out.
+ *
+ * Without this a kid who can't find `q` is stuck forever: a wrong key never
+ * advances the cursor, so the only exit is the Back button, which reads as
+ * giving up on the whole lesson.
+ */
+export const MISSES_BEFORE_SKIP = 5
 
 function makeReducer(items: LessonItem[]) {
   return function reducer(state: SessionState, action: Action): SessionState {
@@ -100,12 +116,19 @@ function makeReducer(items: LessonItem[]) {
         // backspace shouldn't compound the error count.
         marks[state.cursor] = correct
 
+        const expectedKey = expected.toLowerCase()
         const keyErrors = correct
           ? state.keyErrors
-          : {
-              ...state.keyErrors,
-              [expected.toLowerCase()]: (state.keyErrors[expected.toLowerCase()] ?? 0) + 1,
-            }
+          : { ...state.keyErrors, [expectedKey]: (state.keyErrors[expectedKey] ?? 0) + 1 }
+        // Count the attempt once per character reached, not once per keypress,
+        // so five stabs at the same `q` don't inflate its denominator.
+        const keyAttempts = correct
+          ? { ...state.keyAttempts, [expectedKey]: (state.keyAttempts[expectedKey] ?? 0) + 1 }
+          : state.consecutiveMisses === 0
+            ? { ...state.keyAttempts, [expectedKey]: (state.keyAttempts[expectedKey] ?? 0) + 1 }
+            : state.keyAttempts
+
+        const consecutiveMisses = correct ? 0 : state.consecutiveMisses + 1
 
         const next: SessionState = {
           ...state,
@@ -114,10 +137,12 @@ function makeReducer(items: LessonItem[]) {
           startedAt: state.startedAt ?? action.now,
           correctChars: correct ? state.correctChars + 1 : state.correctChars,
           errorChars: correct ? state.errorChars : state.errorChars + 1,
-          consecutiveMisses: correct ? 0 : state.consecutiveMisses + 1,
+          consecutiveMisses,
           recentlyMissed: correct ? state.recentlyMissed : true,
           itemClean: correct ? state.itemClean : false,
           keyErrors,
+          keyAttempts,
+          offerSkip: consecutiveMisses >= MISSES_BEFORE_SKIP,
         }
         return next
       }
@@ -126,7 +151,29 @@ function makeReducer(items: LessonItem[]) {
         if (state.cursor === 0 || state.revealing || state.done) return state
         const marks = [...state.marks]
         marks[state.cursor - 1] = null
-        return { ...state, cursor: state.cursor - 1, marks, consecutiveMisses: 0 }
+        return {
+          ...state,
+          cursor: state.cursor - 1,
+          marks,
+          consecutiveMisses: 0,
+          offerSkip: false,
+        }
+      }
+
+      case 'skip-char': {
+        // Step over a character they can't find. It stays marked wrong so the
+        // key is logged for extra practice, but they are never trapped.
+        if (!state.offerSkip || state.revealing || state.done) return state
+        const marks = [...state.marks]
+        marks[state.cursor] = false
+        return {
+          ...state,
+          marks,
+          cursor: state.cursor + 1,
+          consecutiveMisses: 0,
+          offerSkip: false,
+          itemClean: false,
+        }
       }
 
       case 'advance': {
@@ -202,6 +249,8 @@ export type UseTypingSessionOptions = {
   items: LessonItem[]
   levelId: number
   sneakyStarsEnabled: boolean
+  /** How many Sneaky Stars to offer — fewer when the kid is struggling. */
+  sneakyStarCount: number
   seed: number
   onFinish: (state: SessionState) => void
 }
@@ -210,6 +259,7 @@ export function useTypingSession({
   items,
   levelId,
   sneakyStarsEnabled,
+  sneakyStarCount,
   seed,
   onFinish,
 }: UseTypingSessionOptions) {
@@ -217,8 +267,8 @@ export function useTypingSession({
   const [state, dispatch] = useReducer(reducer, items, initialState)
 
   const schedule: StarSchedule = useMemo(
-    () => (sneakyStarsEnabled ? scheduleStars(items.length, makeRng(seed)) : []),
-    [items.length, sneakyStarsEnabled, seed],
+    () => (sneakyStarsEnabled ? scheduleStars(items.length, makeRng(seed), sneakyStarCount) : []),
+    [items.length, sneakyStarsEnabled, sneakyStarCount, seed],
   )
   const catchKey = useMemo(() => catchKeyFor(levelId), [levelId])
 
@@ -286,6 +336,13 @@ export function useTypingSession({
         dispatch({ type: 'backspace' })
         return
       }
+      // The way out of a character they can't find. Only live once offered, so
+      // it never swallows a keypress during normal typing.
+      if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        dispatch({ type: 'skip-char' })
+        return
+      }
       // Space would scroll the page; every other single character is a keystroke.
       if (event.key === ' ') event.preventDefault()
       if (event.key.length !== 1) return
@@ -314,6 +371,16 @@ export function useTypingSession({
   }, [item, state.cursor, state.marks])
 
   const skipReveal = useCallback(() => dispatch({ type: 'reveal-done' }), [])
+  const skipChar = useCallback(() => dispatch({ type: 'skip-char' }), [])
 
-  return { state, item, nextChar, charStates, catchKey, skipReveal, totalItems: items.length }
+  return {
+    state,
+    item,
+    nextChar,
+    charStates,
+    catchKey,
+    skipReveal,
+    skipChar,
+    totalItems: items.length,
+  }
 }

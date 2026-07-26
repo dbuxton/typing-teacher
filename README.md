@@ -12,6 +12,30 @@ npm run dev          # http://localhost:5173/typing-teacher/
 
 ## What makes it different
 
+**It adapts to the kid.** Two things pull against each other, and the app tries to
+hold both: get them to their real level *fast*, and never push them past what they
+can manage.
+
+- **Auto-acceleration.** A child who already knows the home row shouldn't grind
+  through six lessons of "fjf jfj". Ace a lesson and you jump up to three levels at
+  once. What's measured is accuracy on the keys the level actually *teaches*, not
+  overall accuracy — easy filler words from earlier levels can't carry anyone
+  upward.
+- **Nothing advances on a fluke.** Progression runs off a rolling average, so one
+  lucky lesson doesn't promote a kid into material they can't handle, and one bad
+  day doesn't undo their progress either.
+- **Lessons get gentler when they're struggling.** Fewer items, shorter words, no
+  sentence, fewer Spelling Stars. In the first version every lesson was identical
+  and a struggling kid simply failed to unlock, over and over, which is
+  demoralising in a way that's easy to miss from the code.
+- **Help comes back.** If accuracy stays low the keyboard steps back in, and the app
+  *offers* an easier level — as an offer, with "no, stay here" right beside it.
+- **Speed is personal.** Three stars is measured against the kid's own recent best,
+  never a fixed words-per-minute, so it stays reachable at 7 and still means
+  something at 9.
+- **No dead ends.** Stuck on a key you can't find? After a few tries, "press → to
+  skip". Can't make out a spoken word? "Show me". A kid is never trapped.
+
 **Eyes on the screen comes first.** The habit a beginner forms in their first few
 weeks is the one they keep, and hunt-and-peck is horrible to unlearn. So:
 
@@ -37,11 +61,16 @@ then real words and sentences. Levels 1–2 are unavoidably drill-heavy (there a
 no words in "f j"), so they're short — the aim is to reach real words in the
 first session, because that's the session that decides if there's a second one.
 
-**Spelling is woven in.** From level 4, a couple of items per lesson are Spelling
-Stars: a commonly misspelled word appears with a sentence for context, hides, and
-the kid types it from memory. Words they get wrong come back sooner (Leitner
-spaced repetition, `src/engine/srs.ts`), so it targets *their* weak words rather
-than working through a fixed list. British spellings by default.
+**Spelling is woven in, and it's a real spelling test.** From level 4, a couple of
+items per lesson are Spelling Stars. The first time a kid meets a word it's shown —
+you have to teach a word before you can test it. Every time after, it's **spoken
+aloud and stays hidden**, and they spell it from sound. A word sitting on screen
+tests copying, not spelling; the on-screen keyboard even stops highlighting the next
+key during a hidden word, or it would spell it out one pulsing key at a time.
+
+Words they get wrong come back sooner (Leitner spaced repetition,
+`src/engine/srs.ts`), so it targets *their* weak words rather than working through a
+fixed list. British spellings by default.
 
 **Rewards that accumulate.** Coins, a daily streak, 20 badges, and a garden that
 grows one stage per lesson. Nothing wilts, nothing dies, nothing nags — skip a
@@ -67,12 +96,17 @@ lesson map to switch them off.
 ```
 src/
   data/      curriculum.ts (12 levels), spellingWords.ts, badges.ts, plants.ts
-  engine/    pure logic, all unit-tested — generator, scoring, srs,
-             sneakyStars, assist, keymap, and the useTypingSession hook
+  engine/    pure logic, all unit-tested — adaptive, generator, scoring, srs,
+             sneakyStars, assist, speech, keymap, and the useTypingSession hook
   store/     schema.ts (versioned save + migrations), profileStore.ts (zustand)
   components/ Keyboard, Hands, TypingArea, SpellingCard, SneakyStar, Chrome
   screens/   Home, LessonMap, Lesson, Results, GardenScreen, BadgeShelf
 ```
+
+`src/engine/adaptive.ts` holds every difficulty decision as pure functions —
+acceleration, the mastery gate, backing off, the difficulty controller, personal
+speed. Keeping it in one testable place is what makes it possible to *simulate* a
+child's whole journey rather than hoping the rules interact sensibly.
 
 The curriculum is data, not code. A level lists the keys it unlocks plus words
 and sentences built only from keys taught so far, and the test suite enforces
@@ -106,6 +140,7 @@ change that to match or the assets 404.
 
 Everything lives in `localStorage` under `typing-teacher.save.v1`, keyed by
 player, so several kids can share one computer with separate gardens. The save is
-versioned with a migration hook (`src/store/schema.ts`), so future changes to the
-data model won't wipe anyone's progress. Clearing site data clears the lot —
+versioned with a migration hook (`src/store/schema.ts`) — currently on version 2,
+and `src/store/schema.test.ts` checks that a version 1 save keeps its coins,
+garden, badges and level rather than resetting. Clearing site data clears the lot;
 there's no backup, because there's no server.

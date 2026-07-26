@@ -94,10 +94,66 @@ test('the keyboard shows the next key and the finger to use', async ({ page }) =
 test('sneaky stars can be switched off for a kid who finds them annoying', async ({ page }) => {
   await createPlayer(page, 'Kit')
 
-  const toggle = page.getByRole('checkbox')
+  const toggle = page.getByRole('checkbox').first()
   await expect(toggle).toBeChecked()
   await toggle.uncheck()
 
   await page.getByRole('button', { name: /Carry on with Level 1/ }).click()
   await expect(page.getByText('Sneaky Stars')).toHaveCount(0)
+})
+
+test('both comfort settings survive a reload', async ({ page }) => {
+  await createPlayer(page, 'Nel')
+
+  const sneaky = page.getByRole('checkbox').first()
+  const readAloud = page.getByRole('checkbox').nth(1)
+  await expect(sneaky).toBeChecked()
+  await expect(readAloud).toBeChecked()
+
+  await sneaky.uncheck()
+  await readAloud.uncheck()
+
+  await page.reload()
+  await page.getByText('Nel').click()
+  await expect(page.getByRole('checkbox').first()).not.toBeChecked()
+  await expect(page.getByRole('checkbox').nth(1)).not.toBeChecked()
+})
+
+test('a kid who cannot find a key is offered a way past it', async ({ page }) => {
+  await createPlayer(page, 'Stuck')
+  await page.getByRole('button', { name: /Carry on with Level 1/ }).click()
+
+  const text = await currentText(page)
+  const wrongKey = text[0] === 'f' ? 'j' : 'f'
+
+  // No escape offered while they're only a couple of tries in — we don't want to
+  // suggest giving up the moment a kid fumbles.
+  await page.keyboard.press(wrongKey)
+  await page.keyboard.press(wrongKey)
+  await expect(page.getByText(/Tricky one/)).toHaveCount(0)
+
+  // But they must never be trapped: after five, there's a way through.
+  for (let i = 0; i < 3; i++) await page.keyboard.press(wrongKey)
+  await expect(page.getByText(/Tricky one/)).toBeVisible()
+
+  await page.keyboard.press('ArrowRight')
+  await expect(page.getByText(/Tricky one/)).toHaveCount(0)
+  // The cursor really moved on rather than just hiding the message.
+  await expect(page.locator('.bg-sky-500').first()).toBeVisible()
+})
+
+test('a capable kid is jumped ahead instead of grinding through level 1', async ({ page }) => {
+  await createPlayer(page, 'Quick')
+  await page.getByRole('button', { name: /Carry on with Level 1/ }).click()
+
+  // Play a flawless lesson.
+  for (let item = 0; item < 6; item++) {
+    await typeCurrentItem(page)
+    await page.waitForTimeout(500)
+  }
+
+  // Perfect work on the new keys should skip them several levels, not one.
+  await expect(page.getByText(/Jumping you ahead|Skipping you ahead/)).toBeVisible()
+  await page.getByRole('button', { name: 'Lesson map' }).click()
+  await expect(page.getByRole('button', { name: /Carry on with Level [2-9]/ })).toBeVisible()
 })

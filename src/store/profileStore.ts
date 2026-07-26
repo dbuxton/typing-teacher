@@ -14,9 +14,9 @@ import {
 } from './schema'
 import { GARDEN_PLOTS, plantKindById } from '../data/plants'
 import { newlyEarnedBadges } from '../data/badges'
-import { assistAfterLesson } from '../engine/assist'
+import { assistAfterLesson, previousAssistLevel } from '../engine/assist'
 import { applyResults } from '../engine/srs'
-import { MAX_LEVEL } from '../data/curriculum'
+import { applyLesson, mergeKeyStats, newKeyAccuracyFor } from '../engine/adaptive'
 
 export type Screen = 'home' | 'map' | 'lesson' | 'results' | 'garden' | 'badges'
 
@@ -31,15 +31,27 @@ export type LessonOutcome = {
   sneakyStarsTotal: number
   spellingAnswers: { word: string; correct: boolean }[]
   keyErrors: Record<string, number>
+  keyAttempts: Record<string, number>
   wordsTyped: number
   charsTyped: number
+}
+
+/** What the results screen needs to explain what just happened. */
+export type LastResult = LessonResult & {
+  newBadges: string[]
+  assistChangedTo: string | null
+  assistEased: boolean
+  /** How many levels the kid just jumped, 0 if none. */
+  levelJump: number
+  /** Set when the app is suggesting they drop back a level for a bit. */
+  offerEasierLevel: number | null
 }
 
 type State = {
   save: SaveFile
   screen: Screen
   /** Set when a lesson finishes so the results screen has something to show. */
-  lastResult: (LessonResult & { newBadges: string[]; assistPromotedTo: string | null }) | null
+  lastResult: LastResult | null
 
   activeProfile: () => Profile | null
   setScreen: (screen: Screen) => void
@@ -48,6 +60,7 @@ type State = {
   deleteProfile: (id: string) => void
   setLevel: (levelId: number) => void
   toggleSneakyStars: () => void
+  toggleReadAloud: () => void
   recordLesson: (outcome: LessonOutcome) => void
   plantSeed: (kindId: string) => void
 }
@@ -115,6 +128,15 @@ export const useStore = create<State>()(
           }
         }),
 
+      toggleReadAloud: () =>
+        set((state) => {
+          const id = state.save.activeProfileId
+          if (!id) return state
+          return {
+            save: updateProfile(state.save, id, (p) => ({ ...p, readAloud: !p.readAloud })),
+          }
+        }),
+
       recordLesson: (outcome) =>
         set((state) => {
           const id = state.save.activeProfileId
@@ -149,22 +171,35 @@ export const useStore = create<State>()(
             return { ...plant, stage: Math.min(plant.stage + 1, max) }
           })
 
-          const keyErrors = { ...current.keyErrors }
-          for (const [key, count] of Object.entries(outcome.keyErrors)) {
-            keyErrors[key] = (keyErrors[key] ?? 0) + count
-          }
+          const perKeyStats = mergeKeyStats(
+            current.perKeyStats,
+            outcome.keyAttempts,
+            outcome.keyErrors,
+          )
 
           const lessonNumber = current.lessonsCompleted + 1
           const spelling = applyResults(current.spelling, outcome.spellingAnswers, lessonNumber)
 
-          // Clearing a level at two stars or better unlocks the next one.
-          const cleared = outcome.stars >= 2 && outcome.levelId === current.highestLevelUnlocked
-          const highestLevelUnlocked = cleared
-            ? Math.min(current.highestLevelUnlocked + 1, MAX_LEVEL)
-            : current.highestLevelUnlocked
+          // Progression is decided by the adaptive model, not by star count.
+          // Gating on accuracy over the keys this level actually *teaches* is
+          // what stops a lucky lesson on easy filler words promoting a kid past
+          // material they can't yet handle.
+          const adaptive = applyLesson(current, {
+            levelId: outcome.levelId,
+            accuracy: outcome.accuracy,
+            newKeyAccuracy: newKeyAccuracyFor(
+              outcome.levelId,
+              outcome.keyAttempts,
+              outcome.keyErrors,
+              outcome.accuracy,
+            ),
+            wpm: outcome.wpm,
+          })
 
           const assistLevel = assistAfterLesson(current, outcome.accuracy)
-          const assistPromotedTo = assistLevel !== current.assistLevel ? assistLevel : null
+          const assistChangedTo = assistLevel !== current.assistLevel ? assistLevel : null
+          const assistEased = assistLevel === previousAssistLevel(current.assistLevel)
+            && assistLevel !== current.assistLevel
 
           const updated: Profile = {
             ...current,
@@ -172,10 +207,15 @@ export const useStore = create<State>()(
             streak,
             lastPlayedDate: date,
             garden,
-            keyErrors,
+            perKeyStats,
+            levelStats: { ...current.levelStats, [outcome.levelId]: adaptive.levelStat },
+            difficulty: adaptive.difficulty,
+            personalWpm: adaptive.personalWpm,
             spelling,
-            highestLevelUnlocked,
-            currentLevel: cleared ? highestLevelUnlocked : current.currentLevel,
+            highestLevelUnlocked: adaptive.unlockedTo,
+            // Move them onto the newly unlocked level; if they didn't advance,
+            // leave them where they are rather than dragging them backwards.
+            currentLevel: adaptive.jump > 0 ? adaptive.unlockedTo : current.currentLevel,
             assistLevel,
             lessonsCompleted: lessonNumber,
             totalWordsTyped: current.totalWordsTyped + outcome.wordsTyped,
@@ -190,7 +230,16 @@ export const useStore = create<State>()(
 
           return {
             save: updateProfile(state.save, id, () => withBadges),
-            lastResult: { ...result, newBadges, assistPromotedTo },
+            lastResult: {
+              ...result,
+              newBadges,
+              assistChangedTo,
+              assistEased,
+              levelJump: adaptive.jump,
+              offerEasierLevel: adaptive.offerEasierLevel
+                ? Math.max(1, outcome.levelId - 1)
+                : null,
+            },
             screen: 'results',
           }
         }),

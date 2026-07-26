@@ -31,9 +31,17 @@ type Props = {
   item: LessonItem
   charStates: CharState[]
   hidden: boolean
+  /**
+   * Spelling-test mode: letters not yet typed stay hidden. Letters already typed
+   * are revealed so the kid can see their own work — but the word is never shown
+   * ahead of them, because reading it off the screen isn't spelling it.
+   */
+  mask?: boolean
+  /** How far the kid has got, used to decide what's revealed under `mask`. */
+  cursor?: number
 }
 
-function TypingAreaImpl({ item, charStates, hidden }: Props) {
+function TypingAreaImpl({ item, charStates, hidden, mask = false, cursor = 0 }: Props) {
   if (hidden) {
     // Spelling item: the word is behind the reveal card, so show placeholders.
     return (
@@ -50,7 +58,11 @@ function TypingAreaImpl({ item, charStates, hidden }: Props) {
   return (
     <p className="type-text text-3xl leading-relaxed break-words sm:text-4xl">
       {item.text.split('').map((char, index) => (
-        <MemoChar key={index} char={char} state={charStates[index] ?? 'pending'} />
+        <MemoChar
+          key={index}
+          char={mask && index >= cursor ? '_' : char}
+          state={charStates[index] ?? 'pending'}
+        />
       ))}
     </p>
   )

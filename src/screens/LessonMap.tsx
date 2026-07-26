@@ -9,6 +9,7 @@ export function LessonMap({ profile }: { profile: Profile }) {
   const setLevel = useStore((s) => s.setLevel)
   const setScreen = useStore((s) => s.setScreen)
   const toggleSneakyStars = useStore((s) => s.toggleSneakyStars)
+  const toggleReadAloud = useStore((s) => s.toggleReadAloud)
 
   function start(levelId: number) {
     setLevel(levelId)
@@ -65,15 +66,26 @@ export function LessonMap({ profile }: { profile: Profile }) {
         })}
       </div>
 
-      <label className="mx-auto flex cursor-pointer items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm text-slate-600 shadow-sm">
-        <input
-          type="checkbox"
-          checked={profile.sneakyStars}
-          onChange={toggleSneakyStars}
-          className="h-4 w-4 accent-sky-500"
-        />
-        Sneaky Stars (the eyes-up game)
-      </label>
+      <div className="mx-auto flex flex-wrap justify-center gap-2">
+        <label className="flex cursor-pointer items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm text-slate-600 shadow-sm">
+          <input
+            type="checkbox"
+            checked={profile.sneakyStars}
+            onChange={toggleSneakyStars}
+            className="h-4 w-4 accent-sky-500"
+          />
+          Sneaky Stars (the eyes-up game)
+        </label>
+        <label className="flex cursor-pointer items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm text-slate-600 shadow-sm">
+          <input
+            type="checkbox"
+            checked={profile.readAloud}
+            onChange={toggleReadAloud}
+            className="h-4 w-4 accent-amber-500"
+          />
+          Say spelling words out loud
+        </label>
+      </div>
     </div>
   )
 }

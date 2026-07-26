@@ -1,6 +1,7 @@
 import { badgeById } from '../data/badges'
-import { promotionMessage } from '../engine/assist'
+import { demotionMessage, promotionMessage } from '../engine/assist'
 import { praiseFor, speedComment } from '../engine/scoring'
+import { easierLevelMessage, jumpMessage } from '../engine/adaptive'
 import { useStore } from '../store/profileStore'
 import type { AssistLevel, Profile } from '../store/schema'
 import { BigButton } from '../components/Chrome'
@@ -13,10 +14,18 @@ import { BigButton } from '../components/Chrome'
 export function Results({ profile }: { profile: Profile }) {
   const result = useStore((s) => s.lastResult)
   const setScreen = useStore((s) => s.setScreen)
+  const setLevel = useStore((s) => s.setLevel)
 
   if (!result) {
     setScreen('map')
     return null
+  }
+
+  const jumpNote = jumpMessage(result.levelJump)
+
+  function playLevel(levelId: number) {
+    setLevel(levelId)
+    setScreen('lesson')
   }
 
   return (
@@ -27,6 +36,13 @@ export function Results({ profile }: { profile: Profile }) {
       </div>
 
       <p className="text-center text-xl font-bold text-slate-700">{praiseFor(result)}</p>
+
+      {/* Levelled up — and by how much, since a multi-level jump deserves noise */}
+      {jumpNote && (
+        <div className="pop-in w-full rounded-2xl bg-emerald-50 p-4 text-center ring-2 ring-emerald-200">
+          <p className="font-bold text-emerald-800">{jumpNote}</p>
+        </div>
+      )}
 
       {/* 1. Eyes up — the headline */}
       {result.sneakyStarsTotal > 0 && (
@@ -63,18 +79,23 @@ export function Results({ profile }: { profile: Profile }) {
 
       {/* 3. Speed, last and smallest */}
       <div className="text-center text-sm text-slate-400">
-        {Math.round(result.wpm)} words per minute · {speedComment(result.wpm)}
+        {Math.round(result.wpm)} words per minute ·{' '}
+        {speedComment(result.wpm, profile.personalWpm)}
       </div>
 
       <div className="rounded-full bg-yellow-100 px-4 py-2 font-bold text-yellow-700">
         🪙 +{result.coinsEarned} coins
       </div>
 
-      {result.assistPromotedTo && (
+      {result.assistChangedTo && (
         <div className="pop-in w-full rounded-2xl bg-sky-50 p-4 text-center ring-2 ring-sky-200">
-          <p className="font-bold text-sky-800">Keyboard help changed!</p>
+          <p className="font-bold text-sky-800">
+            {result.assistEased ? 'Keyboard help is back' : 'Keyboard help changed!'}
+          </p>
           <p className="text-sm text-sky-700">
-            {promotionMessage(result.assistPromotedTo as AssistLevel)}
+            {result.assistEased
+              ? demotionMessage(result.assistChangedTo as AssistLevel)
+              : promotionMessage(result.assistChangedTo as AssistLevel)}
           </p>
         </div>
       )}
@@ -97,8 +118,28 @@ export function Results({ profile }: { profile: Profile }) {
         </div>
       )}
 
+      {/*
+        Struggling: offer an easier level, as the primary button. It's an offer,
+        never a demotion — carrying on where they are is right there next to it.
+      */}
+      {result.offerEasierLevel !== null && (
+        <div className="w-full rounded-2xl bg-white p-4 text-center shadow">
+          <p className="mb-3 text-slate-600">{easierLevelMessage(result.offerEasierLevel)}</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <BigButton onClick={() => playLevel(result.offerEasierLevel!)}>
+              Yes, Level {result.offerEasierLevel}
+            </BigButton>
+            <BigButton tone="secondary" onClick={() => playLevel(result.levelId)}>
+              No, stay here
+            </BigButton>
+          </div>
+        </div>
+      )}
+
       <div className="mt-2 flex flex-wrap justify-center gap-3">
-        <BigButton onClick={() => setScreen('lesson')}>Another go!</BigButton>
+        {result.offerEasierLevel === null && (
+          <BigButton onClick={() => setScreen('lesson')}>Another go!</BigButton>
+        )}
         <BigButton tone="secondary" onClick={() => setScreen('map')}>
           Lesson map
         </BigButton>
