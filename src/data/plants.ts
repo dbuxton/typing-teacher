@@ -21,7 +21,10 @@ export const PLANT_KINDS: PlantKind[] = [
   { id: 'cactus', name: 'Cactus', cost: 35, stages: ['🌱', '🌿', '🌵'] },
   { id: 'mushroom', name: 'Toadstool', cost: 40, stages: ['🌱', '🍄'] },
   { id: 'palm', name: 'Palm Tree', cost: 60, stages: ['🌱', '🌿', '🎋', '🌴'] },
-  { id: 'tree', name: 'Big Tree', cost: 80, stages: ['🌱', '🌿', '🌳'] },
+  // Evergreen, so it doesn't collide with the cherry's third stage below. A
+  // half-grown plant must never look like another plant's finished one, or the
+  // kid can't tell what's done and what's still coming.
+  { id: 'tree', name: 'Pine Tree', cost: 80, stages: ['🌱', '🌿', '🌲'] },
   { id: 'cherry', name: 'Cherry Blossom', cost: 100, stages: ['🌱', '🌿', '🌳', '🌸'] },
 ]
 
