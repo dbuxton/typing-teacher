@@ -3,8 +3,7 @@ import type { RewardKind, RewardTheme } from './types'
 /**
  * Pokémon. Coins buy an egg; the next lesson hatches it, and every lesson after
  * that it evolves, until it reaches its final form. Evolution *is* the "one stage
- * per lesson" mechanic, so this theme needs no invention — only drawings, which
- * live in `src/art/pokemon/`.
+ * per lesson" mechanic. Character artwork lives in `public/art/rewards/pokemon/`.
  *
  * Each egg is speckled in its line's colour, so a kid can tell which egg is
  * which before it hatches.

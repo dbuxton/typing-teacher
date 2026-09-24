@@ -1,0 +1,848 @@
+{
+  "date": "2026-09-24",
+  "model": "gemini-3.1-flash-image",
+  "generatedCharacters": 25,
+  "imageEditRequests": 1,
+  "originalPromptFile": "pokemon-character-prompts.json",
+  "processing": {
+    "backgroundRemoval": "rembg 2.0.85 / BiRefNet-General and General-Lite",
+    "colourDecontamination": true,
+    "size": 512,
+    "format": "WebP",
+    "quality": 88,
+    "webpMethod": 4
+  },
+  "records": [
+    {
+      "id": "magikarp",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: A cheerful Magikarp from Pok\u00e9mon, a bright orange-red fish with large round eyes, cream lips, long golden whiskers, pale side fins and a golden crown-shaped dorsal fin. A lively swimming pose with its complete tail and every fin visible.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:36:37.934Z",
+      "usage": {
+        "promptTokenCount": 513,
+        "candidatesTokenCount": 1407,
+        "totalTokenCount": 1920,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 255
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/magikarp.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "gyarados",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Gyarados from Pok\u00e9mon, a powerful blue serpentine water dragon with a cream segmented underside, white fins, a three-pointed blue head crest and long whiskers. Curve its entire body into a compact upright S so the head, fins and tail all fit comfortably in the square. Confident and impressive, with a friendly expression suitable for children.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:37:10.496Z",
+      "usage": {
+        "promptTokenCount": 530,
+        "candidatesTokenCount": 1398,
+        "totalTokenCount": 1928,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 272
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/gyarados.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "caterpie",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Caterpie from Pok\u00e9mon, a small bright-green segmented caterpillar with a yellow underside, large expressive eyes and its distinctive red Y-shaped antenna. A gentle upward-curving crawling pose, cheerful and curious. Show the entire body, little feet, antenna and tail.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:37:19.777Z",
+      "usage": {
+        "promptTokenCount": 516,
+        "candidatesTokenCount": 1412,
+        "totalTokenCount": 1928,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 258
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/caterpie.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "metapod",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Metapod from Pok\u00e9mon, a green crescent-shaped chrysalis with its recognisable angular shell, central ridge and sleepy eyes. An upright three-quarter pose that clearly shows the folded geometry and curved silhouette. Calm and charming. No added arms, legs or accessories.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:37:27.035Z",
+      "usage": {
+        "promptTokenCount": 516,
+        "candidatesTokenCount": 1329,
+        "totalTokenCount": 1845,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 258
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/metapod.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "butterfree",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Butterfree from Pok\u00e9mon, a small purple butterfly Pok\u00e9mon with large red compound eyes, slender antennae, blue feet and two pairs of broad pale wings with bold dark veins. Hovering gently with its wings open, its body centred and all four wing tips fully inside the frame.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:37:35.737Z",
+      "usage": {
+        "promptTokenCount": 516,
+        "candidatesTokenCount": 1450,
+        "totalTokenCount": 1966,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 258
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/butterfree.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "pichu",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Pichu from Pok\u00e9mon, a tiny pale-yellow electric mouse with oversized pointed ears edged in black, pink cheek circles, a black neck marking and a short black angular tail. A playful standing pose, small paws near its chest, happy expression. Keep its baby proportions distinct from Pikachu.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:37:45.508Z",
+      "usage": {
+        "promptTokenCount": 519,
+        "candidatesTokenCount": 1486,
+        "totalTokenCount": 2005,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 261
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/pichu.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "raichu",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Classic Kanto Raichu from Pok\u00e9mon: an orange electric mouse with a cream belly, yellow cheek circles, large curled ears and a long thin dark tail ending in a lightning-bolt shape. A cheerful standing pose with the tail curving beside its body so its whole tip remains visible. Use the classic form.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:37:54.337Z",
+      "usage": {
+        "promptTokenCount": 524,
+        "candidatesTokenCount": 1390,
+        "totalTokenCount": 1914,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 266
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/raichu.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "igglybuff",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Igglybuff from Pok\u00e9mon, a tiny round pale-pink baby Pok\u00e9mon with short limbs, large reddish eyes and a recognisable curled tuft on its forehead. A sweet upright pose with its small arms lifted slightly. Preserve the simple round body and baby proportions. No accessories.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:38:00.473Z",
+      "usage": {
+        "promptTokenCount": 517,
+        "candidatesTokenCount": 1396,
+        "totalTokenCount": 1913,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 259
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/igglybuff.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "jigglypuff",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Jigglypuff from Pok\u00e9mon, a round pink character with large teal-blue eyes, short pointed ears with dark interiors and its distinctive curled forelock. A happy standing pose, tiny arms open slightly and a gentle smile. Show the whole round body and both small feet. No microphone.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:38:08.011Z",
+      "usage": {
+        "promptTokenCount": 519,
+        "candidatesTokenCount": 1314,
+        "totalTokenCount": 1833,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 261
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/jigglypuff.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "wigglytuff",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Wigglytuff from Pok\u00e9mon, a tall soft-pink character with a white belly, very long rabbit-like ears with dark interiors, large blue eyes and a curled forelock. An affectionate, confident upright pose, small arms relaxed. Show both complete ears and both feet; preserve its taller proportions compared with Jigglypuff.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:38:16.837Z",
+      "usage": {
+        "promptTokenCount": 528,
+        "candidatesTokenCount": 1458,
+        "totalTokenCount": 1986,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 270
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/wigglytuff.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "bulbasaur",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Bulbasaur from Pok\u00e9mon, a small turquoise quadruped with darker teal markings, large red eyes, pointed ears and a large closed green plant bulb growing on its back. A cheerful three-quarter standing pose with a gentle smile. Show all four feet, the whole bulb and both ears.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:38:25.515Z",
+      "usage": {
+        "promptTokenCount": 520,
+        "candidatesTokenCount": 1418,
+        "totalTokenCount": 1938,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 262
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/bulbasaur.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "ivysaur",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Ivysaur from Pok\u00e9mon, a sturdy blue-green quadruped with darker markings, red eyes, pointed ears and small visible fangs. A closed rose-pink flower bud rises from a spreading collar of broad green leaves on its back. A confident three-quarter standing pose. Keep the flower closed to distinguish it from Venusaur.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:38:33.650Z",
+      "usage": {
+        "promptTokenCount": 529,
+        "candidatesTokenCount": 1355,
+        "totalTokenCount": 1884,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 271
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/ivysaur.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "venusaur",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Venusaur from Pok\u00e9mon, a broad blue-green quadruped with darker markings, red eyes and a friendly sturdy face. Its back supports a short thick trunk, broad green leaves and a fully open enormous pink flower with pale spots and a warm yellow centre. Show the complete flower and all feet; give it a compact, balanced three-quarter pose.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:38:42.119Z",
+      "usage": {
+        "promptTokenCount": 532,
+        "candidatesTokenCount": 1460,
+        "totalTokenCount": 1992,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 274
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/venusaur.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "charmander",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Charmander from Pok\u00e9mon, a small orange bipedal lizard with a cream belly, large blue eyes and a bright flame at the end of its curved tail. A cheerful standing pose with one little paw raised. Keep the complete tail and its flame clearly visible beside the body.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:38:50.964Z",
+      "usage": {
+        "promptTokenCount": 517,
+        "candidatesTokenCount": 1375,
+        "totalTokenCount": 1892,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 259
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/charmander.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "charmeleon",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Charmeleon from Pok\u00e9mon, a red bipedal lizard with a cream belly, a pointed horn on the back of its head, bright eyes and small pale claws. A confident, determined standing pose. Curve its long tail beside its body so the complete tail flame is visible. More mature than Charmander, without looking frightening.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:38:59.782Z",
+      "usage": {
+        "promptTokenCount": 528,
+        "candidatesTokenCount": 1410,
+        "totalTokenCount": 1938,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 270
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/charmeleon.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "charizard",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Edit the attached Charizard illustration. It mistakenly has two tails. Remove the entire thin tail and its flame on the viewer's RIGHT, replacing that area with the same plain white background. Keep the thick curved tail on the viewer's LEFT and its flame. The final character must have exactly ONE tail and exactly ONE flame, at the tip of that tail. Preserve the face, two arms, two legs, two wings, pose, painted texture, colours, lighting, composition and white background. Keep the full character in frame. No additional objects, text, shadows or checkerboard. Return one finished image.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:41:39.763Z",
+      "usage": {
+        "promptTokenCount": 382,
+        "candidatesTokenCount": 1385,
+        "totalTokenCount": 1767,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 124
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/charizard.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "squirtle",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Squirtle from Pok\u00e9mon, a small light-blue turtle with a warm brown shell, a pale cream belly and a tightly curled blue tail. Large expressive eyes and a happy smile. A lively three-quarter standing pose that shows the shell, both little feet and the complete curled tail.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:39:18.333Z",
+      "usage": {
+        "promptTokenCount": 520,
+        "candidatesTokenCount": 1393,
+        "totalTokenCount": 1913,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 262
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/squirtle.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "wartortle",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Wartortle from Pok\u00e9mon, a blue turtle with a brown shell, cream belly, long pale-blue fin-like ears and a large fluffy pale curled tail. A confident three-quarter standing pose with a warm expression and small visible fangs. Keep both ears and the entire fluffy tail visible.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:39:27.621Z",
+      "usage": {
+        "promptTokenCount": 522,
+        "candidatesTokenCount": 1405,
+        "totalTokenCount": 1927,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 264
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/wartortle.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "blastoise",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Blastoise from Pok\u00e9mon, a large sturdy blue turtle with a broad brown shell, cream belly and two metallic water cannons emerging above its shoulders. A friendly, powerful three-quarter standing pose with both feet planted. Both cannons should be visible, resting calmly with no firing or effects.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:39:37.253Z",
+      "usage": {
+        "promptTokenCount": 519,
+        "candidatesTokenCount": 1459,
+        "totalTokenCount": 1978,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 261
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/blastoise.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "gastly",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Gastly from Pok\u00e9mon, a dark spherical ghost face with large pale eyes, small fangs and a mischievous smile, surrounded by a compact cloud of purple gas. Float centrally, keeping every wisp inside the frame. Make the purple gas clearly defined and richly coloured so it can be retained during background removal. Playful rather than scary.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:39:47.998Z",
+      "usage": {
+        "promptTokenCount": 529,
+        "candidatesTokenCount": 1386,
+        "totalTokenCount": 1915,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 271
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/gastly.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    },
+    {
+      "id": "haunter",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Haunter from Pok\u00e9mon, a floating purple ghost with a spiky head, pointed ears, large eyes, a broad mischievous grin and two separate three-fingered claw-like hands. Arrange the hands close beside the face as part of one compact character composition. Keep all spikes and fingers visible. Playful and friendly, without horror imagery.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:39:56.044Z",
+      "usage": {
+        "promptTokenCount": 530,
+        "candidatesTokenCount": 1418,
+        "totalTokenCount": 1948,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 272
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/haunter.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "gengar",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Gengar from Pok\u00e9mon, a stocky purple ghost with pointed ears, a spiky back, short arms and legs, red eyes and a wide toothy grin. A confident playful three-quarter standing pose, one small hand raised. Keep its whole silhouette visible. Cheeky and appealing, without horror imagery.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:40:06.558Z",
+      "usage": {
+        "promptTokenCount": 524,
+        "candidatesTokenCount": 1454,
+        "totalTokenCount": 1978,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 266
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/gengar.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "dratini",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Dratini from Pok\u00e9mon, a small light-blue serpentine dragon with a pale underside, large expressive eyes, a rounded pale snout and white fin-like structures beside its head. A gentle compact coil with the head lifted curiously and the tapering tail fully visible. Sweet, delicate and friendly.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:40:16.482Z",
+      "usage": {
+        "promptTokenCount": 519,
+        "candidatesTokenCount": 1437,
+        "totalTokenCount": 1956,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 261
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/dratini.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "dragonair",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Dragonair from Pok\u00e9mon, an elegant long blue serpentine dragon with a white underside, a small forehead horn, white wing-like structures beside its head, a blue orb at its neck and two blue orbs near its tail. Arrange the complete body in a graceful compact S-shaped coil. Keep the horn, head fins and complete tail visible.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:40:26.128Z",
+      "usage": {
+        "promptTokenCount": 531,
+        "candidatesTokenCount": 1353,
+        "totalTokenCount": 1884,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 273
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/dragonair.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "dragonite",
+      "model": "gemini-3.1-flash-image",
+      "prompt": "Create one polished, hand-painted 3D storybook illustration for a children's typing-game collection. Softly sculpted forms, subtle painted texture, crisp readable silhouette, warm gentle studio lighting, rich cheerful colours and expressive eyes. Match the finish and friendly mood of the supplied Pikachu reference if one is attached, using it only as a style reference.\n\nShow exactly one Pok\u00e9mon in its recognisable classic design. Full body, centred in a square composition, generally in a three-quarter view. Keep its entire silhouette inside the frame with at least 8% clear margin; fit long tails, wings and antennae by adjusting the pose, never by cropping.\n\nUse a completely plain, solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, glow outside the silhouette, border, card frame, text, labels, logos, watermark or extra characters. Keep the silhouette clearly separated from the background. Produce one image only, never a collage or evolution sheet.\n\nSubject: Dragonite from Pok\u00e9mon, a friendly rounded orange dragon with a cream segmented belly, two slender head antennae, small teal-membraned wings and a thick tapering tail. A warm smiling three-quarter standing pose, one hand raised in greeting. Keep both antennae, wings, feet and the whole tail visible.",
+      "aspectRatio": "1:1",
+      "imageSize": "1K",
+      "usedReference": true,
+      "generatedAt": "2026-09-24T15:40:36.517Z",
+      "usage": {
+        "promptTokenCount": 524,
+        "candidatesTokenCount": 1390,
+        "totalTokenCount": 1914,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 266
+          },
+          {
+            "modality": "IMAGE",
+            "tokenCount": 258
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "IMAGE",
+            "tokenCount": 1120
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "asset": "public/art/rewards/pokemon/dragonite.webp",
+      "backgroundRemovalModel": "birefnet-general-lite"
+    },
+    {
+      "id": "pikachu",
+      "source": "User-supplied illustration",
+      "asset": "public/art/rewards/pokemon/pikachu.webp",
+      "backgroundRemovalModel": "birefnet-general"
+    }
+  ]
+}

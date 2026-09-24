@@ -57,7 +57,7 @@ export function CollectionScreen({ profile }: { profile: Profile }) {
                   <span className="text-2xl text-slate-300">·</span>
                 )}
               </div>
-              {/* The emoji garden speaks for itself; drawn themes get a caption. */}
+              {/* Player names and evolution forms need a caption at tile size. */}
               {item && theme.id !== 'garden' && (
                 <span className="line-clamp-2 w-full text-center text-[9px] leading-tight font-bold text-slate-600 sm:text-[10px]">
                   {name}

@@ -68,6 +68,96 @@ body {
   animation: wobble 0.25s ease-in-out;
 }
 
+.reward-image {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.player-card {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  aspect-ratio: 64 / 88;
+  max-width: 100%;
+  container-type: inline-size;
+  border-radius: 13%;
+  background: var(--card-edge);
+  box-shadow: 0 2px 4px #0f172a20;
+}
+
+.player-card-surface {
+  position: absolute;
+  inset: 3%;
+  overflow: hidden;
+  border-radius: 11%;
+  background: linear-gradient(145deg, var(--card-light), var(--card-dark));
+  color: var(--card-ink);
+}
+
+.player-card-portrait {
+  position: absolute;
+  width: 100%;
+  height: 83%;
+  top: 3%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.player-card-position,
+.player-card-stars,
+.player-card-name,
+.player-card-club {
+  position: absolute;
+  z-index: 1;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.player-card-position {
+  top: 5%;
+  left: 5%;
+  padding: 2% 4%;
+  border-radius: 20%;
+  background: var(--card-light);
+  font-size: 12cqw;
+}
+
+.player-card-stars {
+  top: 6%;
+  right: 4%;
+  font-size: 10cqw;
+  text-shadow: 0 0 2px var(--card-light);
+}
+
+.player-card-name {
+  bottom: 12%;
+  left: 4%;
+  width: 92%;
+  padding: 4% 0;
+  border-radius: 3px;
+  background: #fffffff0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 11cqw;
+}
+
+.player-card-name-long { font-size: 9cqw; }
+
+.player-card-club {
+  bottom: 3%;
+  width: 100%;
+  text-align: center;
+  font-size: 7.5cqw;
+  white-space: nowrap;
+}
+
+.player-card-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(130deg, #f472b644, #facc1511, #38bdf844, #a3e63511, #c084fc44);
+}
+
 /* The holographic sheen on a Legend player card. */
 @keyframes holo {
   0%, 100% { opacity: 0.55; }

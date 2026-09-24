@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { FORMS } from '../../art/pokemon'
+import { existsSync } from 'node:fs'
+import { POKEMON_IMAGES } from '../../art/assets'
 import { THEMES, isFullyGrown, rewardKind, rewardStage, shopPreviewStage, themeById } from '.'
 import { EGG_PREFIX, eggColour } from './pokemon'
 import { PLAYERS, TIERS } from './football'
@@ -98,19 +99,23 @@ describe('Pokémon', () => {
     }
   })
 
-  it('has a drawing for every form a kid can reach', () => {
+  it('has an image file for every form a kid can reach', () => {
     // A missing drawing would show an egg forever — worse than a blank, since it
     // looks like the lesson didn't count.
     for (const kind of pokemon.kinds) {
       for (const stage of kind.stages.slice(1)) {
-        expect(FORMS[stage.id], `no drawing for ${stage.name}`).toBeDefined()
+        expect(POKEMON_IMAGES.has(stage.id), `no image mapping for ${stage.name}`).toBe(true)
+        expect(
+          existsSync(new URL(`../../../public/art/rewards/pokemon/${stage.id}.webp`, import.meta.url)),
+          `missing image file for ${stage.name}`,
+        ).toBe(true)
       }
     }
   })
 
-  it('has no drawings nothing uses', () => {
+  it('has no mapped character images nothing uses', () => {
     const used = new Set(pokemon.kinds.flatMap((k) => k.stages.map((s) => s.id)))
-    for (const id of Object.keys(FORMS)) expect(used, id).toContain(id)
+    for (const id of POKEMON_IMAGES) expect(used, id).toContain(id)
   })
 })
 

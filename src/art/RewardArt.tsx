@@ -2,10 +2,11 @@ import { rewardStage, type ThemeId } from '../data/rewards'
 import { playerById } from '../data/rewards/football'
 import { eggColour, EGG_PREFIX } from '../data/rewards/pokemon'
 import { PlayerCard } from './PlayerCard'
-import { Egg, FORMS } from './pokemon'
+import { Egg } from './pokemon/egg'
+import { EGG_IMAGES, GARDEN_IMAGES, POKEMON_IMAGES, rewardImage } from './assets'
 
 /**
- * Draws one collected thing at one stage, whatever the theme: an emoji plant, a
+ * Draws one collected thing at one stage, whatever the theme: a painted plant, a
  * Pokémon, or a player's card. Every screen goes through here, so a theme's art
  * only has to be wired up once.
  *
@@ -24,7 +25,7 @@ export function RewardArt({
   stage: number
   /** Height in px. */
   size?: number
-  /** For the SVG themes, e.g. to let the art shrink into a small tile. */
+  /** Lets the art shrink into a small tile. */
   className?: string
 }) {
   const current = rewardStage(theme, kindId, stage)
@@ -37,20 +38,59 @@ export function RewardArt({
 
   if (theme === 'pokemon') {
     const id = current?.id ?? `${EGG_PREFIX}unknown`
-    const Form = FORMS[id]
+    if (current && id.startsWith(EGG_PREFIX) && EGG_IMAGES.has(kindId)) {
+      return (
+        <RewardImage
+          src={rewardImage(`eggs/${kindId}`)}
+          alt={current.name}
+          size={size}
+          className={className}
+        />
+      )
+    }
+    if (current && POKEMON_IMAGES.has(id)) {
+      return (
+        <RewardImage
+          src={rewardImage(`pokemon/${id}`)}
+          alt={current.name}
+          size={size}
+          className={className}
+        />
+      )
+    }
     return (
       <svg viewBox="0 0 64 64" width={size} height={size} className={className} role="img" aria-label={current?.name ?? 'Egg'}>
-        {Form ? <Form /> : <Egg colour={eggColour(id) ?? '#cbd5e1'} />}
+        <Egg colour={eggColour(id) ?? '#cbd5e1'} />
       </svg>
     )
   }
 
-  return <Emoji size={size}>{current?.id ?? '🌱'}</Emoji>
+  return (
+    <RewardImage
+      src={rewardImage(`garden/${GARDEN_IMAGES[current?.id ?? '🌱'] ?? 'seedling'}`)}
+      alt={current?.name ?? 'Seedling'}
+      size={size}
+      className={className}
+    />
+  )
+}
+
+function RewardImage({ src, alt, size, className }: { src: string; alt: string; size: number; className?: string }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      width={size}
+      height={size}
+      className={`reward-image ${className ?? ''}`}
+      decoding="async"
+      draggable={false}
+    />
+  )
 }
 
 function Emoji({ size, children }: { size: number; children: string }) {
-  // Emoji glyphs sit a little small for their font size; 0.85 lines them up
-  // with the SVG themes at the same `size`.
+  // Only used for an unrecognised footballer from an old save.
   return (
     <span style={{ fontSize: size * 0.85, lineHeight: 1 }}>
       {children}

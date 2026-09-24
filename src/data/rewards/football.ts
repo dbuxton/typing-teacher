@@ -4,8 +4,8 @@ import type { RewardKind, RewardTheme } from './types'
  * Women's Super League. Coins sign a player; every lesson she trains and her card
  * goes up a tier, from Academy to Legend.
  *
- * These are real people, so the cards carry no faces and no club crests — just a
- * shirt in club colours, her name, position and club. Every player costs the
+ * The cards use individual illustrated portraits, shirts in club colours, and
+ * live text for each player's name, position and club. Every player costs the
  * same: a price list would rank real women against each other, and a kid's
  * favourite should never be "the cheap one".
  *

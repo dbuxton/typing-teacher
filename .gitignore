@@ -29,6 +29,12 @@ yarn-error.log*
 .env*.local
 .env
 
+# Generated originals awaiting review and background removal
+/output/nano-banana-2/
+
+# Session cache created by the local ONNX image processor
+/:memory:.ses
+
 # vercel
 .vercel
 

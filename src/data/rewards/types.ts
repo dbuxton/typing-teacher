@@ -4,8 +4,8 @@
  * themes — buy something, and every completed lesson moves it up one stage —
  * only the art and the words change.
  *
- * Every theme is a fixed, finite catalogue. Nothing is generated, so every stage
- * a kid can ever see has been drawn and checked by the tests.
+ * Every theme is a fixed, finite catalogue. Artwork is bundled with the app;
+ * nothing is generated at runtime.
  */
 
 export type ThemeId = 'garden' | 'football' | 'pokemon'

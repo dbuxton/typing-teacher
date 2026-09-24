@@ -78,14 +78,22 @@ a fortnight and it's exactly as you left it.
 
 Each player picks what their coins buy when they're created:
 
-- **Garden** — seeds that grow into flowers and trees (emoji).
+- **Garden** — painted seedlings that grow into illustrated flowers and trees.
 - **Women's Super League** — sign a starting eleven of WSL and Lionesses players.
   Each lesson is a training session that upgrades her card: Academy → Bronze →
-  Silver → Gold → Legend. The cards have no faces and no club crests, just a
-  shirt in club colours, and every player costs the same. The squad and their clubs
+  Silver → Gold → Legend. Each card has its own illustrated player portrait,
+  a shirt in club colours, and a frame that upgrades. Every player costs the same. The squad and their clubs
   are in `src/data/rewards/football.ts`; update them there when players move.
 - **Pokémon** — eggs that hatch and then evolve, across nine evolution lines.
-  These are hand-drawn SVG fan art (`src/art/pokemon/`), not official artwork.
+  Speckled eggs and all 26 characters use painted illustrations with transparent
+  backgrounds. These are generated fan illustrations, not official artwork.
+
+Generated images live in `public/art/rewards/` as transparent 512px WebP files.
+Each plant, egg and player portrait was requested individually using the built-in
+image generator. The Pokémon were generated individually with Nano Banana 2,
+using the supplied Pikachu as a style reference. The exact prompt set and asset
+notes are in `docs/reward-art.md`; `docs/nano-banana-2.md` explains regeneration.
+All images load locally; names, prices, card tiers and saved growth stages remain data.
 
 The theme can't be changed later, because switching would leave a whole
 collection behind. To try a different one, make another player. Every theme is a
@@ -113,7 +121,7 @@ lesson map to switch them off.
 src/
   data/      curriculum.ts (12 levels), spellingWords.ts, badges.ts,
              rewards/ (garden, football and pokemon themes)
-  art/       RewardArt, PlayerCard, and a drawing per Pokémon form
+  art/       RewardArt, portrait cards, asset mappings and fallback egg art
   engine/    pure logic, all unit-tested — adaptive, generator, scoring, srs,
              sneakyStars, assist, speech, keymap, and the useTypingSession hook
   store/     schema.ts (versioned save + migrations), profileStore.ts (zustand)
