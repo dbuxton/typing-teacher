@@ -68,11 +68,22 @@ body {
   animation: wobble 0.25s ease-in-out;
 }
 
+/* The holographic sheen on a Legend player card. */
+@keyframes holo {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.holo {
+  animation: holo 2.4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .key-next,
   .sneaky-star,
   .pop-in,
-  .wobble {
+  .wobble,
+  .holo {
     animation-duration: 0.01ms;
     animation-iteration-count: 1;
   }

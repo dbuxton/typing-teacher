@@ -1,4 +1,4 @@
-import { BADGES } from '../data/badges'
+import { BADGES, badgeText } from '../data/badges'
 import { ASSIST_LABELS } from '../engine/scoring'
 import { useStore } from '../store/profileStore'
 import type { Profile } from '../store/schema'
@@ -20,6 +20,7 @@ export function BadgeShelf({ profile }: { profile: Profile }) {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {BADGES.map((badge) => {
           const has = earned.has(badge.id)
+          const text = badgeText(badge, profile.theme)
           return (
             <div
               key={badge.id}
@@ -27,11 +28,11 @@ export function BadgeShelf({ profile }: { profile: Profile }) {
                 has ? 'bg-white' : 'bg-slate-100'
               }`}
             >
-              <span className={`text-4xl ${has ? '' : 'opacity-25 grayscale'}`}>{badge.emoji}</span>
+              <span className={`text-4xl ${has ? '' : 'opacity-25 grayscale'}`}>{text.emoji}</span>
               <span className={`font-bold ${has ? 'text-slate-700' : 'text-slate-400'}`}>
-                {badge.name}
+                {text.name}
               </span>
-              <span className="text-xs text-slate-400">{badge.how}</span>
+              <span className="text-xs text-slate-400">{text.how}</span>
               {badge.rare && (
                 <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[10px] font-bold text-violet-600">
                   RARE

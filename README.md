@@ -72,9 +72,25 @@ Words they get wrong come back sooner (Leitner spaced repetition,
 `src/engine/srs.ts`), so it targets *their* weak words rather than working through a
 fixed list. British spellings by default.
 
-**Rewards that accumulate.** Coins, a daily streak, 20 badges, and a garden that
-grows one stage per lesson. Nothing wilts, nothing dies, nothing nags — skip a
-fortnight and the garden is exactly as you left it.
+**Rewards that accumulate.** Coins, a daily streak, 20 badges, and a collection
+that grows one stage per lesson. Nothing wilts, nothing dies, nothing nags — skip
+a fortnight and it's exactly as you left it.
+
+Each player picks what their coins buy when they're created:
+
+- **Garden** — seeds that grow into flowers and trees (emoji).
+- **Women's Super League** — sign a starting eleven of WSL and Lionesses players.
+  Each lesson is a training session that upgrades her card: Academy → Bronze →
+  Silver → Gold → Legend. The cards have no faces and no club crests, just a
+  shirt in club colours, and every player costs the same. The squad and their clubs
+  are in `src/data/rewards/football.ts`; update them there when players move.
+- **Pokémon** — eggs that hatch and then evolve, across nine evolution lines.
+  These are hand-drawn SVG fan art (`src/art/pokemon/`), not official artwork.
+
+The theme can't be changed later, because switching would leave a whole
+collection behind. To try a different one, make another player. Every theme is a
+fixed catalogue, and the tests check that every stage a kid can reach has been
+drawn.
 
 ### The one thing the app can't do
 
@@ -95,12 +111,14 @@ lesson map to switch them off.
 
 ```
 src/
-  data/      curriculum.ts (12 levels), spellingWords.ts, badges.ts, plants.ts
+  data/      curriculum.ts (12 levels), spellingWords.ts, badges.ts,
+             rewards/ (garden, football and pokemon themes)
+  art/       RewardArt, PlayerCard, and a drawing per Pokémon form
   engine/    pure logic, all unit-tested — adaptive, generator, scoring, srs,
              sneakyStars, assist, speech, keymap, and the useTypingSession hook
   store/     schema.ts (versioned save + migrations), profileStore.ts (zustand)
   components/ Keyboard, Hands, TypingArea, SpellingCard, SneakyStar, Chrome
-  screens/   Home, LessonMap, Lesson, Results, GardenScreen, BadgeShelf
+  screens/   Home, LessonMap, Lesson, Results, CollectionScreen, BadgeShelf
 ```
 
 `src/engine/adaptive.ts` holds every difficulty decision as pure functions —
@@ -139,8 +157,9 @@ change that to match or the assets 404.
 ## Saved progress
 
 Everything lives in `localStorage` under `typing-teacher.save.v1`, keyed by
-player, so several kids can share one computer with separate gardens. The save is
-versioned with a migration hook (`src/store/schema.ts`) — currently on version 2,
-and `src/store/schema.test.ts` checks that a version 1 save keeps its coins,
-garden, badges and level rather than resetting. Clearing site data clears the lot;
+player, so several kids can share one computer with separate collections. The
+save is versioned with a migration hook (`src/store/schema.ts`), currently at
+version 3. `src/store/schema.test.ts` checks that older saves keep their coins,
+garden, badges and level rather than resetting (v1 and v2 players become
+gardeners). Clearing site data clears the lot;
 there's no backup, because there's no server.

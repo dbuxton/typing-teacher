@@ -1,4 +1,5 @@
 import type { Profile, LessonResult } from '../store/schema'
+import { themeById, type ThemeId } from './rewards'
 
 /**
  * Badges are pure predicates over the profile *after* a lesson has been recorded,
@@ -15,6 +16,12 @@ export type Badge = {
   /** Kid-facing description of how to earn it. */
   how: string
   rare?: boolean
+  /**
+   * The collection badges take their name and emoji from the player's reward
+   * theme — "Green Fingers" in a garden, "Signed!" in a football squad. The id
+   * never changes, so a badge already earned survives in any theme.
+   */
+  themed?: 'first' | 'full'
   earned: (profile: Profile, lesson: LessonResult) => boolean
 }
 
@@ -124,6 +131,7 @@ export const BADGES: Badge[] = [
     name: 'Green Fingers',
     emoji: '🌱',
     how: 'Plant your first seed',
+    themed: 'first',
     earned: (p) => p.garden.length >= 1,
   },
   {
@@ -131,7 +139,8 @@ export const BADGES: Badge[] = [
     name: 'Garden Party',
     emoji: '🌻',
     how: 'Fill every plot in the garden',
-    earned: (p) => p.garden.length >= 12,
+    themed: 'full',
+    earned: (p) => p.garden.length >= themeById(p.theme).slots,
   },
   // --- the eyes-up set ---
   {
@@ -166,6 +175,12 @@ export const BADGES: Badge[] = [
     earned: (p) => p.highestLevelUnlocked >= 12,
   },
 ]
+
+/** What a kid sees for this badge: themed wording where the badge has it. */
+export function badgeText(badge: Badge, theme: ThemeId): Pick<Badge, 'name' | 'emoji' | 'how'> {
+  if (badge.themed) return themeById(theme).badgeCopy[badge.themed]
+  return badge
+}
 
 export function badgeById(id: string): Badge | undefined {
   return BADGES.find((b) => b.id === id)

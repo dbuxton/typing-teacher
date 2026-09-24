@@ -1,5 +1,6 @@
 import type { Profile } from '../store/schema'
 import { useStore } from '../store/profileStore'
+import { themeById } from '../data/rewards'
 
 /** Small shared bits of furniture: the top bar, coins, streak flame, buttons. */
 
@@ -40,12 +41,12 @@ export function TopBar({ profile }: { profile: Profile }) {
       <div className="flex items-center gap-2">
         <StreakFlame streak={profile.streak} />
         <CoinCount coins={profile.coins} />
-        {screen !== 'garden' && (
+        {screen !== 'collection' && (
           <button
-            onClick={() => setScreen('garden')}
+            onClick={() => setScreen('collection')}
             className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-bold text-emerald-700 transition hover:bg-emerald-200"
           >
-            🌻 Garden
+            {themeById(profile.theme).navLabel}
           </button>
         )}
         {screen !== 'badges' && (

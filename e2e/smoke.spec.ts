@@ -15,9 +15,10 @@ async function currentText(page: Page): Promise<string> {
   return text.replace(/ /g, ' ').replace(/\n/g, '')
 }
 
-async function createPlayer(page: Page, name = 'Robin') {
+async function createPlayer(page: Page, name = 'Robin', prizes?: RegExp) {
   await page.goto('./')
   await page.getByPlaceholder('Type your name').fill(name)
+  if (prizes) await page.getByRole('button', { name: prizes }).click()
   await page.getByRole('button', { name: "Let's go!" }).click()
   await expect(page.getByRole('heading', { name: 'Choose a lesson' })).toBeVisible()
 }
@@ -156,4 +157,32 @@ test('a capable kid is jumped ahead instead of grinding through level 1', async 
   await expect(page.getByText(/Jumping you ahead|Skipping you ahead/)).toBeVisible()
   await page.getByRole('button', { name: 'Lesson map' }).click()
   await expect(page.getByRole('button', { name: /Carry on with Level [2-9]/ })).toBeVisible()
+})
+
+test('a kid who picks Pokémon collects eggs instead of seeds', async ({ page }) => {
+  await createPlayer(page, 'Ash', /^Pokémon/)
+
+  // The top bar and the collection are Pokémon-flavoured, not a garden.
+  await expect(page.getByRole('button', { name: /Garden/ })).toHaveCount(0)
+  await page.getByRole('button', { name: /Pokémon/ }).click()
+  await expect(page.getByRole('heading', { name: 'Your Pokémon' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Egg shop/ })).toBeVisible()
+  // No coins yet, so nothing is buyable.
+  await expect(page.getByRole('button', { name: /Magikarp/ })).toBeDisabled()
+
+  // Earn some coins with a flawless lesson, then spend them.
+  await page.getByRole('button', { name: /Back to lessons/ }).click()
+  await page.getByRole('button', { name: /Carry on with Level 1/ }).click()
+  for (let item = 0; item < 6; item++) {
+    await typeCurrentItem(page)
+    await page.waitForTimeout(500)
+  }
+  await page.getByRole('button', { name: /Spend coins/ }).click()
+  await page.getByRole('button', { name: /Magikarp/ }).click()
+  await expect(page.getByText('Magikarp egg')).toBeVisible()
+
+  // The collection badge speaks the theme's language too.
+  await page.getByRole('button', { name: /Badges/ }).click()
+  await expect(page.getByText('Hatchling')).toBeVisible()
+  await expect(page.getByText('Green Fingers')).toHaveCount(0)
 })

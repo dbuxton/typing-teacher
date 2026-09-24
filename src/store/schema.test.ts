@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { SAVE_VERSION, daysBetween, makeProfile, migrate, today } from './schema'
+import { SAVE_VERSION, daysBetween, makeProfile, migrate, today, type Profile } from './schema'
 
 /**
  * Migration tests exist to protect a real child's real progress. If these break,
@@ -121,6 +121,50 @@ describe('v1 -> v2 migration', () => {
   it('drops the dead keyErrors field', () => {
     const rosa = migrate(v1Save(), 1).profiles[0] as Record<string, unknown>
     expect(rosa.keyErrors).toBeUndefined()
+  })
+})
+
+describe('v2 -> v3 migration', () => {
+  /** A v2 profile: everything a v1 save became, before reward themes existed. */
+  function v2Save() {
+    const v2 = migrate(v1Save(), 1).profiles[0] as Partial<Profile>
+    delete v2.theme
+    return { version: 2, profiles: [v2], activeProfileId: v2.id }
+  }
+
+  it('makes every existing player a gardener, keeping their plants', () => {
+    const rosa = migrate(v2Save(), 2).profiles[0]
+    expect(rosa.theme).toBe('garden')
+    expect(rosa.garden).toEqual([{ kindId: 'sunflower', stage: 2 }])
+    expect(rosa.coins).toBe(120)
+    expect(rosa.badges).toEqual(['first-lesson', 'eagle-eye'])
+  })
+
+  it('carries a v1 save all the way up', () => {
+    const rosa = migrate(v1Save(), 1).profiles[0]
+    expect(rosa.theme).toBe('garden')
+    expect(rosa.garden).toEqual([{ kindId: 'sunflower', stage: 2 }])
+  })
+})
+
+describe('reward themes', () => {
+  it('starts a new player on the theme they picked', () => {
+    expect(makeProfile('Ada', '🦉', 'pokemon').theme).toBe('pokemon')
+    expect(makeProfile('Ada', '🦉').theme).toBe('garden')
+  })
+
+  it('keeps a valid theme through a reload', () => {
+    const save = { version: SAVE_VERSION, profiles: [makeProfile('Ada', '🦉', 'football')], activeProfileId: null }
+    expect(migrate(save, SAVE_VERSION).profiles[0].theme).toBe('football')
+  })
+
+  it('falls back to the garden for a theme this build does not know', () => {
+    const save = {
+      version: SAVE_VERSION,
+      profiles: [{ ...makeProfile('Ada', '🦉'), theme: 'dinosaurs' }],
+      activeProfileId: null,
+    }
+    expect(migrate(save, SAVE_VERSION).profiles[0].theme).toBe('garden')
   })
 })
 

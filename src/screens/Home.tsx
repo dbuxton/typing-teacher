@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useStore } from '../store/profileStore'
 import { BigButton } from '../components/Chrome'
+import { DEFAULT_THEME, THEMES, themeById, type ThemeId } from '../data/rewards'
+import { RewardArt } from '../art/RewardArt'
 
 const AVATARS = ['🦊', '🐼', '🐙', '🦖', '🐧', '🦄', '🐝', '🐸', '🦉', '🐳']
 
@@ -14,12 +16,14 @@ export function Home() {
   const [adding, setAdding] = useState(save.profiles.length === 0)
   const [name, setName] = useState('')
   const [avatar, setAvatar] = useState(AVATARS[0])
+  const [theme, setTheme] = useState<ThemeId>(DEFAULT_THEME)
 
   function create() {
     const trimmed = name.trim()
     if (!trimmed) return
-    addProfile(trimmed, avatar)
+    addProfile(trimmed, avatar, theme)
     setName('')
+    setTheme(DEFAULT_THEME)
     setAdding(false)
   }
 
@@ -48,6 +52,7 @@ export function Home() {
                     Level {profile.currentLevel} · {profile.lessonsCompleted} lesson
                     {profile.lessonsCompleted === 1 ? '' : 's'}
                     {profile.streak > 0 && ` · 🔥 ${profile.streak}`}
+                    {` · ${themeById(profile.theme).icon}`}
                   </span>
                 </span>
               </button>
@@ -94,6 +99,40 @@ export function Home() {
                   }`}
                 >
                   {emoji}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/*
+            Fixed once chosen: switching would leave a whole collection behind,
+            and "nothing is ever taken away" matters more than flexibility.
+            Trying another theme means making another player.
+          */}
+          <div className="w-full">
+            <span className="mb-2 block text-sm font-bold text-slate-600">Pick your prizes</span>
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+              {THEMES.map((option) => (
+                <button
+                  key={option.id}
+                  onClick={() => setTheme(option.id)}
+                  aria-pressed={theme === option.id}
+                  className={`flex items-center gap-3 rounded-xl p-3 text-left transition sm:flex-col sm:text-center ${
+                    theme === option.id ? 'bg-sky-100 ring-2 ring-sky-400' : 'bg-slate-50 hover:bg-slate-100'
+                  }`}
+                >
+                  <span aria-hidden className="flex h-16 w-16 shrink-0 items-center justify-center">
+                    <RewardArt
+                      theme={option.id}
+                      kindId={option.showcase.kindId}
+                      stage={option.showcase.stage}
+                      size={60}
+                    />
+                  </span>
+                  <span>
+                    <span className="block font-bold">{option.name}</span>
+                    <span className="block text-xs text-slate-500">{option.blurb}</span>
+                  </span>
                 </button>
               ))}
             </div>

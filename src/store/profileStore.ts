@@ -12,13 +12,13 @@ import {
   migrate,
   today,
 } from './schema'
-import { GARDEN_PLOTS, plantKindById } from '../data/plants'
+import { maxStage, rewardKind, themeById, type ThemeId } from '../data/rewards'
 import { newlyEarnedBadges } from '../data/badges'
 import { assistAfterLesson, previousAssistLevel } from '../engine/assist'
 import { applyResults } from '../engine/srs'
 import { applyLesson, mergeKeyStats, newKeyAccuracyFor } from '../engine/adaptive'
 
-export type Screen = 'home' | 'map' | 'lesson' | 'results' | 'garden' | 'badges'
+export type Screen = 'home' | 'map' | 'lesson' | 'results' | 'collection' | 'badges'
 
 /** Everything a finished lesson tells the store. */
 export type LessonOutcome = {
@@ -55,14 +55,15 @@ type State = {
 
   activeProfile: () => Profile | null
   setScreen: (screen: Screen) => void
-  addProfile: (name: string, avatar: string) => void
+  addProfile: (name: string, avatar: string, theme: ThemeId) => void
   selectProfile: (id: string) => void
   deleteProfile: (id: string) => void
   setLevel: (levelId: number) => void
   toggleSneakyStars: () => void
   toggleReadAloud: () => void
   recordLesson: (outcome: LessonOutcome) => void
-  plantSeed: (kindId: string) => void
+  /** Spend coins on a seed, a player or an egg — whatever the theme sells. */
+  collectReward: (kindId: string) => void
 }
 
 function updateProfile(save: SaveFile, id: string, fn: (p: Profile) => Profile): SaveFile {
@@ -83,9 +84,9 @@ export const useStore = create<State>()(
 
       setScreen: (screen) => set({ screen }),
 
-      addProfile: (name, avatar) =>
+      addProfile: (name, avatar, theme) =>
         set((state) => {
-          const profile = makeProfile(name, avatar)
+          const profile = makeProfile(name, avatar, theme)
           return {
             save: {
               ...state.save,
@@ -164,10 +165,10 @@ export const useStore = create<State>()(
           const gap = current.lastPlayedDate ? daysBetween(current.lastPlayedDate, date) : null
           const streak = gap === 0 ? current.streak : gap === 1 ? current.streak + 1 : 1
 
-          // Every planted seed grows one stage per completed lesson.
+          // Everything collected grows (or trains, or evolves) one stage per
+          // completed lesson. Unknown kinds from an old save are left alone.
           const garden = current.garden.map((plant) => {
-            const kind = plantKindById(plant.kindId)
-            const max = kind ? kind.stages.length - 1 : plant.stage
+            const max = maxStage(current.theme, plant.kindId) ?? plant.stage
             return { ...plant, stage: Math.min(plant.stage + 1, max) }
           })
 
@@ -244,14 +245,17 @@ export const useStore = create<State>()(
           }
         }),
 
-      plantSeed: (kindId) =>
+      collectReward: (kindId) =>
         set((state) => {
           const id = state.save.activeProfileId
           const current = state.save.profiles.find((p) => p.id === id)
-          const kind = plantKindById(kindId)
-          if (!id || !current || !kind) return state
+          if (!id || !current) return state
+          const theme = themeById(current.theme)
+          const kind = rewardKind(theme.id, kindId)
+          if (!kind) return state
           if (current.coins < kind.cost) return state
-          if (current.garden.length >= GARDEN_PLOTS) return state
+          if (current.garden.length >= theme.slots) return state
+          if (theme.unique && current.garden.some((p) => p.kindId === kindId)) return state
 
           return {
             save: updateProfile(state.save, id, (p) => ({

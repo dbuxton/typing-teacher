@@ -1,4 +1,5 @@
-import { badgeById } from '../data/badges'
+import { badgeById, badgeText } from '../data/badges'
+import { themeById } from '../data/rewards'
 import { demotionMessage, promotionMessage } from '../engine/assist'
 import { praiseFor, speedComment } from '../engine/scoring'
 import { easierLevelMessage, jumpMessage } from '../engine/adaptive'
@@ -107,10 +108,11 @@ export function Results({ profile }: { profile: Profile }) {
             {result.newBadges.map((id) => {
               const badge = badgeById(id)
               if (!badge) return null
+              const text = badgeText(badge, profile.theme)
               return (
                 <div key={id} className="flex flex-col items-center">
-                  <span className="text-4xl">{badge.emoji}</span>
-                  <span className="text-xs font-bold text-violet-700">{badge.name}</span>
+                  <span className="text-4xl">{text.emoji}</span>
+                  <span className="text-xs font-bold text-violet-700">{text.name}</span>
                 </div>
               )
             })}
@@ -144,8 +146,8 @@ export function Results({ profile }: { profile: Profile }) {
           Lesson map
         </BigButton>
         {profile.coins > 0 && (
-          <BigButton tone="secondary" onClick={() => setScreen('garden')}>
-            🌻 Spend coins
+          <BigButton tone="secondary" onClick={() => setScreen('collection')}>
+            {themeById(profile.theme).icon} Spend coins
           </BigButton>
         )}
       </div>

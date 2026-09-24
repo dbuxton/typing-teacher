@@ -1,10 +1,12 @@
+import { DEFAULT_THEME, isThemeId, type ThemeId } from '../data/rewards'
+
 /**
  * The save file shape, versioned from day one so a future change to the data
  * model doesn't wipe a kid's garden. Bump `SAVE_VERSION`, add a case to
  * `migrate`, and old saves keep working.
  */
 
-export const SAVE_VERSION = 2
+export const SAVE_VERSION = 3
 // The storage key is deliberately NOT versioned alongside SAVE_VERSION — the key
 // is where the save lives, the version is what shape it's in. Changing the key
 // would orphan every existing save instead of migrating it.
@@ -25,6 +27,10 @@ export type SpellingProgress = {
   timesWrong: number
 }
 
+/**
+ * One collected reward: a plant, a player or a Pokémon, depending on the
+ * profile's theme. (Named for the garden, which was the only theme in v1/v2.)
+ */
 export type Plant = {
   kindId: string
   /** Growth stages accumulated; advanced once per completed lesson. */
@@ -73,6 +79,11 @@ export type Profile = {
   avatar: string
   locale: 'en-GB' | 'en-US'
   createdAt: string
+  /**
+   * What coins buy: a garden, a football squad, or Pokémon. Chosen when the
+   * profile is created and fixed after that.
+   */
+  theme: ThemeId
 
   currentLevel: number
   highestLevelUnlocked: number
@@ -100,6 +111,7 @@ export type Profile = {
   /** ISO date of the last day a lesson was completed. */
   lastPlayedDate: string | null
   badges: string[]
+  /** The collection for `theme`. Keeps its v1 name so old saves need no rename. */
   garden: Plant[]
 
   lessonsCompleted: number
@@ -128,13 +140,14 @@ export const STARTING_DIFFICULTY = 0.5
 /** A gentle opening speed target. Rises with the kid, never with the calendar. */
 export const STARTING_WPM = 8
 
-export function makeProfile(name: string, avatar: string): Profile {
+export function makeProfile(name: string, avatar: string, theme: ThemeId = DEFAULT_THEME): Profile {
   return {
     id: `p_${name.toLowerCase().replace(/[^a-z0-9]/g, '')}_${randomSuffix()}`,
     name,
     avatar,
     locale: 'en-GB',
     createdAt: today(),
+    theme,
 
     currentLevel: 1,
     highestLevelUnlocked: 1,
@@ -210,6 +223,7 @@ type V1Profile = Partial<Profile> & { keyErrors?: Record<string, number> }
 function migrateProfile(profile: Partial<Profile>, version: number): Partial<Profile> {
   let working = profile
   if (version < 2) working = v1ToV2(working as V1Profile)
+  if (version < 3) working = v2ToV3(working)
   return working
 }
 
@@ -280,6 +294,14 @@ function v1ToV2(profile: V1Profile): Partial<Profile> {
   }
 }
 
+/**
+ * v2 -> v3: reward themes arrive. Every existing player was growing a garden,
+ * so that's their theme — their plants stay exactly where they were.
+ */
+function v2ToV3(profile: Partial<Profile>): Partial<Profile> {
+  return { ...profile, theme: 'garden' }
+}
+
 /** Defensive: fill in any field a hand-edited or older save is missing. */
 function fillProfileDefaults(p: Partial<Profile>): Profile {
   const base = makeProfile(p.name ?? 'Player', p.avatar ?? '🦊')
@@ -287,6 +309,7 @@ function fillProfileDefaults(p: Partial<Profile>): Profile {
     ...base,
     ...p,
     id: p.id ?? base.id,
+    theme: isThemeId(p.theme) ? p.theme : DEFAULT_THEME,
     perKeyStats: p.perKeyStats ?? {},
     levelStats: p.levelStats ?? {},
     spelling: p.spelling ?? [],

@@ -4,7 +4,7 @@ import { Home } from './screens/Home'
 import { LessonMap } from './screens/LessonMap'
 import { Lesson } from './screens/Lesson'
 import { Results } from './screens/Results'
-import { GardenScreen } from './screens/GardenScreen'
+import { CollectionScreen } from './screens/CollectionScreen'
 import { BadgeShelf } from './screens/BadgeShelf'
 
 /**
@@ -25,7 +25,7 @@ export default function App() {
         {screen === 'map' && <LessonMap profile={profile} />}
         {screen === 'lesson' && <Lesson profile={profile} />}
         {screen === 'results' && <Results profile={profile} />}
-        {screen === 'garden' && <GardenScreen profile={profile} />}
+        {screen === 'collection' && <CollectionScreen profile={profile} />}
         {screen === 'badges' && <BadgeShelf profile={profile} />}
       </main>
     </div>
