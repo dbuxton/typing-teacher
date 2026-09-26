@@ -334,6 +334,8 @@ test('dinosaurs hatch, grow, unlock facts and keep their arranged island', async
   await page.getByRole('button', { name: /Stegosaurus/ }).click()
   const collection = page.getByLabel('Your collection', { exact: true })
   await expect(collection.getByText('Triceratops · Egg', { exact: true })).toBeVisible()
+  await expect(collection.getByRole('img', { name: 'Triceratops · Egg', exact: true })).toHaveAttribute('src', /triceratops-egg\.webp$/)
+  await expect(collection.getByRole('img', { name: 'Stegosaurus · Egg', exact: true })).toHaveAttribute('src', /stegosaurus-egg\.webp$/)
   await expect(page.getByText(/Your dinosaur book · 0\/18/)).toBeVisible()
   for (const [stage, suffix] of [['Hatchling', '-baby'], ['Juvenile', '-juvenile'], ['Adult', '']]) {
     await page.getByRole('button', { name: /Back to lessons/ }).click()

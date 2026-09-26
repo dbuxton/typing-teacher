@@ -1,7 +1,7 @@
 {
   "provider": "Built-in image_gen",
   "style": "Painted storybook animals",
-  "note": "Each asset is a separate image request. Shared egg artwork; adult references are used for each species' younger stages. Colours and growth proportions are illustrative.",
+  "note": "Each asset is a separate image request. Each species has an individual egg and three illustrated ages; the original shared egg remains an unknown-kind fallback. Egg colours and patterns, dinosaur colours and growth proportions are imaginative.",
   "species": [
     {
       "id": "triceratops",
@@ -10,7 +10,8 @@
       "cost": 10,
       "appearance": "sage-green skin, cream underside, darker teal broad frill, two long ivory brow horns and one short nose horn, parrot-like beak, sturdy four-legged stance and tapering tail",
       "fact": "It had three horns and a large bony frill behind its head.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/triceratops.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/triceratops.html",
+      "eggDesign": "a softly rounded sage-green shell with several broad irregular dark teal patches and scattered tiny ivory flecks"
     },
     {
       "id": "stegosaurus",
@@ -19,7 +20,8 @@
       "cost": 15,
       "appearance": "moss-green body, warm terracotta plates in two alternating rows along its arched back, small low head, four legs with taller hind legs, long tail ending in four ivory spikes",
       "fact": "Its back plates stood upright in two alternating rows.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/stegosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/stegosaurus.html",
+      "eggDesign": "a warm cream shell with bold moss-green mottling and scattered terracotta diamond-shaped painted markings"
     },
     {
       "id": "parasaurolophus",
@@ -28,7 +30,8 @@
       "cost": 20,
       "appearance": "warm ochre skin with teal back stripes, duck-like beak, long tubular crest sweeping backwards from the skull, sturdy hind legs and smaller forelegs, balanced thick tapering tail",
       "fact": "This duck-billed dinosaur could walk on two legs or four.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/parasaurolophus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/parasaurolophus.html",
+      "eggDesign": "a warm ochre shell with loose curved teal bands sweeping diagonally around it"
     },
     {
       "id": "oviraptor",
@@ -37,7 +40,8 @@
       "cost": 25,
       "appearance": "rust-orange and cream feathers, toothless parrot-like beak, modest rounded cranial crest, feathered forearms, two bird-like legs, feathered tail fan",
       "fact": "It had a curved beak instead of teeth.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/oviraptor.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/oviraptor.html",
+      "eggDesign": "a slender softly tapered cream shell with fine rust-orange freckles clustered around its lower half"
     },
     {
       "id": "camarasaurus",
@@ -46,7 +50,8 @@
       "cost": 30,
       "appearance": "warm sandy-gold sauropod, boxy blunt head, relatively short thick upright neck for a sauropod, barrel body, four column-like legs, tapering tail with ochre spots",
       "fact": "Its name means chambered lizard, after spaces inside its backbone.",
-      "source": "https://home.nps.gov/places/camarasaurus-lentus.htm"
+      "source": "https://home.nps.gov/places/camarasaurus-lentus.htm",
+      "eggDesign": "a broad sandy-gold shell with large soft-edged ochre spots and warm ivory highlights"
     },
     {
       "id": "ankylosaurus",
@@ -55,7 +60,8 @@
       "cost": 35,
       "appearance": "slate-blue low broad body, warm cream underside, rows of bony armour plates and small side spikes, four stout legs, broad low head, heavy rounded club at tail tip",
       "fact": "Bony armour covered its body, and its tail ended in a heavy club.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/ankylosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/ankylosaurus.html",
+      "eggDesign": "a round slate-blue shell with pale cream irregular polygon-like patches painted flat on the smooth shell"
     },
     {
       "id": "pachycephalosaurus",
@@ -64,7 +70,8 @@
       "cost": 40,
       "appearance": "warm chestnut skin with cream belly, pale blue rounded bony skull dome ringed with small knobbly spikes, short arms, two strong hind legs and long balancing tail",
       "fact": "It had a thick bony dome on top of its head.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/pachycephalosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/pachycephalosaurus.html",
+      "eggDesign": "a chestnut-brown shell with a softly blended pale-blue cap and small cream speckles around the lower half"
     },
     {
       "id": "diplodocus",
@@ -73,7 +80,8 @@
       "cost": 45,
       "appearance": "muted lilac-grey skin with soft plum markings, very long slender neck held forward in a gentle curve, small narrow head, four legs, long slender whip-like tail curling within frame",
       "fact": "Its long neck helped it reach plants, and it had a whip-like tail.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/diplodocus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/diplodocus.html",
+      "eggDesign": "a tall muted lilac-grey shell with flowing plum-coloured wavy bands and tiny cream flecks"
     },
     {
       "id": "styracosaurus",
@@ -82,7 +90,8 @@
       "cost": 50,
       "appearance": "warm dusty-rose skin, cream belly, large blue-grey frill edged with six long ivory spikes, one prominent long nose horn, tiny brow nubs, beak, four legs and tapering tail",
       "fact": "Long spikes surrounded its frill, with a big horn on its nose.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/styracosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/styracosaurus.html",
+      "eggDesign": "a dusty-rose shell with small blue-grey starburst-shaped markings painted flat onto the smooth shell"
     },
     {
       "id": "deinonychus",
@@ -91,7 +100,8 @@
       "cost": 55,
       "appearance": "cinnamon and cream feathered body, narrow alert head, feathered forearms held inward, two athletic bird-like legs, raised curved claw on each second toe, long stiff balancing feathered tail",
       "fact": "Its long stiff tail helped it balance.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/deinonychus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/deinonychus.html",
+      "eggDesign": "a cream shell with cinnamon-brown short chevron-shaped brush markings, subtly clustered on one side"
     },
     {
       "id": "apatosaurus",
@@ -100,7 +110,8 @@
       "cost": 60,
       "appearance": "blue-grey skin with subtle navy mottling, heavy robust sauropod body, thick long muscular neck, small elongated low head, four massive legs and long tapering tail",
       "fact": "It shared its world with Stegosaurus, Diplodocus and Allosaurus.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/apatosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/apatosaurus.html",
+      "eggDesign": "a broad blue-grey shell with irregular navy mottling concentrated around its base and scattered pale ivory speckles"
     },
     {
       "id": "velociraptor",
@@ -109,7 +120,8 @@
       "cost": 65,
       "appearance": "golden-tan and cream feathers, russet striped feathered tail, slender low snout, feathered arms, two light bird-like legs, small raised sickle claw on each second toe",
       "fact": "Real Velociraptor had a feathery covering.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/velociraptor.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/velociraptor.html",
+      "eggDesign": "a golden-tan shell with three loose rusty-red diagonal bands and fine dark brown freckles"
     },
     {
       "id": "amargasaurus",
@@ -118,7 +130,8 @@
       "cost": 70,
       "appearance": "turquoise and deep teal skin, compact four-legged sauropod body, moderately long neck, distinctive paired rows of tall narrow ochre spines along neck and back, long tapering tail",
       "fact": "It had two rows of long spines along its neck and back.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/amargasaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/amargasaurus.html",
+      "eggDesign": "a turquoise shell with two loose vertical rows of small golden-ochre dash markings and subtle deep-teal speckles"
     },
     {
       "id": "allosaurus",
@@ -127,7 +140,8 @@
       "cost": 75,
       "appearance": "rust-red skin with cream belly and subdued burgundy stripes, mature long skull with small ridges above the eyes, two strong legs, arms with three fingers each, long balancing tail",
       "fact": "It had three fingers on each hand and small horns above its eyes.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/allosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/allosaurus.html",
+      "eggDesign": "a warm rust-red shell with curved dark burgundy bands and sparse small cream flecks"
     },
     {
       "id": "brachiosaurus",
@@ -136,7 +150,8 @@
       "cost": 80,
       "appearance": "forest-green skin with lime patches and cream belly, very tall upright neck, small head, front legs clearly longer than rear legs, sloping back and tapering tail kept in frame",
       "fact": "This tall plant-eater lived in what is now North America.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/brachiosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/brachiosaurus.html",
+      "eggDesign": "a softly tapered forest-green shell with large rounded lime-green patches and small cream speckles"
     },
     {
       "id": "spinosaurus",
@@ -145,7 +160,8 @@
       "cost": 85,
       "appearance": "deep teal body, orange striped tall back sail, long narrow crocodile-like snout, compact hind legs, three-fingered forearms, broad paddle-like tail, standing with balanced body",
       "fact": "Its broad paddle-like tail is a clue to a life near water.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/spinosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/spinosaurus.html",
+      "eggDesign": "a deep teal shell with broad warm-orange wavy stripes flowing around its upper half"
     },
     {
       "id": "argentinosaurus",
@@ -154,7 +170,8 @@
       "cost": 90,
       "appearance": "warm terracotta and sandstone skin, enormous heavy titanosaur body, long thick gently rising neck and tiny head, four massive pillar legs, long tapering tail curling into composition",
       "fact": "It was one of the biggest land animals ever discovered.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/argentinosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/argentinosaurus.html",
+      "eggDesign": "a broad sandstone shell with large irregular terracotta islands of colour and fine warm ochre stippling"
     },
     {
       "id": "tyrannosaurus",
@@ -163,7 +180,8 @@
       "cost": 95,
       "appearance": "olive-green skin with warm golden-cream belly and dark forest-green stripes, very large deep adult skull, muscular body on two powerful hind legs, tiny arms with exactly two fingers per hand, long balancing tail",
       "fact": "It walked on two powerful legs and ate other animals.",
-      "source": "https://www.nhm.ac.uk/discover/dino-directory/tyrannosaurus.html"
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/tyrannosaurus.html",
+      "eggDesign": "a golden-cream shell with bold olive-green irregular stripes and a few darker forest-green speckles"
     }
   ],
   "jobs": [
@@ -550,6 +568,132 @@
       "stage": "egg",
       "reference": "animals/elephant",
       "prompt": "Use case: illustration-story.\nAsset type: dinosaur egg collectible for a children's typing tutor.\nOne single intact dinosaur egg, warm creamy shell with irregular moss-green and golden-ochre speckles, softly rounded organic oval, subtle hand-painted texture and warm gentle studio lighting. Match the attached animal illustration's polished painted storybook rendering, but depict only the egg. Square composition, centred, 15% clear margin, whole egg visible. Actual transparent RGBA background and clean alpha. No crack, animal, face, nest, ground, shadow, scenery, label, text, border, checkerboard pixels or other objects."
+    },
+    {
+      "id": "triceratops-egg",
+      "dinosaurId": "triceratops",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Triceratops egg with a softly rounded sage-green shell with several broad irregular dark teal patches and scattered tiny ivory flecks. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "stegosaurus-egg",
+      "dinosaurId": "stegosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Stegosaurus egg with a warm cream shell with bold moss-green mottling and scattered terracotta diamond-shaped painted markings. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "parasaurolophus-egg",
+      "dinosaurId": "parasaurolophus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Parasaurolophus egg with a warm ochre shell with loose curved teal bands sweeping diagonally around it. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "oviraptor-egg",
+      "dinosaurId": "oviraptor",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Oviraptor egg with a slender softly tapered cream shell with fine rust-orange freckles clustered around its lower half. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "camarasaurus-egg",
+      "dinosaurId": "camarasaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Camarasaurus egg with a broad sandy-gold shell with large soft-edged ochre spots and warm ivory highlights. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "ankylosaurus-egg",
+      "dinosaurId": "ankylosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Ankylosaurus egg with a round slate-blue shell with pale cream irregular polygon-like patches painted flat on the smooth shell. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "pachycephalosaurus-egg",
+      "dinosaurId": "pachycephalosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Pachycephalosaurus egg with a chestnut-brown shell with a softly blended pale-blue cap and small cream speckles around the lower half. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "diplodocus-egg",
+      "dinosaurId": "diplodocus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Diplodocus egg with a tall muted lilac-grey shell with flowing plum-coloured wavy bands and tiny cream flecks. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "styracosaurus-egg",
+      "dinosaurId": "styracosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Styracosaurus egg with a dusty-rose shell with small blue-grey starburst-shaped markings painted flat onto the smooth shell. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "deinonychus-egg",
+      "dinosaurId": "deinonychus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Deinonychus egg with a cream shell with cinnamon-brown short chevron-shaped brush markings, subtly clustered on one side. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "apatosaurus-egg",
+      "dinosaurId": "apatosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Apatosaurus egg with a broad blue-grey shell with irregular navy mottling concentrated around its base and scattered pale ivory speckles. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "velociraptor-egg",
+      "dinosaurId": "velociraptor",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Velociraptor egg with a golden-tan shell with three loose rusty-red diagonal bands and fine dark brown freckles. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "amargasaurus-egg",
+      "dinosaurId": "amargasaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Amargasaurus egg with a turquoise shell with two loose vertical rows of small golden-ochre dash markings and subtle deep-teal speckles. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "allosaurus-egg",
+      "dinosaurId": "allosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Allosaurus egg with a warm rust-red shell with curved dark burgundy bands and sparse small cream flecks. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "brachiosaurus-egg",
+      "dinosaurId": "brachiosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Brachiosaurus egg with a softly tapered forest-green shell with large rounded lime-green patches and small cream speckles. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "spinosaurus-egg",
+      "dinosaurId": "spinosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Spinosaurus egg with a deep teal shell with broad warm-orange wavy stripes flowing around its upper half. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "argentinosaurus-egg",
+      "dinosaurId": "argentinosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact Argentinosaurus egg with a broad sandstone shell with large irregular terracotta islands of colour and fine warm ochre stippling. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
+    },
+    {
+      "id": "tyrannosaurus-egg",
+      "dinosaurId": "tyrannosaurus",
+      "stage": "egg",
+      "reference": "dinosaurs/egg",
+      "prompt": "Use case: illustration-story.\nAsset type: individual dinosaur egg collectible for a children's typing tutor.\nPrimary request: create exactly one intact T. rex egg with a golden-cream shell with bold olive-green irregular stripes and a few darker forest-green speckles. The shell patterns are imaginative storybook designs that hint at the dinosaur's colours.\nInput image: style and composition reference only. Match the reference egg's polished hand-painted storybook rendering, subtle eggshell texture, soft warm lighting and gentle rounded volume. Use the new colour and pattern design above, not the reference's colours.\nComposition: one whole closed egg standing upright, centred in a square canvas with a 15% clear margin on every side. Smooth organic oval silhouette, softly tapered top and rounded broad base, readable markings at a small game icon size.\nBackground: genuinely transparent RGBA with clean alpha around the entire egg. No opaque backdrop or checkerboard pixels.\nConstraints: depict only the egg. No dinosaur, hatchling, eyes, face, cracks, protrusions, spikes, nest, ground, cast shadow, props, scenery, labels, text, border or extra eggs."
     }
   ]
 }

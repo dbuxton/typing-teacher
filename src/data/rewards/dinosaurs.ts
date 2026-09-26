@@ -151,7 +151,7 @@ export const DINOSAUR_SPECIES = [
 const DINOS: RewardKind[] = DINOSAUR_SPECIES.map(dinosaur => ({
   ...dinosaur,
   stages: [
-    { id: 'egg', name: dinosaur.name + ' · Egg' },
+    { id: dinosaur.id + '-egg', name: dinosaur.name + ' · Egg' },
     { id: dinosaur.id + '-baby', name: dinosaur.name + ' · Hatchling' },
     { id: dinosaur.id + '-juvenile', name: dinosaur.name + ' · Juvenile' },
     { id: dinosaur.id, name: dinosaur.name + ' · Adult' },

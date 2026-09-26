@@ -50,7 +50,7 @@ def main():
                             'alphaExtrema': list(asset.getchannel('A').getextrema()),
                             'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
     (ROOT / 'docs/dinosaur-art-generation.json').write_text(json.dumps({
-        'provider': 'Built-in image_gen', 'note': 'Individual requests; original alpha preserved. One shared egg plus three illustrated ages for each dinosaur.',
+        'provider': 'Built-in image_gen', 'note': 'Individual requests; original alpha preserved. Each dinosaur has its own egg and three illustrated ages. The original shared egg remains an unknown-kind fallback.',
         'assets': records,
     }, indent=2) + '\n')
     print(f'Packaged {len(records)}/{len(jobs)} dinosaur images')

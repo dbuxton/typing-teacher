@@ -212,6 +212,6 @@ describe('dinosaurs', () => {
         expect(existsSync(new URL(`../../../public/art/rewards/dinosaurs/${stage.id}.webp`, import.meta.url)), stage.name).toBe(true)
       }
     }
-    expect(new Set(theme.kinds.flatMap(kind => kind.stages.map(stage => stage.id))).size).toBe(55)
+    expect(new Set(theme.kinds.flatMap(kind => kind.stages.map(stage => stage.id))).size).toBe(72)
   })
 })

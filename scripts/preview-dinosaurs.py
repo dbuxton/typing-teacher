@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / 'public/art/rewards/dinosaurs'
 WORK = ROOT / 'output/dinosaur-art'
+WORK.mkdir(parents=True, exist_ok=True)
 species = json.loads((ROOT / 'docs/dinosaur-art-prompts.json').read_text())['species']
 def load_font(size, bold=False):
     candidates = [
@@ -43,6 +44,18 @@ for dark in [False, True]:
         draw.text((x + 100, y + 215), f"{dinosaur['cost']} coins", font=font, fill=ink, anchor='mt')
     canvas.convert('RGB').save(WORK / 'adults-dark.png' if dark else ROOT / 'docs/dinosaur-art-preview.png')
 
+for dark in [False, True]:
+    canvas = Image.new('RGBA', (1200, 830), '#18353b' if dark else '#f1f7e9')
+    draw = ImageDraw.Draw(canvas)
+    ink = '#e9f2e7' if dark else '#254537'
+    draw.text((28, 22), 'Every dinosaur starts with its own egg', font=title, fill=ink)
+    draw.text((28, 60), '18 individual illustrations · colours hint at the dinosaur inside', font=font, fill=ink)
+    for i, dinosaur in enumerate(species):
+        x, y = (i % 6) * 200, 106 + (i // 6) * 236
+        tile(canvas, dinosaur['id'] + '-egg', x, y, 194)
+        draw.text((x + 100, y + 200), dinosaur['name'], font=font, fill=ink, anchor='mt')
+    canvas.convert('RGB').save(WORK / 'eggs-dark.png' if dark else ROOT / 'docs/dinosaur-eggs-preview.png')
+
 for group in ['Crests & armour', 'Long necks', 'Two-legged']:
     members = [s for s in species if s['group'] == group]
     canvas = Image.new('RGBA', (1150, 1470), '#f1f7e9')
@@ -53,7 +66,7 @@ for group in ['Crests & armour', 'Long necks', 'Two-legged']:
     for row, dinosaur in enumerate(members):
         y = 115 + row * 220
         draw.text((18, y + 90), dinosaur['name'], font=font, fill='#254537')
-        for col, id in enumerate(['egg', dinosaur['id'] + '-baby', dinosaur['id'] + '-juvenile', dinosaur['id']]):
+        for col, id in enumerate([dinosaur['id'] + '-egg', dinosaur['id'] + '-baby', dinosaur['id'] + '-juvenile', dinosaur['id']]):
             tile(canvas, id, 228 + col * 225, y, 214)
     slug = group.lower().replace(' & ', '-').replace(' ', '-')
     canvas.convert('RGB').save(WORK / f'{slug}-growth.png')

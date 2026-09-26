@@ -1,6 +1,6 @@
 {
   "provider": "Built-in image_gen",
-  "note": "Individual requests; original alpha preserved. One shared egg plus three illustrated ages for each dinosaur.",
+  "note": "Individual requests; original alpha preserved. Each dinosaur has its own egg and three illustrated ages. The original shared egg remains an unknown-kind fallback.",
   "assets": [
     {
       "id": "triceratops",
@@ -881,6 +881,294 @@
       ],
       "bytes": 37302,
       "sha256": "fcb5a4d75328d76dfca6d387adebfcffb118619321e6d98c8fd9c312934d307a"
+    },
+    {
+      "id": "triceratops-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/triceratops-egg.webp",
+      "generatedOriginal": "exec-6dbdcd48-0a6e-47a7-899e-c15c1ef97175.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 34882,
+      "sha256": "af47e0ca5bc7bdebb280850cbd2893f585aa8d8473074b42a14276573f9530c5"
+    },
+    {
+      "id": "stegosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/stegosaurus-egg.webp",
+      "generatedOriginal": "exec-31c9b9dc-d659-408d-992b-fcb6d16305ad.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 42396,
+      "sha256": "3406184c2675e6c3acf2e73d449f4586db3fd762b131292b9bf2a4c291a57967"
+    },
+    {
+      "id": "parasaurolophus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/parasaurolophus-egg.webp",
+      "generatedOriginal": "exec-acac74f3-a54a-4448-913d-a2e5827e5c69.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 37470,
+      "sha256": "feab0080af5a98b3c6646534e222f41d17da9c5e5d5ded954932209f73af5923"
+    },
+    {
+      "id": "oviraptor-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/oviraptor-egg.webp",
+      "generatedOriginal": "exec-a5824b19-7ffc-4284-bb14-8e4848aee848.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 32330,
+      "sha256": "0286a7ede0ab7ef01d59e2871d071f9445cd0386c6d946f1442b2f1aae310f70"
+    },
+    {
+      "id": "camarasaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/camarasaurus-egg.webp",
+      "generatedOriginal": "exec-9b94d0ea-832f-462e-97ed-1741dc2daca1.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 35940,
+      "sha256": "024284aa163d95a0f81e34594e7fdec8a26d6e2fd39904b2995c5a78535f2c60"
+    },
+    {
+      "id": "ankylosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/ankylosaurus-egg.webp",
+      "generatedOriginal": "exec-62300a73-62ee-49a1-ac4e-c22f90b332db.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 31268,
+      "sha256": "460c432eb1f15332d46feb4ed8bc9af386b81f8650949d8483ab65a643574ce0"
+    },
+    {
+      "id": "pachycephalosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/pachycephalosaurus-egg.webp",
+      "generatedOriginal": "exec-5acaa9c0-daab-42c2-b3b4-ab6d450eb597.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 43722,
+      "sha256": "c08e952ebb46403aaa6dff76a05215d4373463396be1ba4498bd73e3f8b6fa9e"
+    },
+    {
+      "id": "diplodocus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/diplodocus-egg.webp",
+      "generatedOriginal": "exec-c9b941ca-2f17-4750-8964-5b31c7425093.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 34860,
+      "sha256": "0a59ee2802dfd67d03549b011110654e3e42c610441fbd227e01bda35dde6e37"
+    },
+    {
+      "id": "styracosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/styracosaurus-egg.webp",
+      "generatedOriginal": "exec-47f0d044-e0c7-401b-b62a-1ea6bc5b0820.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 31144,
+      "sha256": "7fbf7d9a5bca70418a6a588325b22872144c92217176d6e3ee90a98457f1ca01"
+    },
+    {
+      "id": "deinonychus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/deinonychus-egg.webp",
+      "generatedOriginal": "exec-5a2fc449-d147-46a8-9e1a-a0312d53a52d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 29102,
+      "sha256": "5d9294178bfb2c29a1cea1aafc28c20bac9cfaa5d55680638eaee5fd5caa1db4"
+    },
+    {
+      "id": "apatosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/apatosaurus-egg.webp",
+      "generatedOriginal": "exec-5d16606a-5249-43ff-9f89-79fa7e408c1b.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 38976,
+      "sha256": "a459efa1841f5de4369d9ec4f8324e8806f6abbebac75966aa6167af43be656f"
+    },
+    {
+      "id": "velociraptor-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/velociraptor-egg.webp",
+      "generatedOriginal": "exec-44fa2d2c-d7c3-460e-92a3-6705748fbfe2.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 45884,
+      "sha256": "4046511be1b1a0a8a5e9f155ea1c945d8a63182fc801f002c112e42220743319"
+    },
+    {
+      "id": "amargasaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/amargasaurus-egg.webp",
+      "generatedOriginal": "exec-03779307-bb69-4c86-a53a-d0a63605d72f.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 40824,
+      "sha256": "e734ab90e35a1513fd1ad685fe96688f1f24d3e875d41c2c91c44637b787c2c6"
+    },
+    {
+      "id": "allosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/allosaurus-egg.webp",
+      "generatedOriginal": "exec-1f83a082-6ee3-4bf4-857f-fe9913def116.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 44090,
+      "sha256": "6f44dfa70407e43591f5b0c7181395b7eddbbd987d7f157286b63349f67dbd25"
+    },
+    {
+      "id": "brachiosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/brachiosaurus-egg.webp",
+      "generatedOriginal": "exec-a6c9399d-d007-4109-8a68-f5a7f3a39e4d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 35446,
+      "sha256": "81a5a80a82ed9e6ec468855e07148bfa5aa299ffbc5c470e65f959b08189587e"
+    },
+    {
+      "id": "spinosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/spinosaurus-egg.webp",
+      "generatedOriginal": "exec-f24f886d-7890-4ec3-a621-5d9939ff203d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 37490,
+      "sha256": "1b92da7eab4935484e98e1dc9c4f602820979f62f95082480fcc30b7394f22a7"
+    },
+    {
+      "id": "argentinosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/argentinosaurus-egg.webp",
+      "generatedOriginal": "exec-155d85f9-561c-4b3b-bed8-e47b701e5a31.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 45838,
+      "sha256": "34e5cbfd6982db959c141d61f84e08e185101a12f27aba9cc3eb4c57ba0a732b"
+    },
+    {
+      "id": "tyrannosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/tyrannosaurus-egg.webp",
+      "generatedOriginal": "exec-af3743be-912d-41db-967b-02b128b8fb47.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 35638,
+      "sha256": "735380c773088b4b6d0c09562c3b2332af133feca187ed619fe39238225a4f86"
     }
   ]
 }

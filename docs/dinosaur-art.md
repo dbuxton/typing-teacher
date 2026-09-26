@@ -6,9 +6,12 @@ from 10 to 95 coins, shown cheapest first. Collections start at 18 spaces and
 add six whenever full. Duplicate dinosaurs are welcome.
 
 An egg grows through Hatchling → Juvenile → Adult, advancing one stage per
-completed lesson. The 55 transparent illustrations include one shared egg and
-three individual age illustrations for every dinosaur. The shop previews the
-hatchling and labels the purchase as an egg. Adults stay adults.
+completed lesson. Each dinosaur has its own egg illustration and three individual
+age illustrations, for 72 collectible images. One additional generic egg remains
+as a fallback for unknown kinds. The shop previews the hatchling and labels the
+purchase as an egg. Adults stay adults.
+
+![The individual dinosaur eggs](dinosaur-eggs-preview.png)
 
 ![The adult dinosaurs](dinosaur-art-preview.png)
 
@@ -16,7 +19,7 @@ Adults unlock one fact per kind in the dinosaur book. Sources are linked beside
 each fact and recorded in `src/data/rewards/dinosaurs.ts`. The facts come from
 the [Natural History Museum's Dino Directory](https://www.nhm.ac.uk/discover/dino-directory)
 and the [National Park Service's Camarasaurus page](https://home.nps.gov/places/camarasaurus-lentus.htm).
-Colours and age proportions are imaginative storybook interpretations.
+Egg patterns, colours and age proportions are imaginative storybook interpretations.
 
 Choose **Arrange island**, then choose two dinosaurs to swap their occupied
 spots. Their ages, coins, unlocked facts and lesson progress are preserved.
@@ -29,6 +32,9 @@ Each image was requested separately using the built-in image generator. Adults
 use the existing painted elephant as a style reference. Each hatchling and
 juvenile uses its own adult illustration as the reference, keeping colours and
 markings consistent while changing proportions and developing features.
+Each egg uses the original painted egg as a style reference, with its own shell
+colours and markings inspired by the dinosaur inside. Existing saved eggs pick
+up the corresponding illustration automatically; growth progress is unchanged.
 
 - [Exact prompts](dinosaur-art-prompts.json)
 - [Asset records and checksums](dinosaur-art-generation.json)
@@ -49,5 +55,5 @@ python3 scripts/prepare-dinosaurs.py
 python3 scripts/preview-dinosaurs.py
 ```
 
-These packaging tools require Pillow. The preview script writes an adult
-contact sheet into `docs/` and age comparisons into `output/dinosaur-art/`.
+These packaging tools require Pillow. The preview script writes adult and egg
+contact sheets into `docs/` and age comparisons into `output/dinosaur-art/`.

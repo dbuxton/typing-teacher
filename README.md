@@ -101,8 +101,9 @@ Each player picks what their coins buy when they're created:
   and butterflies from caterpillars through chrysalises.
 - **Dinosaurs** — 18 dinosaurs, grouped into Crests & armour, Long necks and Two-legged.
   Buy an egg for 10–95 coins, then grow it through Hatchling → Juvenile → Adult.
-  Every age has its own illustration. Adults unlock a short, sourced fact in your
-  dinosaur book, and you can swap your dinosaurs' places on the island.
+  Every dinosaur has its own patterned egg and illustration at each age. Adults
+  unlock a short, sourced fact in your dinosaur book, and you can swap your
+  dinosaurs' places on the island.
 
 Garden, Pokémon, Animals and Dinosaurs start with **18 spaces** and automatically add six
 more whenever the collection fills. There is no purchase limit for these themes,
