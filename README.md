@@ -87,14 +87,16 @@ Each player picks what their coins buy when they're created:
 - **Women's Super League** — collect an 18-player squad of WSL and Lionesses players.
   Each lesson is a training session that upgrades her card: Academy → Bronze →
   Silver → Gold → Legend. Each card has its own illustrated player portrait,
-  a shirt in club colours, and a frame that upgrades. Every player costs the same. The squad and their clubs
+  a shirt in club colours, and a frame that upgrades. Each player has a different
+  price, from 10 to 95 coins. The squad, prices and clubs
   are in `src/data/rewards/football.ts`; update them there when players move.
 - **Pokémon** — eggs that hatch and then evolve, across nine evolution lines.
   Speckled eggs and all 26 characters use painted illustrations with transparent
   backgrounds. These are generated fan illustrations, not official artwork.
 - **Animals** — 18 species with three illustrations each: six birds, six mammals, and six more
   animals including reptiles, a frog, a seahorse, an octopus and a butterfly.
-  Browse by animal type. Each baby costs 20 coins; every lesson grows it one
+  Browse by animal type. Each species has a different price, from 10 to 95 coins;
+  every lesson grows your animals one
   stage: Baby → Juvenile → Adult. Frogs grow from tadpoles through froglets,
   and butterflies from caterpillars through chrysalises.
 

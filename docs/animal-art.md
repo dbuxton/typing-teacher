@@ -18,7 +18,9 @@ its actual prompt, settings and generation time.
 
 ## Progress and space
 
-Every animal starts as a baby costing 20 coins. Each completed lesson advances
+Every animal starts as a baby. Each species has a distinct price, from a 10-coin
+robin to a 95-coin elephant, with the shop ordered from cheapest to most expensive.
+Each completed lesson advances
 all collected animals by one stage: Baby → Juvenile → Adult. Every stage has a
 separate illustration, with visible changes in proportions, fur, feathers and
 markings. Younger animals also appear smaller in the collection. Adults stay adults, and progress never decays for missed days.

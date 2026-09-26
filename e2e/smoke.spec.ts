@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
+import { PLAYERS } from '../src/data/rewards/football'
 
 /**
  * End-to-end: create a player, complete a whole lesson by actually typing it,
@@ -189,7 +190,7 @@ test('a kid who picks Pokémon collects eggs instead of seeds', async ({ page })
 
 test('baby animals can be found by type, collected and grown through lessons', async ({ page }) => {
   await createPlayer(page, 'Ava', /^Animals/)
-  // Start with enough coins for one baby; grow it by typing a real lesson.
+  // Pick an affordable baby with 20 coins; grow it by typing a real lesson.
   await page.evaluate(() => {
     const key = 'typing-teacher.save.v1'
     const saved = JSON.parse(localStorage.getItem(key)!)
@@ -210,7 +211,11 @@ test('baby animals can be found by type, collected and grown through lessons', a
   await page.getByRole('button', { name: 'More animals', exact: true }).click()
   await expect(page.getByRole('button', { name: /Octopus/ })).toBeVisible()
   await page.getByRole('button', { name: 'All animals', exact: true }).click()
+  await expect(page.getByRole('button', { name: /Robin/ })).toContainText('🪙 10')
+  await expect(page.getByRole('button', { name: /Elephant/ })).toContainText('🪙 95')
+  await expect(page.getByRole('button', { name: /Elephant/ })).toBeDisabled()
   await page.getByRole('button', { name: /Robin/ }).click()
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('typing-teacher.save.v1')!).state.save.profiles[0].coins)).toBe(10)
   await expect(page.getByText('Robin · Baby', { exact: true })).toBeVisible()
   await expect(page.locator('[aria-label="Your collection"] img')).toHaveAttribute('src', /robin-baby\.webp$/)
   await page.locator('[aria-label="Your collection"] img').evaluate(image => (image as HTMLImageElement).decode())
@@ -307,24 +312,31 @@ test('a tricky lesson gets fresh practice before a missed pattern returns', asyn
 
 test('an old starting eleven can fill its expanded squad with seven more players', async ({ page }) => {
   await createPlayer(page, 'Skipper', /^Women's Super League/)
-  const newNames = ['Phallon Tullis-Joyce', 'Lotte Wubben-Moy', 'Naomi Girma', 'Sjoeke Nüsken', 'Jess Park', 'Lauren Hemp', 'Aggie Beever-Jones']
-  await page.evaluate(() => {
+  const newPlayers = PLAYERS.slice(11)
+  let coins = newPlayers.reduce((total, player) => total + player.cost, 0)
+  await page.evaluate(coins => {
     const key = 'typing-teacher.save.v1'
     const saved = JSON.parse(localStorage.getItem(key)!)
     saved.version = 3
     saved.state.save.version = 3
     const p = saved.state.save.profiles[0]
     delete p.practice
-    p.coins = 140
+    p.coins = coins
     p.badges = ['full-garden']
     p.garden = ['hampton', 'bronze', 'bright', 'williamson', 'greenwood', 'walsh', 'toone', 'mariona', 'james', 'russo', 'shaw'].map(kindId => ({ kindId, stage: 4 }))
     localStorage.setItem(key, JSON.stringify(saved))
-  })
+  }, coins)
   await page.reload()
   await page.getByText('Skipper', { exact: true }).click()
   await page.getByRole('button', { name: /Squad/ }).click()
   await expect(page.locator('[aria-label="Your collection"] > div')).toHaveCount(18)
-  for (const name of newNames) await page.getByRole('button', { name: new RegExp(name) }).click()
+  for (const player of newPlayers) {
+    const buy = page.getByRole('button', { name: new RegExp(player.fullName) })
+    await expect(buy).toContainText(`🪙 ${player.cost}`)
+    await buy.click()
+    coins -= player.cost
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('typing-teacher.save.v1')!).state.save.profiles[0].coins)).toBe(coins)
+  }
   await expect(page.locator('[aria-label="Your collection"] img')).toHaveCount(18)
   const images = await page.locator('[aria-label="Your collection"] img').evaluateAll(async imgs => {
     await Promise.all(imgs.map(img => (img as HTMLImageElement).decode()))
