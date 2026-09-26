@@ -35,7 +35,7 @@ function seed(theme: ThemeId, count: number, coins = 100) {
 beforeEach(() => storage.clear())
 
 describe('expanding collections', () => {
-  it.each(['garden', 'pokemon', 'animals'] as const)('allows a 13th, 19th and 25th purchase in %s and persists it', async theme => {
+  it.each(['garden', 'pokemon', 'animals', 'dinosaurs'] as const)('allows a 13th, 19th and 25th purchase in %s and persists it', async theme => {
     for (const count of [12, 18, 24]) {
       const kind = seed(theme, count)
       useStore.getState().collectReward(kind.id)
@@ -125,5 +125,37 @@ describe('animal growth', () => {
     await useStore.persist.rehydrate()
     expect(useStore.getState().activeProfile()?.theme).toBe('animals')
     expect(useStore.getState().activeProfile()?.garden[0]).toEqual({ kindId: 'robin', stage: 2 })
+  })
+})
+
+describe('dinosaur island', () => {
+  it('hatches eggs, grows through both young stages, and keeps adults through reloads', async () => {
+    seed('dinosaurs', 0, 95)
+    useStore.getState().collectReward('tyrannosaurus')
+    expect(useStore.getState().activeProfile()?.coins).toBe(0)
+    expect(useStore.getState().activeProfile()?.garden).toEqual([{ kindId: 'tyrannosaurus', stage: 0 }])
+    for (const stage of [1, 2, 3, 3]) {
+      useStore.getState().recordLesson(lesson)
+      expect(useStore.getState().activeProfile()?.garden[0].stage).toBe(stage)
+    }
+    await useStore.persist.rehydrate()
+    expect(useStore.getState().activeProfile()?.theme).toBe('dinosaurs')
+    expect(useStore.getState().activeProfile()?.garden[0]).toEqual({ kindId: 'tyrannosaurus', stage: 3 })
+    expect(useStore.getState().activeProfile()?.badges).toContain('gardener')
+  })
+
+  it('persists rearranged dinosaurs without changing their growth or coins', async () => {
+    seed('dinosaurs', 0, 25)
+    useStore.getState().collectReward('triceratops')
+    useStore.getState().recordLesson(lesson)
+    useStore.getState().collectReward('stegosaurus')
+    const before = useStore.getState().activeProfile()!
+    for (const [from, to] of [[-1, 0], [0, 18], [0.5, 1], [0, 0]]) useStore.getState().swapRewards(from, to)
+    expect(useStore.getState().activeProfile()).toBe(before)
+    useStore.getState().swapRewards(0, 1)
+    await useStore.persist.rehydrate()
+    expect(useStore.getState().activeProfile()?.garden).toEqual([...before.garden].reverse())
+    expect(useStore.getState().activeProfile()?.coins).toBe(before.coins)
+    expect(useStore.getState().activeProfile()?.lessonsCompleted).toBe(before.lessonsCompleted)
   })
 })

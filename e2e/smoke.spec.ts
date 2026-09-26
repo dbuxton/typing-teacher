@@ -243,6 +243,7 @@ for (const theme of [
   { picker: /^Garden/, nav: /Garden/, kind: 'daisy', name: /Daisy/ },
   { picker: /^Pokémon/, nav: /Pokémon/, kind: 'magikarp', name: /Magikarp/ },
   { picker: /^Animals/, nav: /Animals/, kind: 'robin', name: /Robin/ },
+  { picker: /^Dinosaurs/, nav: /Dinosaurs/, kind: 'triceratops', name: /Triceratops/ },
 ]) {
   test(`${theme.kind} collections grow past 18 and 24 without blocking the shop`, async ({ page }) => {
     await createPlayer(page, 'Max', theme.picker)
@@ -308,6 +309,58 @@ test('a tricky lesson gets fresh practice before a missed pattern returns', asyn
   await typeCurrentItem(page)
   await expect(page.getByText('🌱 Look how far you’ve come', { exact: true })).toBeVisible()
   expect(await currentText(page)).toBe(firstRound[0])
+})
+
+test('dinosaurs hatch, grow, unlock facts and keep their arranged island', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 900 })
+  await createPlayer(page, 'Rex', /^Dinosaurs/)
+  await page.evaluate(() => {
+    const key = 'typing-teacher.save.v1'
+    const saved = JSON.parse(localStorage.getItem(key)!)
+    saved.state.save.profiles[0].coins = 25
+    localStorage.setItem(key, JSON.stringify(saved))
+  })
+  await page.reload()
+  await page.getByText('Rex', { exact: true }).click()
+  await page.getByRole('button', { name: /Dinosaurs/ }).click()
+  await expect(page.getByRole('heading', { name: 'Your dinosaur island' })).toBeVisible()
+  await page.getByRole('button', { name: 'Long necks', exact: true }).click()
+  await expect(page.getByRole('button', { name: /Brachiosaurus/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /Triceratops/ })).toHaveCount(0)
+  await page.getByRole('button', { name: 'Two-legged', exact: true }).click()
+  await expect(page.getByRole('button', { name: /T. rex/ })).toBeDisabled()
+  await page.getByRole('button', { name: 'All dinosaurs', exact: true }).click()
+  await page.getByRole('button', { name: /Triceratops/ }).click()
+  await page.getByRole('button', { name: /Stegosaurus/ }).click()
+  const collection = page.getByLabel('Your collection', { exact: true })
+  await expect(collection.getByText('Triceratops · Egg', { exact: true })).toBeVisible()
+  await expect(page.getByText(/Your dinosaur book · 0\/18/)).toBeVisible()
+  for (const [stage, suffix] of [['Hatchling', '-baby'], ['Juvenile', '-juvenile'], ['Adult', '']]) {
+    await page.getByRole('button', { name: /Back to lessons/ }).click()
+    await page.getByRole('button', { name: /^Level 1 / }).click()
+    for (let item = 0; item < 6; item++) {
+      await typeCurrentItem(page)
+      await page.waitForTimeout(500)
+    }
+    await page.getByRole('button', { name: /Spend coins/ }).click()
+    await expect(collection.getByText(`Triceratops · ${stage}`, { exact: true })).toBeVisible()
+    await expect(collection.locator('img').first()).toHaveAttribute('src', new RegExp(`triceratops${suffix}\\.webp$`))
+  }
+  await page.getByText(/Your dinosaur book · 2\/18/).click()
+  await expect(page.getByText('It had three horns and a large bony frill behind its head.')).toBeVisible()
+  await expect(page.getByText(/Your dinosaur book · 2\/18/)).toBeVisible()
+  await page.getByRole('button', { name: 'Arrange island', exact: true }).click()
+  await page.getByRole('button', { name: 'Move Triceratops · Adult, spot 1', exact: true }).click()
+  await page.getByRole('button', { name: 'Swap with Stegosaurus · Adult, spot 2', exact: true }).click()
+  await page.getByRole('button', { name: 'Done arranging', exact: true }).click()
+  await page.reload()
+  await page.getByText('Rex', { exact: true }).click()
+  await page.getByRole('button', { name: /Dinosaurs/ }).click()
+  await expect(collection.locator('img').first()).toHaveAttribute('src', /stegosaurus\.webp$/)
+  await expect(page.getByText(/Your dinosaur book · 2\/18/)).toBeVisible()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  await page.getByRole('button', { name: /Badges/ }).click()
+  await expect(page.getByText('Dino Discoverer', { exact: true })).toBeVisible()
 })
 
 test('an old starting eleven can fill its expanded squad with seven more players', async ({ page }) => {

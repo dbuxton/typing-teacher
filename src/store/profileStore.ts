@@ -67,6 +67,8 @@ type State = {
   recordLesson: (outcome: LessonOutcome) => void
   /** Spend coins on a seed, player, egg or animal — whatever the theme sells. */
   collectReward: (kindId: string) => void
+  /** Swap two occupied collection spots without changing rewards or coins. */
+  swapRewards: (from: number, to: number) => void
 }
 
 function updateProfile(save: SaveFile, id: string, fn: (p: Profile) => Profile): SaveFile {
@@ -247,6 +249,19 @@ export const useStore = create<State>()(
             },
             screen: 'results',
           }
+        }),
+
+      swapRewards: (from, to) =>
+        set((state) => {
+          const id = state.save.activeProfileId
+          const current = state.save.profiles.find(p => p.id === id)
+          if (!id || !current || from === to || !Number.isInteger(from) || !Number.isInteger(to)) return state
+          if (from < 0 || to < 0 || from >= current.garden.length || to >= current.garden.length) return state
+          const garden = [...current.garden]
+          const moved = garden[from]
+          garden[from] = garden[to]
+          garden[to] = moved
+          return { save: updateProfile(state.save, id, p => ({ ...p, garden })) }
         }),
 
       collectReward: (kindId) =>

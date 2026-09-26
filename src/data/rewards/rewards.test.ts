@@ -5,6 +5,7 @@ import { THEMES, collectionIsFull, collectionSlots, isFullyGrown, rewardKind, re
 import { ANIMAL_SPECIES } from './animals'
 import { EGG_PREFIX, eggColour } from './pokemon'
 import { PLAYERS, TIERS } from './football'
+import { DINOSAUR_SPECIES } from './dinosaurs'
 
 describe.each(THEMES)('$name growth stages', (theme) => {
   /**
@@ -149,7 +150,7 @@ describe('football', () => {
 
 describe('themeById', () => {
   it('falls back to the garden for anything it does not recognise', () => {
-    expect(themeById('dinosaurs').id).toBe('garden')
+    expect(themeById('unknown-theme').id).toBe('garden')
     expect(themeById(undefined).id).toBe('garden')
   })
 })
@@ -179,7 +180,7 @@ describe('animal friends', () => {
 })
 
 describe('collection space', () => {
-  it.each(['garden', 'pokemon', 'animals'])('%s starts at 18 and always has room for another reward', id => {
+  it.each(['garden', 'pokemon', 'animals', 'dinosaurs'])('%s starts at 18 and always has room for another reward', id => {
     const theme = themeById(id)
     for (const [owned, expected] of [[0, 18], [12, 18], [17, 18], [18, 24], [23, 24], [24, 30], [90, 96]]) {
       expect(collectionSlots(theme, owned)).toBe(expected)
@@ -194,5 +195,23 @@ describe('collection space', () => {
     expect(collectionIsFull(theme, 17)).toBe(false)
     expect(collectionIsFull(theme, 18)).toBe(true)
     expect(collectionSlots(theme, 24)).toBe(24)
+  })
+})
+
+describe('dinosaurs', () => {
+  it('has eighteen dinosaurs whose eggs hatch and grow through three illustrated ages', () => {
+    const theme = themeById('dinosaurs')
+    expect(theme.id).toBe('dinosaurs')
+    expect(theme.kinds).toHaveLength(18)
+    for (const group of ['Crests & armour', 'Long necks', 'Two-legged']) {
+      expect(DINOSAUR_SPECIES.filter(dinosaur => dinosaur.group === group)).toHaveLength(6)
+    }
+    for (const kind of theme.kinds) {
+      expect(kind.stages.map(stage => stage.name.split(' · ')[1])).toEqual(['Egg', 'Hatchling', 'Juvenile', 'Adult'])
+      for (const stage of kind.stages) {
+        expect(existsSync(new URL(`../../../public/art/rewards/dinosaurs/${stage.id}.webp`, import.meta.url)), stage.name).toBe(true)
+      }
+    }
+    expect(new Set(theme.kinds.flatMap(kind => kind.stages.map(stage => stage.id))).size).toBe(55)
   })
 })

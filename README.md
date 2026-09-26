@@ -99,8 +99,12 @@ Each player picks what their coins buy when they're created:
   every lesson grows your animals one
   stage: Baby → Juvenile → Adult. Frogs grow from tadpoles through froglets,
   and butterflies from caterpillars through chrysalises.
+- **Dinosaurs** — 18 dinosaurs, grouped into Crests & armour, Long necks and Two-legged.
+  Buy an egg for 10–95 coins, then grow it through Hatchling → Juvenile → Adult.
+  Every age has its own illustration. Adults unlock a short, sourced fact in your
+  dinosaur book, and you can swap your dinosaurs' places on the island.
 
-Garden, Pokémon and Animals start with **18 spaces** and automatically add six
+Garden, Pokémon, Animals and Dinosaurs start with **18 spaces** and automatically add six
 more whenever the collection fills. There is no purchase limit for these themes,
 so a longer practice journey never runs out of rewards. Their collection badge
 is earned at 18; badges earned under the old 12-space limit stay earned.
@@ -108,10 +112,11 @@ Football has 18 unique players: a starting eleven plus seven more squad members.
 The full-squad badge now targets 18; an already-earned football badge stays earned.
 
 Generated images live in `public/art/rewards/` as transparent 512px WebP files.
-Each plant, egg and player portrait was requested individually using the built-in
+Each plant, egg, dinosaur and player portrait was requested individually using the built-in
 image generator. The Pokémon and animals were generated individually with Nano Banana 2,
 using the supplied Pikachu as a style reference. The exact prompt set and asset
-notes are in `docs/reward-art.md`; `docs/nano-banana-2.md`, `docs/animal-art.md` and `docs/football-art.md` explain regeneration.
+notes are in `docs/reward-art.md`; `docs/nano-banana-2.md`, `docs/animal-art.md`,
+`docs/football-art.md` and `docs/dinosaur-art.md` describe the artwork and regeneration.
 All images load locally; names, prices, card tiers and saved growth stages remain data.
 
 The theme can't be changed later, because switching would leave a whole
@@ -139,7 +144,7 @@ lesson map to switch them off.
 ```
 src/
   data/      curriculum.ts (12 levels), spellingWords.ts, badges.ts,
-             rewards/ (garden, football, pokemon and animals themes)
+             rewards/ (garden, football, pokemon, animals and dinosaurs themes)
   art/       RewardArt, portrait cards, asset mappings and fallback egg art
   engine/    pure logic, all unit-tested — adaptive, generator, practice, scoring, srs,
              sneakyStars, assist, speech, keymap, and the useTypingSession hook

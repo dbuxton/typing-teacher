@@ -94,7 +94,7 @@ export type Profile = {
   locale: 'en-GB' | 'en-US'
   createdAt: string
   /**
-   * What coins buy: plants, footballers, Pokémon or animals. Chosen when the
+   * What coins buy: plants, footballers, Pokémon, animals or dinosaurs. Chosen when the
    * profile is created and fixed after that.
    */
   theme: ThemeId
