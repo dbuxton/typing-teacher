@@ -32,6 +32,7 @@ yarn-error.log*
 # Generated originals awaiting review and background removal
 /output/nano-banana-2/
 /output/football-art/
+/output/dinosaur-art/
 
 # Session cache created by the local ONNX image processor
 /:memory:.ses

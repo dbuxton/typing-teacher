@@ -160,15 +160,15 @@ describe('reward themes', () => {
     expect(makeProfile('Ada', '🦉').theme).toBe('garden')
   })
 
-  it('keeps a valid theme through a reload', () => {
-    const save = { version: SAVE_VERSION, profiles: [makeProfile('Ada', '🦉', 'football')], activeProfileId: null }
-    expect(migrate(save, SAVE_VERSION).profiles[0].theme).toBe('football')
+  it.each(['football', 'dinosaurs'] as const)('keeps %s through a reload', theme => {
+    const save = { version: SAVE_VERSION, profiles: [makeProfile('Ada', '🦉', theme)], activeProfileId: null }
+    expect(migrate(save, SAVE_VERSION).profiles[0].theme).toBe(theme)
   })
 
   it('falls back to the garden for a theme this build does not know', () => {
     const save = {
       version: SAVE_VERSION,
-      profiles: [{ ...makeProfile('Ada', '🦉'), theme: 'dinosaurs' }],
+      profiles: [{ ...makeProfile('Ada', '🦉'), theme: 'unknown-theme' }],
       activeProfileId: null,
     }
     expect(migrate(save, SAVE_VERSION).profiles[0].theme).toBe('garden')

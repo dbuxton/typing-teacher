@@ -7,7 +7,7 @@ import { EGG_IMAGES, GARDEN_IMAGES, POKEMON_IMAGES, rewardImage } from './assets
 
 /**
  * Draws one collected thing at one stage, whatever the theme: a painted plant, a
- * Pokémon, animal friend or a player's card. Every screen goes through here, so a theme's art
+ * Pokémon, animal, dinosaur or a player's card. Every screen goes through here, so a theme's art
  * only has to be wired up once.
  *
  * Anything unrecognised (a kind from an old save, say) draws the theme's
@@ -29,6 +29,18 @@ export function RewardArt({
   className?: string
 }) {
   const current = rewardStage(theme, kindId, stage)
+
+  if (theme === 'dinosaurs') {
+    return (
+      <RewardImage
+        src={rewardImage(`dinosaurs/${current?.id ?? 'egg'}`)}
+        alt={current?.name ?? 'Dinosaur egg'}
+        size={size}
+        scale={[0.7, 0.75, 0.875, 1][Math.min(Math.max(stage, 0), 3)]}
+        className={className}
+      />
+    )
+  }
 
   if (theme === 'animals') {
     return (

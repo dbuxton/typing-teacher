@@ -1,0 +1,1174 @@
+{
+  "provider": "Built-in image_gen",
+  "note": "Individual requests; original alpha preserved. Each dinosaur has its own egg and three illustrated ages. The original shared egg remains an unknown-kind fallback.",
+  "assets": [
+    {
+      "id": "triceratops",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/triceratops.webp",
+      "generatedOriginal": "exec-6c7fb633-c69e-4894-a28a-e0264f5788ea.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 61386,
+      "sha256": "7f554aabecb62d61ffde820e8137030b954ed10c6c125a491e1f7f9b6cc3d160"
+    },
+    {
+      "id": "triceratops-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/triceratops-baby.webp",
+      "generatedOriginal": "exec-8bb90cdc-8aeb-4fee-bcc0-01afbbc35822.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 46980,
+      "sha256": "b17be0bf8149ce5c4961d705c9ab390b150c3bf6e1ed65d1479ba44b49422a39"
+    },
+    {
+      "id": "triceratops-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/triceratops-juvenile.webp",
+      "generatedOriginal": "exec-dff78471-127b-41ae-982e-5bcb54a6bea2.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 48424,
+      "sha256": "2d1b82ebc4a3921f2e569f3ebb921099c1794977b4090fb7cfb8c68d01f10471"
+    },
+    {
+      "id": "stegosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/stegosaurus.webp",
+      "generatedOriginal": "exec-6d520bd9-6278-4067-a0d1-47f090d00ced.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 60618,
+      "sha256": "6eea70c85175bbeca7a8674c24be02d3fdb41b0c48ed65c9220d3d2e07dd1532"
+    },
+    {
+      "id": "stegosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/stegosaurus-baby.webp",
+      "generatedOriginal": "exec-3b19974a-6444-43a1-b71a-bbed1a0d8778.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 38324,
+      "sha256": "bb3d2fe36646f4fe0bf90088e84f6b8d2826bc5008b6cad11f7015925d422235"
+    },
+    {
+      "id": "stegosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/stegosaurus-juvenile.webp",
+      "generatedOriginal": "exec-1c066845-ef13-47d0-8ad8-84083af8529d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 41572,
+      "sha256": "dc720f8f8fd9d065ad6444c6d960098ac302c178822631f83831c39052e2ff11"
+    },
+    {
+      "id": "parasaurolophus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/parasaurolophus.webp",
+      "generatedOriginal": "exec-30f9d3b0-5d67-4e47-a277-8d2fe066bd14.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 55004,
+      "sha256": "07d1870fadbc2b21a3532ffcd71da94a99d435295129bd1bfb0c398bf21db9f0"
+    },
+    {
+      "id": "parasaurolophus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/parasaurolophus-baby.webp",
+      "generatedOriginal": "exec-a7b4e163-2933-44ba-b88c-a7d6291d9dd0.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 37974,
+      "sha256": "597c7b08dd70acd5dac4c2cbc80452526bf3ec6a435895734ef3cbd668a05be4"
+    },
+    {
+      "id": "parasaurolophus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/parasaurolophus-juvenile.webp",
+      "generatedOriginal": "exec-117b88cd-a0b3-4421-9323-a7ce3523af28.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 41966,
+      "sha256": "7d23ae1563dafe88bf5de190dabdc03a712a4d0774cb8d20737cf708fad71aac"
+    },
+    {
+      "id": "oviraptor",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/oviraptor.webp",
+      "generatedOriginal": "exec-44a22717-7b85-416d-9ccb-8a65bd62915d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 54262,
+      "sha256": "8cb9e08228ef73ec6ea18ca38127a8cad12c3ff4660bfbeaecd6e64525e59c4a"
+    },
+    {
+      "id": "oviraptor-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/oviraptor-baby.webp",
+      "generatedOriginal": "exec-891d5b4c-7b52-4543-80af-6c52f6d9ccb8.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 43112,
+      "sha256": "341f19c5aa68465040bd0b0dd5d8be1e23e55726d8a07c6d324b7cfce722602b"
+    },
+    {
+      "id": "oviraptor-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/oviraptor-juvenile.webp",
+      "generatedOriginal": "exec-e4a48186-8839-4fdb-8041-8fed46899ba6.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 43086,
+      "sha256": "3b0e35e129d896ddc17c702df3632c7d63d08cec9851d68978a4b337385e78c2"
+    },
+    {
+      "id": "camarasaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/camarasaurus.webp",
+      "generatedOriginal": "exec-09614ca3-60e7-4357-8d64-ac5e0926d4ae.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 52458,
+      "sha256": "d9c804cdbcfb87bbb9ae283114173f6fb2b60c221b89a23cfc2ee60810748d40"
+    },
+    {
+      "id": "camarasaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/camarasaurus-baby.webp",
+      "generatedOriginal": "exec-b297ac4e-c440-4e57-b5c5-da84ee59f0d5.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 39108,
+      "sha256": "b933058b826026a10ca7cc1ae731a78613548d08436f37fb7c098006d6f77b2b"
+    },
+    {
+      "id": "camarasaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/camarasaurus-juvenile.webp",
+      "generatedOriginal": "exec-a5abf0d6-0087-43b0-b88b-a80a0857a357.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 38942,
+      "sha256": "0e2c51256dcefb31e166cfb236c0d9255e2daa9114182fd8f77a68fa7c5fd967"
+    },
+    {
+      "id": "ankylosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/ankylosaurus.webp",
+      "generatedOriginal": "exec-a17f33dd-44e9-4eaf-85f6-ca3b693f216f.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 62070,
+      "sha256": "405d95c72c18a835f3ceefa5a45a4a04ccb77b7aa192c315dd5be1709c2949b3"
+    },
+    {
+      "id": "ankylosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/ankylosaurus-baby.webp",
+      "generatedOriginal": "exec-e9222af1-addd-4450-96d7-da8feadb16d4.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 42914,
+      "sha256": "19ef845822df6f37e3d603401588080235a92a3634550131a3a7125b26845fea"
+    },
+    {
+      "id": "ankylosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/ankylosaurus-juvenile.webp",
+      "generatedOriginal": "exec-3846113e-45c6-4e0a-a594-52c4165ae3bd.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 44492,
+      "sha256": "e2e49f8bf69bb59a9b89d77c48b5d71211db0021565eef55a6a6cd9192aec15b"
+    },
+    {
+      "id": "pachycephalosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/pachycephalosaurus.webp",
+      "generatedOriginal": "exec-870f7f9d-d659-4968-a6c2-12b840edacf8.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 46260,
+      "sha256": "06aaf2ee72aa93a5e8ef54ac2900565b100bbcc76f779416ea564c78126d694a"
+    },
+    {
+      "id": "pachycephalosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/pachycephalosaurus-baby.webp",
+      "generatedOriginal": "exec-873ce5d0-4cc3-4a16-9869-af88147da9a4.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 35858,
+      "sha256": "45c8e0a8a5cb516da4e9d94b33455ed59de4f49bf34c7f92ba695c4b2cbca313"
+    },
+    {
+      "id": "pachycephalosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/pachycephalosaurus-juvenile.webp",
+      "generatedOriginal": "exec-67db2e45-c620-4e00-a6ec-5efe33c2eee0.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 34422,
+      "sha256": "cc18b45f78803c32e31830db0864fbdf08ca4160fc692e3d1d0ac2ac792eaad8"
+    },
+    {
+      "id": "diplodocus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/diplodocus.webp",
+      "generatedOriginal": "exec-ca4faf5e-cea8-4414-9ea7-750f1b6f6973.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 46134,
+      "sha256": "838346deb81d376662c58ae78ad78defd274938e2e38331cbc9faa37ed53baf9"
+    },
+    {
+      "id": "diplodocus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/diplodocus-baby.webp",
+      "generatedOriginal": "exec-763ef9b9-f5cd-48ca-8c41-398d824e72f7.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 38624,
+      "sha256": "e9bd1d4e826191893917c6560e9c84c7888421ce299a16513e8b79c196b22e15"
+    },
+    {
+      "id": "diplodocus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/diplodocus-juvenile.webp",
+      "generatedOriginal": "exec-d436898d-f087-4d36-aef4-a88b69af362c.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 37578,
+      "sha256": "4fc6f8e62735e89c565905773fa4f274a12812f1f34c79c14b28857b6d6fab5d"
+    },
+    {
+      "id": "styracosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/styracosaurus.webp",
+      "generatedOriginal": "exec-d7059cac-3a73-4ef5-82d8-47e7028e5a28.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 63156,
+      "sha256": "9fc91dd8810d51f62badbdc8f51e15a783d00ee2707c5f6eb8f72724dfe9c9d2"
+    },
+    {
+      "id": "styracosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/styracosaurus-baby.webp",
+      "generatedOriginal": "exec-1652489f-dd57-43ba-b033-61e269beff62.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 40024,
+      "sha256": "8e85b2111ab08dc751d4e9aba26ad3d21e16971dfc72a581c3f6965a501f0233"
+    },
+    {
+      "id": "styracosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/styracosaurus-juvenile.webp",
+      "generatedOriginal": "exec-3e75e261-4f27-4773-a9c6-d638614fe4e2.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 45816,
+      "sha256": "687f5a8650f8cc787c0db27cc52247807886722d1be764e15004612ffffc1a46"
+    },
+    {
+      "id": "deinonychus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/deinonychus.webp",
+      "generatedOriginal": "exec-cccbb829-5208-4d3d-9e86-8e1246c2c0b2.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 58858,
+      "sha256": "d752429ff56aad483202625e57b5a34bef04d7c22aedf2a2548cf10b3adc78a5"
+    },
+    {
+      "id": "deinonychus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/deinonychus-baby.webp",
+      "generatedOriginal": "exec-a065b6db-0cfb-486f-bfa1-5c79beb70196.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 45594,
+      "sha256": "4eca615951777268f3450abc02044461f14a17e286e8e2c9b01c08e1cf2251c2"
+    },
+    {
+      "id": "deinonychus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/deinonychus-juvenile.webp",
+      "generatedOriginal": "exec-df12f18d-eded-4b5b-8424-d22acea062f2.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 47088,
+      "sha256": "6ec483b7857e738419b678d11850af31af297759d1c09546af560411ba1009bd"
+    },
+    {
+      "id": "apatosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/apatosaurus.webp",
+      "generatedOriginal": "exec-e7314e8c-fb39-418d-944a-9e194969e20f.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 48292,
+      "sha256": "f9d4e01494ce0b001c2b6ba1886a10e3dff3410ffcf975fc7655cb2a16c8c3e0"
+    },
+    {
+      "id": "apatosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/apatosaurus-baby.webp",
+      "generatedOriginal": "exec-11790c21-8caf-4e0d-87e5-f6142d210fa6.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 39436,
+      "sha256": "64d87774297d1b28948514012cfe2379bb97dcd61093474436797f95625fd39d"
+    },
+    {
+      "id": "apatosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/apatosaurus-juvenile.webp",
+      "generatedOriginal": "exec-f83d99ec-7a9e-4d5e-ad3b-bad93a2d2d77.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 37968,
+      "sha256": "1eb1ce9a754f1772959d54fd5f167c30f43a663fa79a14753cf17c24a2fb1e35"
+    },
+    {
+      "id": "velociraptor",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/velociraptor.webp",
+      "generatedOriginal": "exec-4b1a8d01-7e6c-487c-88d6-71931f0112d0.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 58516,
+      "sha256": "6c1169dee63071920431b750fd9087a4172e57cfd691a7c1f3d7572ba8e32a3a"
+    },
+    {
+      "id": "velociraptor-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/velociraptor-baby.webp",
+      "generatedOriginal": "exec-74b94f8a-ba47-44a3-bcbd-0e08e2ef9279.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 42822,
+      "sha256": "a5008de1830b1a8918efd75a9e9fce2b8a6021734f7132c076f79827898c423f"
+    },
+    {
+      "id": "velociraptor-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/velociraptor-juvenile.webp",
+      "generatedOriginal": "exec-0ad11ff6-c8ff-4de1-a8a3-fd4e1c1db01f.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 46146,
+      "sha256": "8b1826ac0ff357efb86b681c6251f358d984e57a4ab69e2421861363f6d7d609"
+    },
+    {
+      "id": "amargasaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/amargasaurus.webp",
+      "generatedOriginal": "exec-2d5a9c91-00c0-4fcc-9d97-91ca5a5f15d3.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 69310,
+      "sha256": "1e6a92129cd9991a9653afc17f11290174e425f866e845ceb4902f517e398fdb"
+    },
+    {
+      "id": "amargasaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/amargasaurus-baby.webp",
+      "generatedOriginal": "exec-728b01aa-1829-457a-a6b2-366e48743fdc.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 51210,
+      "sha256": "755d060bef5b7aba465265f69cfc17da7eb818ffe6184c4350841cde86368a2d"
+    },
+    {
+      "id": "amargasaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/amargasaurus-juvenile.webp",
+      "generatedOriginal": "exec-8cf2625f-9a10-4c72-9f16-fac6fbf4fd75.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 49016,
+      "sha256": "5d0bd6f80ae531c44fd72da85d1e1f13a8274c55ee8ba6553c2b58191b79fbbb"
+    },
+    {
+      "id": "allosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/allosaurus.webp",
+      "generatedOriginal": "exec-f7e76d54-75e7-4ad8-97ae-18cae77213cb.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 48002,
+      "sha256": "3f80f52e3c7e23861321ab3e92e38cfbcc80b064986a75fe151149488a210ab2"
+    },
+    {
+      "id": "allosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/allosaurus-baby.webp",
+      "generatedOriginal": "exec-b776de1a-e2d1-42fa-acc4-8da604787f14.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 33648,
+      "sha256": "6d089f7ba78981ff458daceb0020da01ac896fae807493fb00f5c3a503c043e1"
+    },
+    {
+      "id": "allosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/allosaurus-juvenile.webp",
+      "generatedOriginal": "exec-03603ff9-2564-4eaa-988a-28b17acdbb9f.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 36810,
+      "sha256": "9e3e83e00916a24dd0e8fc1f41f19f17c705d7f5b4ac3cfca23a709d9311190d"
+    },
+    {
+      "id": "brachiosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/brachiosaurus.webp",
+      "generatedOriginal": "exec-e1420c5d-bdb3-4569-bbbb-70791a8541b5.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 40692,
+      "sha256": "0ffc2440032640d8ce3f825a224e06ce1f86bcc79fa7e50d84ea758e716c44b7"
+    },
+    {
+      "id": "brachiosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/brachiosaurus-baby.webp",
+      "generatedOriginal": "exec-b16eab98-6d78-4d45-bedc-79aac3375f83.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 34844,
+      "sha256": "c8b32d9c21f5d868b962fa67c69bb11d7ab0c67f4c62d8d2aaf7dd8e1a046d45"
+    },
+    {
+      "id": "brachiosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/brachiosaurus-juvenile.webp",
+      "generatedOriginal": "exec-141dbda4-5cd0-4601-906f-604bb9a228d1.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 35148,
+      "sha256": "70c50aebf19af2cbfe84a5a3db4efdf0b998764c43203ec2f726c9f9d2d15134"
+    },
+    {
+      "id": "spinosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/spinosaurus.webp",
+      "generatedOriginal": "exec-2d5b5dc7-e459-40a8-a126-1c97b6a20c95.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 59622,
+      "sha256": "3d55cf2d490b13dd9653db4db20e5de0a6039a66f362946a8ab1c1f3dfac0615"
+    },
+    {
+      "id": "spinosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/spinosaurus-baby.webp",
+      "generatedOriginal": "exec-498de5c0-b895-450e-8b33-3572716b6459.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 42842,
+      "sha256": "b6ee1ac8371b48af1f200b9199a65a76b5054e2fb369ad0c083cb13eb4bb0dc6"
+    },
+    {
+      "id": "spinosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/spinosaurus-juvenile.webp",
+      "generatedOriginal": "exec-130f7b83-ef39-4dea-a28c-141470f204cb.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 43218,
+      "sha256": "476a09445c60bb1484a55b62acbcfe69040cd67030cdbe076a6b2a570a9f459f"
+    },
+    {
+      "id": "argentinosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/argentinosaurus.webp",
+      "generatedOriginal": "exec-b257253e-a5ba-4992-bbd0-b6f9faec779d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 55440,
+      "sha256": "cabb48f5c41ce44c8ee6af6dd3bfdb28509b69581ea15b1556463e522abb137e"
+    },
+    {
+      "id": "argentinosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/argentinosaurus-baby.webp",
+      "generatedOriginal": "exec-6aade436-7869-4023-b7b0-d2a7e0edc164.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 53356,
+      "sha256": "494f0599b25c4fb36c5246223d7f741570a7b012d7e214dfcc77925fcfadc0ec"
+    },
+    {
+      "id": "argentinosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/argentinosaurus-juvenile.webp",
+      "generatedOriginal": "exec-d3f088bb-9854-41d0-b60f-29abb54214e8.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 45090,
+      "sha256": "e8c1ecdd47b8281a4e4a9928e28579333c42a65d04f70435fce27968bfdf17b4"
+    },
+    {
+      "id": "tyrannosaurus",
+      "stage": "adult",
+      "file": "public/art/rewards/dinosaurs/tyrannosaurus.webp",
+      "generatedOriginal": "exec-2f0555d4-d415-49e3-8a39-324256956ee6.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 54582,
+      "sha256": "a8b1267e480976ae5665c8131018c5b13571c65f321878c76fe4f21e8a576a3a"
+    },
+    {
+      "id": "tyrannosaurus-baby",
+      "stage": "baby",
+      "file": "public/art/rewards/dinosaurs/tyrannosaurus-baby.webp",
+      "generatedOriginal": "exec-15934fc9-3cfd-4738-8029-873de544f824.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 44308,
+      "sha256": "62c477b65ccdea71dcfa04cebda982a4b5bc0125b2f66120a4108c6f131552bd"
+    },
+    {
+      "id": "tyrannosaurus-juvenile",
+      "stage": "juvenile",
+      "file": "public/art/rewards/dinosaurs/tyrannosaurus-juvenile.webp",
+      "generatedOriginal": "exec-32ad5caa-41ab-47ea-8f3f-5eb0041ad126.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 39596,
+      "sha256": "95d0b04a400f38f53a18ead922f0ae51cd0a0d9e4e3362db91c32cc265cb6fe8"
+    },
+    {
+      "id": "egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/egg.webp",
+      "generatedOriginal": "exec-dd3f01a3-72c9-45b0-aac8-f9236a9431ac.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 37302,
+      "sha256": "fcb5a4d75328d76dfca6d387adebfcffb118619321e6d98c8fd9c312934d307a"
+    },
+    {
+      "id": "triceratops-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/triceratops-egg.webp",
+      "generatedOriginal": "exec-6dbdcd48-0a6e-47a7-899e-c15c1ef97175.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 34882,
+      "sha256": "af47e0ca5bc7bdebb280850cbd2893f585aa8d8473074b42a14276573f9530c5"
+    },
+    {
+      "id": "stegosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/stegosaurus-egg.webp",
+      "generatedOriginal": "exec-31c9b9dc-d659-408d-992b-fcb6d16305ad.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 42396,
+      "sha256": "3406184c2675e6c3acf2e73d449f4586db3fd762b131292b9bf2a4c291a57967"
+    },
+    {
+      "id": "parasaurolophus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/parasaurolophus-egg.webp",
+      "generatedOriginal": "exec-acac74f3-a54a-4448-913d-a2e5827e5c69.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 37470,
+      "sha256": "feab0080af5a98b3c6646534e222f41d17da9c5e5d5ded954932209f73af5923"
+    },
+    {
+      "id": "oviraptor-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/oviraptor-egg.webp",
+      "generatedOriginal": "exec-a5824b19-7ffc-4284-bb14-8e4848aee848.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 32330,
+      "sha256": "0286a7ede0ab7ef01d59e2871d071f9445cd0386c6d946f1442b2f1aae310f70"
+    },
+    {
+      "id": "camarasaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/camarasaurus-egg.webp",
+      "generatedOriginal": "exec-9b94d0ea-832f-462e-97ed-1741dc2daca1.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 35940,
+      "sha256": "024284aa163d95a0f81e34594e7fdec8a26d6e2fd39904b2995c5a78535f2c60"
+    },
+    {
+      "id": "ankylosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/ankylosaurus-egg.webp",
+      "generatedOriginal": "exec-62300a73-62ee-49a1-ac4e-c22f90b332db.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 31268,
+      "sha256": "460c432eb1f15332d46feb4ed8bc9af386b81f8650949d8483ab65a643574ce0"
+    },
+    {
+      "id": "pachycephalosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/pachycephalosaurus-egg.webp",
+      "generatedOriginal": "exec-5acaa9c0-daab-42c2-b3b4-ab6d450eb597.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 43722,
+      "sha256": "c08e952ebb46403aaa6dff76a05215d4373463396be1ba4498bd73e3f8b6fa9e"
+    },
+    {
+      "id": "diplodocus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/diplodocus-egg.webp",
+      "generatedOriginal": "exec-c9b941ca-2f17-4750-8964-5b31c7425093.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 34860,
+      "sha256": "0a59ee2802dfd67d03549b011110654e3e42c610441fbd227e01bda35dde6e37"
+    },
+    {
+      "id": "styracosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/styracosaurus-egg.webp",
+      "generatedOriginal": "exec-47f0d044-e0c7-401b-b62a-1ea6bc5b0820.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 31144,
+      "sha256": "7fbf7d9a5bca70418a6a588325b22872144c92217176d6e3ee90a98457f1ca01"
+    },
+    {
+      "id": "deinonychus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/deinonychus-egg.webp",
+      "generatedOriginal": "exec-5a2fc449-d147-46a8-9e1a-a0312d53a52d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 29102,
+      "sha256": "5d9294178bfb2c29a1cea1aafc28c20bac9cfaa5d55680638eaee5fd5caa1db4"
+    },
+    {
+      "id": "apatosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/apatosaurus-egg.webp",
+      "generatedOriginal": "exec-5d16606a-5249-43ff-9f89-79fa7e408c1b.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 38976,
+      "sha256": "a459efa1841f5de4369d9ec4f8324e8806f6abbebac75966aa6167af43be656f"
+    },
+    {
+      "id": "velociraptor-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/velociraptor-egg.webp",
+      "generatedOriginal": "exec-44fa2d2c-d7c3-460e-92a3-6705748fbfe2.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 45884,
+      "sha256": "4046511be1b1a0a8a5e9f155ea1c945d8a63182fc801f002c112e42220743319"
+    },
+    {
+      "id": "amargasaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/amargasaurus-egg.webp",
+      "generatedOriginal": "exec-03779307-bb69-4c86-a53a-d0a63605d72f.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 40824,
+      "sha256": "e734ab90e35a1513fd1ad685fe96688f1f24d3e875d41c2c91c44637b787c2c6"
+    },
+    {
+      "id": "allosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/allosaurus-egg.webp",
+      "generatedOriginal": "exec-1f83a082-6ee3-4bf4-857f-fe9913def116.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 44090,
+      "sha256": "6f44dfa70407e43591f5b0c7181395b7eddbbd987d7f157286b63349f67dbd25"
+    },
+    {
+      "id": "brachiosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/brachiosaurus-egg.webp",
+      "generatedOriginal": "exec-a6c9399d-d007-4109-8a68-f5a7f3a39e4d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 35446,
+      "sha256": "81a5a80a82ed9e6ec468855e07148bfa5aa299ffbc5c470e65f959b08189587e"
+    },
+    {
+      "id": "spinosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/spinosaurus-egg.webp",
+      "generatedOriginal": "exec-f24f886d-7890-4ec3-a621-5d9939ff203d.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 37490,
+      "sha256": "1b92da7eab4935484e98e1dc9c4f602820979f62f95082480fcc30b7394f22a7"
+    },
+    {
+      "id": "argentinosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/argentinosaurus-egg.webp",
+      "generatedOriginal": "exec-155d85f9-561c-4b3b-bed8-e47b701e5a31.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 45838,
+      "sha256": "34e5cbfd6982db959c141d61f84e08e185101a12f27aba9cc3eb4c57ba0a732b"
+    },
+    {
+      "id": "tyrannosaurus-egg",
+      "stage": "egg",
+      "file": "public/art/rewards/dinosaurs/tyrannosaurus-egg.webp",
+      "generatedOriginal": "exec-af3743be-912d-41db-967b-02b128b8fb47.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 35638,
+      "sha256": "735380c773088b4b6d0c09562c3b2332af133feca187ed619fe39238225a4f86"
+    }
+  ]
+}

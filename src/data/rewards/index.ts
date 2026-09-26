@@ -2,12 +2,13 @@ import { FOOTBALL } from './football'
 import { GARDEN } from './garden'
 import { POKEMON } from './pokemon'
 import { ANIMALS } from './animals'
+import { DINOSAURS } from './dinosaurs'
 import type { RewardKind, RewardStage, RewardTheme, ThemeId } from './types'
 
 export type { RewardKind, RewardStage, RewardTheme, ThemeId } from './types'
 
 /** In picker order. The garden comes first because it's the default. */
-export const THEMES: RewardTheme[] = [GARDEN, FOOTBALL, POKEMON, ANIMALS]
+export const THEMES: RewardTheme[] = [GARDEN, FOOTBALL, POKEMON, ANIMALS, DINOSAURS]
 
 export const DEFAULT_THEME: ThemeId = 'garden'
 

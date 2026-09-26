@@ -1,6 +1,6 @@
 /**
  * A reward theme is the thing coins buy and lessons grow: a garden of plants, a
- * squad of footballers, a team of Pokémon or animal friends. The mechanics are identical across
+ * squad of footballers, a team of Pokémon, animal friends or dinosaurs. The mechanics are identical across
  * themes — buy something, and every completed lesson moves it up one stage —
  * only the art and the words change.
  *
@@ -8,7 +8,7 @@
  * nothing is generated at runtime.
  */
 
-export type ThemeId = 'garden' | 'football' | 'pokemon' | 'animals'
+export type ThemeId = 'garden' | 'football' | 'pokemon' | 'animals' | 'dinosaurs'
 
 export type RewardStage = {
   /** Unique within the theme. For the garden it's the emoji itself. */
