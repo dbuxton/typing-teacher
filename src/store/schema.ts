@@ -6,7 +6,7 @@ import { DEFAULT_THEME, isThemeId, type ThemeId } from '../data/rewards'
  * `migrate`, and old saves keep working.
  */
 
-export const SAVE_VERSION = 3
+export const SAVE_VERSION = 4
 // The storage key is deliberately NOT versioned alongside SAVE_VERSION — the key
 // is where the save lives, the version is what shape it's in. Changing the key
 // would orphan every existing save instead of migrating it.
@@ -27,8 +27,22 @@ export type SpellingProgress = {
   timesWrong: number
 }
 
+export type PracticeAnswer = {
+  kind: 'drill' | 'word' | 'sentence'
+  text: string
+  correct: boolean
+}
+
+/** Recent typing material and the small queue of items to revisit later. */
+export type PracticeProgress = Omit<PracticeAnswer, 'correct'> & {
+  lastSeenAt: number
+  /** Lesson number, or null when no review is needed. */
+  dueAt: number | null
+  cleanReviews: number
+}
+
 /**
- * One collected reward: a plant, a player or a Pokémon, depending on the
+ * One collected reward: a plant, player, Pokémon or animal, depending on the
  * profile's theme. (Named for the garden, which was the only theme in v1/v2.)
  */
 export type Plant = {
@@ -80,7 +94,7 @@ export type Profile = {
   locale: 'en-GB' | 'en-US'
   createdAt: string
   /**
-   * What coins buy: a garden, a football squad, or Pokémon. Chosen when the
+   * What coins buy: plants, footballers, Pokémon or animals. Chosen when the
    * profile is created and fixed after that.
    */
   theme: ThemeId
@@ -123,6 +137,7 @@ export type Profile = {
   /** Per-level ability, keyed by level id. */
   levelStats: Record<number, LevelStat>
   spelling: SpellingProgress[]
+  practice: PracticeProgress[]
   /** Most recent lessons, newest last. Capped to keep the save small. */
   history: LessonResult[]
 }
@@ -170,6 +185,7 @@ export function makeProfile(name: string, avatar: string, theme: ThemeId = DEFAU
     perKeyStats: {},
     levelStats: {},
     spelling: [],
+    practice: [],
     history: [],
   }
 }
@@ -224,6 +240,7 @@ function migrateProfile(profile: Partial<Profile>, version: number): Partial<Pro
   let working = profile
   if (version < 2) working = v1ToV2(working as V1Profile)
   if (version < 3) working = v2ToV3(working)
+  if (version < 4) working = { ...working, practice: [] }
   return working
 }
 
@@ -313,6 +330,7 @@ function fillProfileDefaults(p: Partial<Profile>): Profile {
     perKeyStats: p.perKeyStats ?? {},
     levelStats: p.levelStats ?? {},
     spelling: p.spelling ?? [],
+    practice: p.practice ?? [],
     badges: p.badges ?? [],
     garden: p.garden ?? [],
     history: p.history ?? [],

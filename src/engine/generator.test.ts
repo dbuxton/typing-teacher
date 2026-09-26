@@ -4,10 +4,96 @@ import { MIN_LESSON_ITEMS } from './adaptive'
 import { LEVELS, isTypeable, getLevel, SPELLING_STARTS_AT_LEVEL } from '../data/curriculum'
 import { SPELLING_WORDS } from '../data/spellingWords'
 import { makeProfile } from '../store/schema'
+import { rememberPractice } from './practice'
+import type { LessonItem } from './generator'
+import { applyResults } from './srs'
 
 const profile = makeProfile('Test', '🦊')
 
 describe('lesson generation', () => {
+  it('keeps prolonged practice varied, complete and typeable through many difficult rounds', () => {
+    for (const level of LEVELS) {
+      let kid = { ...makeProfile('Keep going', '🦉'), difficulty: 0 }
+      for (let round = 1; round <= 30; round++) {
+        const items = generateLesson(kid, level.id, round)
+        expect(items).toHaveLength(Math.min(6, level.itemCount))
+        expect(lessonIsTypeable(items, level.id)).toBe(true)
+        expect(items.filter(item => item.review).length).toBeLessThanOrEqual(1)
+        expect(new Set(items.map(item => item.text)).size).toBe(items.length)
+        if (level.id > 1) expect(items.filter(item => item.kind === 'drill')).toHaveLength(2)
+        const answers = items.flatMap(item => item.kind === 'spelling' ? [] : [{ kind: item.kind, text: item.text, correct: false }])
+        kid = {
+          ...kid, lessonsCompleted: round,
+          practice: rememberPractice(kid.practice, answers, round),
+          spelling: applyResults(kid.spelling, items.filter(item => item.kind === 'spelling').map(item => ({ word: item.text, correct: false })), round),
+        }
+      }
+    }
+  })
+
+  function finish(items: LessonItem[], lessonNumber: number, correct = false) {
+    return rememberPractice([], items.filter(item => item.kind !== 'spelling').map(item => ({
+      kind: item.kind as 'drill' | 'word' | 'sentence', text: item.text, correct,
+    })), lessonNumber)
+  }
+
+  it('uses fresh patterns on a repeated first level, even with the same random seed', () => {
+    for (let seed = 0; seed < 40; seed++) {
+      const first = generateLesson(profile, 1, seed)
+      const next = generateLesson({ ...profile, lessonsCompleted: 1, practice: finish(first, 1) }, 1, seed)
+      expect(next.some(item => first.some(previous => previous.text === item.text))).toBe(false)
+      expect(new Set(next.map(item => item.label)).size).toBeGreaterThanOrEqual(4)
+      expect(lessonIsTypeable(next, 1)).toBe(true)
+    }
+  })
+
+  it('gives failed words a gap, then brings back at most one in an otherwise fresh mix', () => {
+    const practice = rememberPractice([], ['flask', 'dad', 'sad', 'fall'].map(text => ({ kind: 'word', text, correct: false })), 1)
+    const between = generateLesson({ ...profile, practice, lessonsCompleted: 1 }, 2, 1)
+    expect(between.some(item => practice.some(miss => item.text === miss.text))).toBe(false)
+    const due = generateLesson({ ...profile, practice, lessonsCompleted: 2 }, 2, 1)
+    expect(due.filter(item => item.review)).toHaveLength(1)
+    expect(due.filter(item => practice.some(miss => item.text === miss.text))).toHaveLength(1)
+    expect(due).toHaveLength(6)
+  })
+
+  it('remembers typing misses across levels but excludes locked keys when returning to an easier level', () => {
+    const practice = rememberPractice([], [{ kind: 'word', text: 'flask', correct: false }], 1)
+    const progressed = { ...profile, practice, lessonsCompleted: 2 }
+    expect(generateLesson(progressed, 4, 1).some(item => item.text === 'flask' && item.review)).toBe(true)
+    expect(generateLesson(progressed, 1, 1).some(item => item.text === 'flask')).toBe(false)
+  })
+
+  it('covers every new key even while interleaving earlier words', () => {
+    for (const level of LEVELS) {
+      const items = generateLesson({ ...profile, difficulty: 0 }, level.id, 2)
+      for (const key of level.newKeys) {
+        expect(key === 'Shift' ? /[A-Z]/.test(items[0].text) : items[0].text.includes(key), `level ${level.id}, ${key}`).toBe(true)
+      }
+    }
+  })
+
+  it('still exercises Shift when all letters are familiar and only punctuation is weak', () => {
+    const perKeyStats = Object.fromEntries(getLevel(11).allKeys.map(key => [key, { attempts: 20, errors: key === ',' ? 10 : 0 }]))
+    expect(generateLesson({ ...profile, perKeyStats }, 11, 1)[0].text).toMatch(/[A-Z]/)
+  })
+
+  it('can revisit a trail of short words without requiring a higher difficulty', () => {
+    const practice = rememberPractice([], [{ kind: 'word', text: 'dad asks', correct: false }], 1)
+    expect(generateLesson({ ...profile, difficulty: 0, lessonsCompleted: 2, practice }, 2, 1))
+      .toContainEqual(expect.objectContaining({ text: 'dad asks', review: true }))
+  })
+
+  it('does not repeat words within a lesson and uses real sentences on the final level', () => {
+    for (const level of LEVELS) {
+      const items = generateLesson({ ...profile, difficulty: 1 }, level.id, 10)
+      expect(new Set(items.map(item => item.text)).size, `level ${level.id}`).toBe(items.length)
+    }
+    const final = generateLesson({ ...profile, difficulty: 1 }, 12, 10)
+    expect(final.filter(item => item.kind === 'sentence').length).toBeGreaterThan(0)
+    expect(final.filter(item => item.kind === 'drill')).toHaveLength(2)
+  })
+
   // The invariant that matters most: asking a beginner for a letter they have
   // never been taught is the fastest way to send them looking at their hands.
   it('never asks for a character the level has not taught', () => {

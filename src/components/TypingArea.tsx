@@ -70,7 +70,7 @@ function TypingAreaImpl({ item, charStates, hidden, mask = false, cursor = 0 }: 
 
 export const TypingArea = memo(TypingAreaImpl)
 
-export function ItemKindLabel({ kind }: { kind: LessonItem['kind'] }) {
+export function ItemKindLabel({ kind, label: customLabel }: { kind: LessonItem['kind']; label?: string }) {
   const labels: Record<LessonItem['kind'], { text: string; className: string }> = {
     drill: { text: '🤸 Warm-up', className: 'bg-slate-100 text-slate-600' },
     word: { text: '✏️ Word', className: 'bg-sky-100 text-sky-700' },
@@ -80,7 +80,7 @@ export function ItemKindLabel({ kind }: { kind: LessonItem['kind'] }) {
   const label = labels[kind]
   return (
     <span className={`rounded-full px-3 py-1 text-xs font-bold ${label.className}`}>
-      {label.text}
+      {customLabel ?? label.text}
     </span>
   )
 }

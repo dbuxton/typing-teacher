@@ -45,6 +45,12 @@ export function Results({ profile }: { profile: Profile }) {
         </div>
       )}
 
+      {result.levelJump === 0 && (
+        <p className="max-w-sm text-center text-sm text-slate-600">
+          Same keys, a fresh mix next time. Tricky bits will come back after a little break.
+        </p>
+      )}
+
       {/* 1. Eyes up — the headline */}
       {result.sneakyStarsTotal > 0 && (
         <div className="w-full rounded-2xl bg-amber-50 p-5 text-center ring-2 ring-amber-200">
@@ -132,7 +138,7 @@ export function Results({ profile }: { profile: Profile }) {
               Yes, Level {result.offerEasierLevel}
             </BigButton>
             <BigButton tone="secondary" onClick={() => playLevel(result.levelId)}>
-              No, stay here
+              Fresh mix on this level
             </BigButton>
           </div>
         </div>
@@ -140,7 +146,9 @@ export function Results({ profile }: { profile: Profile }) {
 
       <div className="mt-2 flex flex-wrap justify-center gap-3">
         {result.offerEasierLevel === null && (
-          <BigButton onClick={() => setScreen('lesson')}>Another go!</BigButton>
+          <BigButton onClick={() => setScreen('lesson')}>
+            {result.levelJump > 0 ? 'Try the next level!' : 'Try a fresh mix!'}
+          </BigButton>
         )}
         <BigButton tone="secondary" onClick={() => setScreen('map')}>
           Lesson map

@@ -138,7 +138,7 @@ export const BADGES: Badge[] = [
     id: 'full-garden',
     name: 'Garden Party',
     emoji: '🌻',
-    how: 'Fill every plot in the garden',
+    how: 'Collect 18 plants',
     themed: 'full',
     earned: (p) => p.garden.length >= themeById(p.theme).slots,
   },

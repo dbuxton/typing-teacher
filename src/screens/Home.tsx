@@ -111,7 +111,7 @@ export function Home() {
           */}
           <div className="w-full">
             <span className="mb-2 block text-sm font-bold text-slate-600">Pick your prizes</span>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {THEMES.map((option) => (
                 <button
                   key={option.id}

@@ -5,14 +5,14 @@ import { type Rng, shuffle } from './rng'
 /**
  * Leitner spaced repetition for spelling words.
  *
- * Box 0 is "new or just got it wrong" and comes back next lesson. Each correct
+ * Box 0 is "new or just got it wrong" and returns after a lesson's breathing room. Each correct
  * answer promotes a word one box and pushes it further out; a wrong answer
  * drops it straight back to box 0. Intervals are measured in lessons, not days,
  * because a kid might do six lessons on Saturday and none until Wednesday.
  */
 
 /** Lessons to wait before showing a word again, indexed by box. */
-export const BOX_INTERVALS = [1, 2, 4, 8, 16]
+export const BOX_INTERVALS = [2, 2, 4, 8, 16]
 export const MAX_BOX = BOX_INTERVALS.length - 1
 
 export function intervalForBox(box: number): number {
@@ -81,18 +81,8 @@ export function selectSpellingWords(
     if (!out.includes(word)) out.push(word)
   }
 
-  // Still short (a new profile on a low level, or everything scheduled far out)?
-  // Top up with the least recently mastered words rather than returning fewer.
-  if (out.length < count) {
-    const filler = spelling
-      .filter((s) => availableWords.has(s.word) && !out.includes(s.word))
-      .sort((a, b) => a.dueAt - b.dueAt)
-      .map((s) => s.word)
-    for (const word of filler) {
-      if (out.length >= count) break
-      out.push(word)
-    }
-  }
+  // Respect the gap even when the bank is small. The lesson generator fills
+  // spare places with typing practice instead of pulling a review forward.
   return out
 }
 

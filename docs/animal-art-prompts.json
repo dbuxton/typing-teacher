@@ -1,0 +1,492 @@
+{
+  "model": "gemini-3.1-flash-image",
+  "background": "solid white for local background removal",
+  "jobs": [
+    {
+      "id": "robin",
+      "name": "Robin",
+      "group": "Birds",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A European robin with an orange-red breast and face, olive-brown back, creamy belly, delicate brown legs and a tiny pointed beak, standing upright with a curious head tilt. Two legs, two folded wings, one tail.",
+      "animalId": "robin",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "barn-owl",
+      "name": "Barn owl",
+      "group": "Birds",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A barn owl with a heart-shaped ivory facial disc, warm golden-buff wings with small speckles, white fluffy chest and dark gentle eyes, standing with wings folded and feet visible.",
+      "animalId": "barn-owl",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "puffin",
+      "name": "Puffin",
+      "group": "Birds",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: An Atlantic puffin, black back and crown, white face and belly, broad triangular orange-and-grey beak and orange webbed feet, standing cheerfully with two wings folded.",
+      "animalId": "puffin",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "kingfisher",
+      "name": "Kingfisher",
+      "group": "Birds",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A common kingfisher with jewel-blue back and wings, warm orange breast, a white throat patch and long straight pointed dark beak, perched in a natural standing pose without a branch or prop.",
+      "animalId": "kingfisher",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "flamingo",
+      "name": "Flamingo",
+      "group": "Birds",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A pink flamingo with a graceful curved neck, recognisable down-curved pale pink beak with black tip and long slender pink legs. A compact balanced standing pose, both legs visible and wings folded.",
+      "animalId": "flamingo",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "penguin",
+      "name": "Penguin",
+      "group": "Birds",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A friendly adult emperor penguin with black back and head, creamy white belly, warm yellow-orange neck patches, two short flippers and two broad dark feet. Upright cheerful pose.",
+      "animalId": "penguin",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "red-fox",
+      "name": "Red fox",
+      "group": "Mammals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A red fox with warm russet fur, black socks and ear tips, creamy muzzle and chest, and exactly one bushy white-tipped tail curled beside its body. Seated with four anatomically plausible paws and bright friendly eyes.",
+      "animalId": "red-fox",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "rabbit",
+      "name": "Rabbit",
+      "group": "Mammals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A soft chestnut-and-cream rabbit with two long upright ears, gentle dark eyes, whiskers, small pink nose and a tiny fluffy tail. Sitting with compact hindquarters and two forepaws visible.",
+      "animalId": "rabbit",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "hedgehog",
+      "name": "Hedgehog",
+      "group": "Mammals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A European hedgehog with warm brown and cream spines, a soft light-brown face, tiny dark button nose, round ears and four small feet. Three-quarter standing pose with a friendly curious expression.",
+      "animalId": "hedgehog",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "red-panda",
+      "name": "Red panda",
+      "group": "Mammals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A red panda with rusty-red fur, cream face markings, dark chocolate legs, small round ears and exactly one long fluffy ringed tail curved alongside the body. Sitting with a delighted gentle expression.",
+      "animalId": "red-panda",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "otter",
+      "name": "Otter",
+      "group": "Mammals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A Eurasian otter with sleek warm brown fur, pale cream throat, tiny rounded ears, expressive dark eyes, whiskers and one long tapering tail curved beside it. Seated naturally, forepaws held together, no props.",
+      "animalId": "otter",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "elephant",
+      "name": "Elephant",
+      "group": "Mammals",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A mature adult African elephant, clearly older and larger in proportions than the juvenile reference: a powerful broad body with a high shoulder line, a long trunk curving gently upward, two long smooth ivory tusks, very large broad ears with mature folds, thick column-like legs and warm grey wrinkled skin. Four legs correctly placed, two tusks, one trunk and one tail. Gentle wise expressive eyes, friendly face, three-quarter standing pose. This is a fully grown elephant, not a calf.",
+      "animalId": "elephant",
+      "stage": "adult",
+      "reference": "animals/elephant-juvenile"
+    },
+    {
+      "id": "tortoise",
+      "name": "Tortoise",
+      "group": "More animals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A land tortoise with an olive-and-honey domed shell divided into recognisable scutes, four short sturdy scaly legs, a gentle rounded greenish head and a short tail. Standing in a three-quarter view, no water.",
+      "animalId": "tortoise",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "tree-frog",
+      "name": "Tree frog",
+      "group": "More animals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A red-eyed tree frog with vivid green skin, large ruby-red eyes, yellow-and-blue side markings, pale belly and orange toe pads. Sitting naturally with four limbs tucked into a compact friendly pose.",
+      "animalId": "tree-frog",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "gecko",
+      "name": "Gecko",
+      "group": "More animals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A cheerful leopard gecko with warm golden-yellow skin, small dark rounded spots, four splayed legs, a plump curved tail and friendly dark eyes. Low three-quarter standing pose, entire tail and toes visible.",
+      "animalId": "gecko",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "seahorse",
+      "name": "Seahorse",
+      "group": "More animals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A golden-yellow seahorse in a graceful upright side-view pose, head turned very slightly toward the viewer. Recognisable long tubular snout, small friendly dark eye, crown-like coronet, delicate ridges and bony rings along its gently curved body, a small translucent dorsal fin, tiny pectoral fins near the head, and one single long tail coiled into a loose spiral. Natural seahorse anatomy: no legs, arms, hands or flippers. Its entire snout, crest and coiled tail are visible. Warm golden and soft amber colours; a charming, gently curious expression. The background is entirely solid white, with no water, bubbles, plants, rocks or objects.",
+      "animalId": "seahorse",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "octopus",
+      "name": "Octopus",
+      "group": "More animals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A friendly coral-orange octopus with a rounded mantle and two expressive eyes. Exactly eight arms form a compact open arrangement with gentle curls and neat pale suckers; keep each arm visually distinguishable. No extra limbs, props or water.",
+      "animalId": "octopus",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "butterfly",
+      "name": "Butterfly",
+      "group": "More animals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A monarch butterfly with exactly four orange wings, bold black veins and borders dotted with white, a slim black body, two antennae and six small legs. Symmetrical open-wing pose in a shallow three-quarter view, naturally elegant and friendly.",
+      "animalId": "butterfly",
+      "stage": "adult",
+      "reference": "pokemon/pikachu"
+    },
+    {
+      "id": "robin-baby",
+      "animalId": "robin",
+      "name": "Robin · Baby",
+      "group": "Birds",
+      "stage": "baby",
+      "reference": "animals/robin",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A very young European robin chick, a small fluffy round body with brown and cream speckled down, a broad short yellow gape at the beak, tiny folded wings and a stubby tail. It has not grown the adult orange breast. Standing safely with two delicate legs visible, looking curious, the unmistakable proportions of a baby bird."
+    },
+    {
+      "id": "robin-juvenile",
+      "animalId": "robin",
+      "name": "Robin · Juvenile",
+      "group": "Birds",
+      "stage": "juvenile",
+      "reference": "animals/robin",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile European robin, between chick and adult, with longer folded wings and a short developing tail. Speckled golden-brown feathers over its head and breast, cream belly, the adult orange-red breast has not developed yet. Slimmer and less fluffy than a hatchling, youthful larger head, two legs, a small dark pointed beak."
+    },
+    {
+      "id": "barn-owl-baby",
+      "animalId": "barn-owl",
+      "name": "Barn owl · Baby",
+      "group": "Birds",
+      "stage": "baby",
+      "reference": "animals/barn-owl",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby barn owl chick covered in soft creamy white down, a very round fluffy head and pear-shaped body, small developing heart-shaped facial disc and dark curious eyes. Tiny wing buds folded, two short feet visible, almost no tail. A sweet downy owlet, clearly younger than the reference."
+    },
+    {
+      "id": "barn-owl-juvenile",
+      "animalId": "barn-owl",
+      "name": "Barn owl · Juvenile",
+      "group": "Birds",
+      "stage": "juvenile",
+      "reference": "animals/barn-owl",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile barn owl with its heart-shaped ivory face established, a mix of creamy white juvenile fluff on the chest and golden-buff developing feathers on its folded wings. Slightly gangly adolescent proportions, less downy than a chick and smaller-headed than the baby. Two feet visible, short tail, gentle dark eyes."
+    },
+    {
+      "id": "puffin-baby",
+      "animalId": "puffin",
+      "name": "Puffin · Baby",
+      "group": "Birds",
+      "stage": "baby",
+      "reference": "animals/puffin",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby Atlantic puffin chick, a tiny puffling with fluffy smoky charcoal-grey down, a pale grey belly, a small narrow dark grey bill without the adult orange stripes, and little dark webbed feet. Two short folded wings, almost no tail, rounded baby proportions. No egg or nest."
+    },
+    {
+      "id": "puffin-juvenile",
+      "animalId": "puffin",
+      "name": "Puffin · Juvenile",
+      "group": "Birds",
+      "stage": "juvenile",
+      "reference": "animals/puffin",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile Atlantic puffin with short black feathered wings, a pale cream belly and a dusky grey face, its bill narrow and dark grey with only a faint muted orange beginning at the base. Adolescent proportions, longer than the downy chick, two webbed feet. No exaggerated adult bill colouring."
+    },
+    {
+      "id": "kingfisher-baby",
+      "animalId": "kingfisher",
+      "name": "Kingfisher · Baby",
+      "group": "Birds",
+      "stage": "baby",
+      "reference": "animals/kingfisher",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby common kingfisher chick, fluffy grey-blue upperparts, a pale buff chest with a little soft rusty down, a large head and a noticeably short broad dark beak. Very short folded wings and a stubby tail, two tiny dusky feet. Fully feathered enough to sit upright, warm and healthy, no nest."
+    },
+    {
+      "id": "kingfisher-juvenile",
+      "animalId": "kingfisher",
+      "name": "Kingfisher · Juvenile",
+      "group": "Birds",
+      "stage": "juvenile",
+      "reference": "animals/kingfisher",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile common kingfisher with developing teal-blue wings and head, a subdued rusty buff chest, a medium-length straight dark beak, short tail and two dusky brown feet. More feathered and sleek than a chick, less vividly coloured and shorter-billed than the adult reference."
+    },
+    {
+      "id": "flamingo-baby",
+      "animalId": "flamingo",
+      "name": "Flamingo · Baby",
+      "group": "Birds",
+      "stage": "baby",
+      "reference": "animals/flamingo",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby flamingo chick with a round body of fluffy pale grey-white down, short pink-grey legs and feet, a small mostly straight dark-tipped pale grey beak, and a short curved neck. Two legs on the ground, tiny folded wings, wide curious dark eyes. It is grey, not adult pink."
+    },
+    {
+      "id": "flamingo-juvenile",
+      "animalId": "flamingo",
+      "name": "Flamingo · Juvenile",
+      "group": "Birds",
+      "stage": "juvenile",
+      "reference": "animals/flamingo",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile flamingo, noticeably adolescent: long slender grey-pink legs, a developing curved neck, grey-white feathered body with faint blush-pink patches appearing on the folded wings, and a gently down-curved grey beak with a dark tip. Standing on two legs. Not fully pink yet."
+    },
+    {
+      "id": "penguin-baby",
+      "animalId": "penguin",
+      "name": "Penguin · Baby",
+      "group": "Birds",
+      "stage": "baby",
+      "reference": "animals/penguin",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby emperor penguin chick with a fluffy silver-grey round body, a dark charcoal cap, creamy white cheek patches, a short dark beak and tiny dark feet. Small short flippers close to its sides, charmingly plump downy chick proportions. No yellow adult neck marking."
+    },
+    {
+      "id": "penguin-juvenile",
+      "animalId": "penguin",
+      "name": "Penguin · Juvenile",
+      "group": "Birds",
+      "stage": "juvenile",
+      "reference": "animals/penguin",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile emperor penguin with a taller adolescent body, a mixture of soft grey down and emerging dark slate back and flipper feathers, pale belly and mostly grey-white neck with no strong adult golden patch. Two dark feet, short beak, two flippers folded by its sides, visibly midway between the fluffy chick and sleek adult."
+    },
+    {
+      "id": "red-fox-baby",
+      "animalId": "red-fox",
+      "name": "Red fox · Baby",
+      "group": "Mammals",
+      "stage": "baby",
+      "reference": "animals/red-fox",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A tiny red fox cub, sitting with oversized ears and paws, a round fluffy head and a short bushy tail with a small cream tip. Soft darker brown-grey baby fur with warm rusty cheeks and a cream chin, beginning dark paws. Young baby proportions, four anatomically correct legs in a seated pose."
+    },
+    {
+      "id": "red-fox-juvenile",
+      "animalId": "red-fox",
+      "name": "Red fox · Juvenile",
+      "group": "Mammals",
+      "stage": "juvenile",
+      "reference": "animals/red-fox",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile red fox in an alert seated pose, with noticeably lankier legs, oversized ears, a narrower adolescent body, developing rusty red coat and cream chest. Medium fluffy white-tipped tail curled beside it, dark socks on the paws. Less round than a cub, not yet the mature adult proportions of the reference."
+    },
+    {
+      "id": "rabbit-baby",
+      "animalId": "rabbit",
+      "name": "Rabbit · Baby",
+      "group": "Mammals",
+      "stage": "baby",
+      "reference": "animals/rabbit",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A tiny baby rabbit kit, eyes open, round fluffy tan-brown body and soft cream muzzle, short upright ears that are much shorter than an adult rabbit’s ears, little paws tucked close and a tiny rounded tail. Seated pose, large gentle dark eyes, no accessories."
+    },
+    {
+      "id": "rabbit-juvenile",
+      "animalId": "rabbit",
+      "name": "Rabbit · Juvenile",
+      "group": "Mammals",
+      "stage": "juvenile",
+      "reference": "animals/rabbit",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile rabbit, a young bunny with medium-length upright ears, slimmer growing body, warm brown coat and cream muzzle and chest, proportionately large hind paws and a small fluffy tail. Seated three-quarter pose matching the reference, clearly larger and less round than a kit but not yet full grown."
+    },
+    {
+      "id": "hedgehog-baby",
+      "animalId": "hedgehog",
+      "name": "Hedgehog · Baby",
+      "group": "Mammals",
+      "stage": "baby",
+      "reference": "animals/hedgehog",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby hedgehog hoglet, tiny and round with very short soft-looking cream-and-light-brown spines, a fluffy pale face, little rounded ears, a short muzzle with a shiny dark nose and four small pink-brown feet. Warm, healthy and sweet; no adult-long spikes."
+    },
+    {
+      "id": "hedgehog-juvenile",
+      "animalId": "hedgehog",
+      "name": "Hedgehog · Juvenile",
+      "group": "Mammals",
+      "stage": "juvenile",
+      "reference": "animals/hedgehog",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile hedgehog with growing brown-and-cream spines that are longer than a baby’s but shorter and less dense than the adult reference. A slightly elongated adolescent body, soft beige face, dark nose and small rounded ears, four feet visible in a gentle standing pose."
+    },
+    {
+      "id": "red-panda-baby",
+      "animalId": "red-panda",
+      "name": "Red panda · Baby",
+      "group": "Mammals",
+      "stage": "baby",
+      "reference": "animals/red-panda",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A tiny baby red panda cub with a plush round head, small rounded ears, a fluffy pale grey-russet coat, soft white face markings and a short thick tail with faint rings. Round baby proportions, little dark paws, sitting sweetly. Clear red panda identity, not a giant panda."
+    },
+    {
+      "id": "red-panda-juvenile",
+      "animalId": "red-panda",
+      "name": "Red panda · Juvenile",
+      "group": "Mammals",
+      "stage": "juvenile",
+      "reference": "animals/red-panda",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile red panda, a lanky playful adolescent with developing rich russet fur, cream-white cheek mask, dark legs and a medium-length thick ringed tail curving up beside it. Proportionately large ears and paws, sitting in a relaxed three-quarter pose. Less fluffy and round than a cub, less full-bodied than the adult."
+    },
+    {
+      "id": "otter-baby",
+      "animalId": "otter",
+      "name": "Otter · Baby",
+      "group": "Mammals",
+      "stage": "baby",
+      "reference": "animals/otter",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby Eurasian otter pup with a round fluffy head, short soft chocolate-brown fur, a cream chin and chest, small rounded ears, short whiskers, oversized little paws and a short tapered tail. Sitting upright with its forepaws resting together, young plump baby proportions."
+    },
+    {
+      "id": "otter-juvenile",
+      "animalId": "otter",
+      "name": "Otter · Juvenile",
+      "group": "Mammals",
+      "stage": "juvenile",
+      "reference": "animals/otter",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile Eurasian otter, slender and youthful with a longer body, warm brown sleek fur, cream muzzle and throat, developing whiskers and a medium-length tapering tail curving beside it. Upright seated pose, forepaws together, adolescent proportions between a round pup and a mature otter."
+    },
+    {
+      "id": "elephant-baby",
+      "animalId": "elephant",
+      "name": "Elephant · Baby",
+      "group": "Mammals",
+      "stage": "baby",
+      "reference": "animals/elephant-juvenile",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A very young African elephant calf with a round compact body, oversized floppy ears, a short playful trunk curved up at the tip, slightly wobbly-looking but stable four short legs, warm grey skin with gentle wrinkles and a tiny tail. No tusks yet. Large friendly eyes, clear baby proportions."
+    },
+    {
+      "id": "tortoise-baby",
+      "animalId": "tortoise",
+      "name": "Tortoise · Baby",
+      "group": "More animals",
+      "stage": "baby",
+      "reference": "animals/tortoise",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby land tortoise hatchling, a tiny round domed shell with delicate soft olive-gold scute markings, a proportionately large friendly head, four little sturdy legs and a tiny pointed tail. Shell not flattened and no flippers. The animal is complete and out of its egg."
+    },
+    {
+      "id": "tortoise-juvenile",
+      "animalId": "tortoise",
+      "name": "Tortoise · Juvenile",
+      "group": "More animals",
+      "stage": "juvenile",
+      "reference": "animals/tortoise",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile land tortoise with a medium-sized olive-gold domed shell and clearly developing scute rings, head and neck more extended than a hatchling, four growing sturdy scaly legs and a short tail. Slightly elongated adolescent shell, less bulky than the adult reference."
+    },
+    {
+      "id": "tree-frog-baby",
+      "animalId": "tree-frog",
+      "name": "Tree frog · Baby",
+      "group": "More animals",
+      "stage": "baby",
+      "reference": "animals/tree-frog",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A healthy early tree-frog tadpole, one plump rounded olive-brown body with two friendly dark eyes near the front and one long gently curved translucent swimming tail with a delicate fin. No legs yet, no arms, no frog feet. Clearly a tadpole rather than a miniature frog, isolated on plain white without water or bubbles."
+    },
+    {
+      "id": "tree-frog-juvenile",
+      "animalId": "tree-frog",
+      "name": "Tree frog · Juvenile",
+      "group": "More animals",
+      "stage": "juvenile",
+      "reference": "animals/tree-frog",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A red-eyed tree frog froglet just completing metamorphosis: small bright green head and body, developing red-orange eyes, all four delicate green limbs with tiny orange toe pads, and one short tapering remnant tadpole tail still visible behind it. A youthful crouching pose with the body much smaller and slimmer than the adult reference, pale belly. The small tail is essential."
+    },
+    {
+      "id": "gecko-baby",
+      "animalId": "gecko",
+      "name": "Gecko · Baby",
+      "group": "More animals",
+      "stage": "baby",
+      "reference": "animals/gecko",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby leopard gecko hatchling with a short plump body, a proportionately large head and dark friendly eyes, four tiny legs, and a short thick tail. Distinct broad chocolate-brown bands across a pale golden-yellow body and tail rather than the adult spots. Entire tail visible in a loose curve."
+    },
+    {
+      "id": "gecko-juvenile",
+      "animalId": "gecko",
+      "name": "Gecko · Juvenile",
+      "group": "More animals",
+      "stage": "juvenile",
+      "reference": "animals/gecko",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile leopard gecko, a growing adolescent with a slightly longer slender golden-yellow body and a mix of broken dark bands and emerging brown spots. Four small legs with toes, a medium thick tail with fading bands curving behind it, friendly dark eyes. Visibly between a banded hatchling and the fully spotted adult reference."
+    },
+    {
+      "id": "seahorse-baby",
+      "animalId": "seahorse",
+      "name": "Seahorse · Baby",
+      "group": "More animals",
+      "stage": "baby",
+      "reference": "animals/seahorse",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby golden seahorse fry, tiny and delicate with a proportionately large head and eye, a short tubular snout, a short slim body with subtle soft ridges, a very small coronet and one gently curled thin tail. Tiny translucent fins near the head and back. Upright side view, pale honey-gold colour. No arms or legs."
+    },
+    {
+      "id": "seahorse-juvenile",
+      "animalId": "seahorse",
+      "name": "Seahorse · Juvenile",
+      "group": "More animals",
+      "stage": "juvenile",
+      "reference": "animals/seahorse",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile golden seahorse, an adolescent with a medium-length snout, developing coronet, clear but modest bony body rings and one long slim tail curled loosely into a spiral. Warm golden-yellow body, still slimmer and with smaller crest than the adult reference, tiny translucent fins. Upright side view, no arms or legs."
+    },
+    {
+      "id": "octopus-baby",
+      "animalId": "octopus",
+      "name": "Octopus · Baby",
+      "group": "More animals",
+      "stage": "baby",
+      "reference": "animals/octopus",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A baby octopus hatchling, a small round translucent peach-pink mantle, proportionately large gentle dark eyes, and exactly eight short delicate arms arranged in clear loose curls. Tiny pale suckers, compact baby proportions, no extra arms or fins. Each of the eight arm tips must be visibly separate. Friendly, calm expression."
+    },
+    {
+      "id": "octopus-juvenile",
+      "animalId": "octopus",
+      "name": "Octopus · Juvenile",
+      "group": "More animals",
+      "stage": "juvenile",
+      "reference": "animals/octopus",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A juvenile octopus, an adolescent with a small oval coral-orange mantle and exactly eight medium-length arms arranged in clearly separated graceful curls. Developing pale suckers and subtle mottling. A slimmer body and shorter arms than the adult reference, less round and translucent than the hatchling. Every arm tip visible, no extra limbs."
+    },
+    {
+      "id": "butterfly-baby",
+      "animalId": "butterfly",
+      "name": "Butterfly · Baby",
+      "group": "More animals",
+      "stage": "baby",
+      "reference": "animals/butterfly",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A monarch butterfly caterpillar at its larval stage, a friendly gently arched caterpillar with a segmented soft body bearing the distinctive alternating black, creamy-white and yellow bands of a real monarch caterpillar. Small dark head, a pair of thin black feeler-like filaments near the front and another shorter pair near the rear, small true legs near the head and rounded prolegs along the underside. Entire caterpillar seen from a three-quarter side view. No wings, no butterfly body, no plant or leaf."
+    },
+    {
+      "id": "butterfly-juvenile",
+      "animalId": "butterfly",
+      "name": "Butterfly · Juvenile",
+      "group": "More animals",
+      "stage": "juvenile",
+      "reference": "animals/butterfly",
+      "prompt": "Use case: illustration-story. Generate one animal growth-stage illustration for a children's typing-game collection. Use the attached illustration as the reference for this exact species and its hand-painted 3D storybook style: softly sculpted forms, subtle painted texture, warm gentle studio lighting and friendly expressive eyes. Render the specifically described life stage with biologically recognisable age differences; do not simply resize the reference. Keep colour, pose direction and personality coherent with its older form.\n\nExactly one subject, full body, centred in a square image with at least 8% clear margin around every part. Keep all limbs, tails, ears, wings and antennae in frame, with correct anatomy. The subject occupies about 70–80% of the canvas. Completely plain solid WHITE background, no transparency checkerboard, no scenery, ground plane, cast shadow, text, labels, numbers, border, props, clothing, accessories, logo, additional creatures or contact-sheet panels. Soft premium illustration readable at small sizes. Produce one image only.\n\nSubject: A monarch butterfly chrysalis, one smooth jade-green pupa with the recognisable elegant teardrop shape, subtle folded-wing contours beneath the casing, and a delicate dotted metallic-gold band near the upper third. A small dark attachment tip at the top, pointed lower end. Suspended alone vertically in the centre on plain white, with no leaf, twig, string or support visible. No eyes, face, legs, caterpillar or butterfly wings outside the casing. A natural chrysalis illustrated with the same warm softly painted finish as the reference."
+    },
+    {
+      "id": "elephant-juvenile",
+      "name": "Elephant · Juvenile",
+      "group": "Mammals",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: A friendly young African elephant with warm grey softly wrinkled skin, large fan-shaped ears, exactly one trunk lifted gently in a small curve, four thick legs and one small tail. Three-quarter standing pose, no tusks.",
+      "animalId": "elephant",
+      "stage": "juvenile",
+      "reference": "pokemon/pikachu"
+    }
+  ]
+}

@@ -57,6 +57,7 @@ export function Lesson({ profile }: { profile: Profile }) {
         sneakyStarsCaught: state.sneakyStarsCaught,
         sneakyStarsTotal: state.sneakyStarsShown,
         spellingAnswers: state.spellingAnswers,
+        practiceAnswers: state.practiceAnswers,
         // Accumulated across the whole lesson by the session reducer. Attempts
         // as well as errors, so weak keys are measured as a rate.
         keyErrors: state.keyErrors,
@@ -123,7 +124,7 @@ export function Lesson({ profile }: { profile: Profile }) {
       </div>
 
       <div className="flex w-full items-center justify-between">
-        <ItemKindLabel kind={item.kind} />
+        <ItemKindLabel kind={item.kind} label={item.label} />
         {profile.sneakyStars && (
           <CatchKeyHint catchKey={catchKey} caught={state.sneakyStarsCaught} />
         )}

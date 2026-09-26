@@ -37,6 +37,27 @@ body {
   animation: pulse-key 1s ease-in-out infinite;
 }
 
+/* Include both Shift keys and staggered rows within the lesson on small screens. */
+.typing-keyboard {
+  --key-size: clamp(18px, calc((100vw - 48px) / 15), 48px);
+  gap: calc(var(--key-size) / 8);
+}
+
+.keyboard-row {
+  gap: calc(var(--key-size) / 8);
+}
+
+.keyboard-key {
+  width: var(--key-size);
+  height: var(--key-size);
+  font-size: clamp(12px, calc(var(--key-size) * 0.375), 18px);
+}
+
+.keyboard-shift {
+  width: calc(var(--key-size) * 4 / 3);
+  height: var(--key-size);
+}
+
 @keyframes star-drift {
   0% { transform: translateX(-10%) translateY(0) rotate(-10deg); opacity: 0; }
   15% { opacity: 1; }

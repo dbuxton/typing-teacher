@@ -1,4 +1,4 @@
-"""Remove backgrounds locally and export the Pokémon as transparent WebP assets."""
+"""Remove backgrounds locally and export reward art as transparent WebP assets."""
 import argparse
 import json
 import os
@@ -12,18 +12,26 @@ os.environ.setdefault("NUMBA_CACHE_DIR", str(WORK / "numba-cache"))
 os.environ.setdefault("OMP_NUM_THREADS", "4")
 
 from PIL import Image, ImageOps
+from onnxruntime import SessionOptions
 from rembg import new_session, remove
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--theme", choices=["pokemon", "animals", "football"], default="pokemon")
     parser.add_argument("--only", help="Comma-separated character ids")
-    parser.add_argument("--input", type=Path, default=WORK / "originals")
-    parser.add_argument("--output", type=Path, default=ROOT / "public/art/rewards/pokemon")
+    parser.add_argument("--available", action="store_true", help="Prepare only originals already generated")
+    parser.add_argument("--input", type=Path)
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--model", choices=["birefnet-general-lite", "birefnet-general"], default="birefnet-general-lite")
     args = parser.parse_args()
-    ids = [job["id"] for job in json.loads((ROOT / "docs/pokemon-character-prompts.json").read_text())["jobs"]]
-    ids.insert(ids.index("raichu"), "pikachu")
+    work = WORK if args.theme == "pokemon" else WORK / args.theme
+    args.input = args.input or work / "originals"
+    args.output = args.output or ROOT / "public/art/rewards" / args.theme
+    manifest = {"animals": "animal-art-prompts.json", "football": "football-art-prompts.json", "pokemon": "pokemon-character-prompts.json"}[args.theme]
+    ids = [job["id"] for job in json.loads((ROOT / "docs" / manifest).read_text())["jobs"]]
+    if args.theme == "pokemon":
+        ids.insert(ids.index("raichu"), "pikachu")
     if args.only:
         selected = set(args.only.split(","))
         if selected - set(ids):
@@ -33,8 +41,10 @@ def main():
     for id in ids:
         sources[id] = next((args.input / f"{id}{ext}" for ext in [".png", ".jpg", ".webp"] if (args.input / f"{id}{ext}").exists()), None)
         if sources[id] is None:
-            parser.error(f"Missing original for {id}")
-    cutouts = WORK / "cutouts"
+            if not args.available:
+                parser.error(f"Missing original for {id}")
+    ids = [id for id in ids if sources[id] is not None]
+    cutouts = work / "cutouts"
     cutouts.mkdir(parents=True, exist_ok=True)
     args.output.mkdir(parents=True, exist_ok=True)
     session = None
@@ -46,7 +56,11 @@ def main():
         else:
             if session is None:
                 print("Loading the local background-removal model…", flush=True)
-                session = new_session(args.model, providers=["CPUExecutionProvider"])
+                # Keep long batches from retaining a multi-gigabyte allocation arena.
+                options = SessionOptions()
+                options.enable_cpu_mem_arena = False
+                options.enable_mem_pattern = False
+                session = new_session(args.model, sess_opts=options, providers=["CPUExecutionProvider"])
             print(f"Removing background: {id}", flush=True)
             original = ImageOps.exif_transpose(Image.open(sources[id])).convert("RGB")
             cutout = remove(original, session=session, decontaminate=True).convert("RGBA")
