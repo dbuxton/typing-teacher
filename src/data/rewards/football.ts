@@ -5,9 +5,8 @@ import type { RewardKind, RewardTheme } from './types'
  * goes up a tier, from Academy to Legend.
  *
  * The cards use individual illustrated portraits, shirts in club colours, and
- * live text for each player's name, position and club. Every player costs the
- * same: a price list would rank real women against each other, and a kid's
- * favourite should never be "the cheap one".
+ * live text for each player's name, position and club. Each player has a fixed
+ * coin price, mixing quick signings with longer savings goals.
  *
  * Clubs as of the 2025–26 season. Players move; if a kid points out that
  * someone's shirt is wrong, this list is the only place to fix it.
@@ -34,37 +33,36 @@ export type Player = {
   fullName: string
   /** What goes on the card — usually the surname, as on the back of a shirt. */
   cardName: string
+  cost: number
   position: Position
   club: Club
 }
 
 /** The original starting eleven, plus seven more players to fill an 18-player squad. */
 export const PLAYERS: Player[] = [
-  { id: 'hampton', fullName: 'Hannah Hampton', cardName: 'Hampton', position: 'GK', club: CLUBS.chelsea },
-  { id: 'bronze', fullName: 'Lucy Bronze', cardName: 'Bronze', position: 'DEF', club: CLUBS.chelsea },
-  { id: 'bright', fullName: 'Millie Bright', cardName: 'Bright', position: 'DEF', club: CLUBS.chelsea },
-  { id: 'williamson', fullName: 'Leah Williamson', cardName: 'Williamson', position: 'DEF', club: CLUBS.arsenal },
-  { id: 'greenwood', fullName: 'Alex Greenwood', cardName: 'Greenwood', position: 'DEF', club: CLUBS.city },
-  { id: 'walsh', fullName: 'Keira Walsh', cardName: 'Walsh', position: 'MID', club: CLUBS.chelsea },
-  { id: 'toone', fullName: 'Ella Toone', cardName: 'Toone', position: 'MID', club: CLUBS.united },
-  { id: 'mariona', fullName: 'Mariona Caldentey', cardName: 'Mariona', position: 'MID', club: CLUBS.arsenal },
-  { id: 'james', fullName: 'Lauren James', cardName: 'James', position: 'FWD', club: CLUBS.chelsea },
-  { id: 'russo', fullName: 'Alessia Russo', cardName: 'Russo', position: 'FWD', club: CLUBS.arsenal },
-  { id: 'shaw', fullName: 'Khadija Shaw', cardName: 'Shaw', position: 'FWD', club: CLUBS.city },
-  { id: 'tullis-joyce', fullName: 'Phallon Tullis-Joyce', cardName: 'Tullis-Joyce', position: 'GK', club: CLUBS.united },
-  { id: 'wubben-moy', fullName: 'Lotte Wubben-Moy', cardName: 'Wubben-Moy', position: 'DEF', club: CLUBS.arsenal },
-  { id: 'girma', fullName: 'Naomi Girma', cardName: 'Girma', position: 'DEF', club: CLUBS.chelsea },
-  { id: 'nusken', fullName: 'Sjoeke Nüsken', cardName: 'Nüsken', position: 'MID', club: CLUBS.chelsea },
-  { id: 'park', fullName: 'Jess Park', cardName: 'Park', position: 'MID', club: CLUBS.united },
-  { id: 'hemp', fullName: 'Lauren Hemp', cardName: 'Hemp', position: 'FWD', club: CLUBS.city },
-  { id: 'beever-jones', fullName: 'Aggie Beever-Jones', cardName: 'Beever-Jones', position: 'FWD', club: CLUBS.chelsea },
+  { id: 'hampton', fullName: 'Hannah Hampton', cardName: 'Hampton', cost: 20, position: 'GK', club: CLUBS.chelsea },
+  { id: 'bronze', fullName: 'Lucy Bronze', cardName: 'Bronze', cost: 70, position: 'DEF', club: CLUBS.chelsea },
+  { id: 'bright', fullName: 'Millie Bright', cardName: 'Bright', cost: 30, position: 'DEF', club: CLUBS.chelsea },
+  { id: 'williamson', fullName: 'Leah Williamson', cardName: 'Williamson', cost: 90, position: 'DEF', club: CLUBS.arsenal },
+  { id: 'greenwood', fullName: 'Alex Greenwood', cardName: 'Greenwood', cost: 40, position: 'DEF', club: CLUBS.city },
+  { id: 'walsh', fullName: 'Keira Walsh', cardName: 'Walsh', cost: 60, position: 'MID', club: CLUBS.chelsea },
+  { id: 'toone', fullName: 'Ella Toone', cardName: 'Toone', cost: 45, position: 'MID', club: CLUBS.united },
+  { id: 'mariona', fullName: 'Mariona Caldentey', cardName: 'Mariona', cost: 75, position: 'MID', club: CLUBS.arsenal },
+  { id: 'james', fullName: 'Lauren James', cardName: 'James', cost: 85, position: 'FWD', club: CLUBS.chelsea },
+  { id: 'russo', fullName: 'Alessia Russo', cardName: 'Russo', cost: 95, position: 'FWD', club: CLUBS.arsenal },
+  { id: 'shaw', fullName: 'Khadija Shaw', cardName: 'Shaw', cost: 80, position: 'FWD', club: CLUBS.city },
+  { id: 'tullis-joyce', fullName: 'Phallon Tullis-Joyce', cardName: 'Tullis-Joyce', cost: 10, position: 'GK', club: CLUBS.united },
+  { id: 'wubben-moy', fullName: 'Lotte Wubben-Moy', cardName: 'Wubben-Moy', cost: 15, position: 'DEF', club: CLUBS.arsenal },
+  { id: 'girma', fullName: 'Naomi Girma', cardName: 'Girma', cost: 65, position: 'DEF', club: CLUBS.chelsea },
+  { id: 'nusken', fullName: 'Sjoeke Nüsken', cardName: 'Nüsken', cost: 25, position: 'MID', club: CLUBS.chelsea },
+  { id: 'park', fullName: 'Jess Park', cardName: 'Park', cost: 35, position: 'MID', club: CLUBS.united },
+  { id: 'hemp', fullName: 'Lauren Hemp', cardName: 'Hemp', cost: 55, position: 'FWD', club: CLUBS.city },
+  { id: 'beever-jones', fullName: 'Aggie Beever-Jones', cardName: 'Beever-Jones', cost: 50, position: 'FWD', club: CLUBS.chelsea },
 ]
 
 /** Card tiers, lowest first. The stage number is the index into this list. */
 export const TIERS = ['Academy', 'Bronze', 'Silver', 'Gold', 'Legend'] as const
 export type Tier = (typeof TIERS)[number]
-
-export const PLAYER_COST = 20
 
 export function playerById(id: string): Player | undefined {
   return PLAYERS.find((p) => p.id === id)
@@ -73,9 +71,9 @@ export function playerById(id: string): Player | undefined {
 const SQUAD: RewardKind[] = PLAYERS.map((player) => ({
   id: player.id,
   name: player.fullName,
-  cost: PLAYER_COST,
+  cost: player.cost,
   stages: TIERS.map((tier) => ({ id: `${player.id}:${tier}`, name: `${player.cardName} · ${tier}` })),
-}))
+})).sort((a, b) => a.cost - b.cost)
 
 export const FOOTBALL: RewardTheme = {
   id: 'football',

@@ -62,12 +62,14 @@ describe('expanding collections', () => {
     expect(useStore.getState().activeProfile()?.garden).toHaveLength(1)
     expect(useStore.getState().activeProfile()?.coins).toBe(100)
     seed('football', 0, 1000)
-    for (const player of themeById('football').kinds) useStore.getState().collectReward(player.id)
+    const players = themeById('football').kinds
+    const remainingCoins = 1000 - players.reduce((total, player) => total + player.cost, 0)
+    for (const player of players) useStore.getState().collectReward(player.id)
     expect(useStore.getState().activeProfile()?.garden).toHaveLength(18)
-    expect(useStore.getState().activeProfile()?.coins).toBe(640)
+    expect(useStore.getState().activeProfile()?.coins).toBe(remainingCoins)
     useStore.getState().collectReward(kind.id)
     expect(useStore.getState().activeProfile()?.garden).toHaveLength(18)
-    expect(useStore.getState().activeProfile()?.coins).toBe(640)
+    expect(useStore.getState().activeProfile()?.coins).toBe(remainingCoins)
   })
 
   it('awards the collection badge at 18 even though more spaces have appeared', () => {

@@ -2,7 +2,8 @@
 
 The squad now has 18 unique players: the original starting eleven plus Phallon
 Tullis-Joyce, Lotte Wubben-Moy, Naomi Girma, Sjoeke Nüsken, Jess Park, Lauren Hemp
-and Aggie Beever-Jones. Every player costs 20 coins and trains through Academy,
+and Aggie Beever-Jones. Each player has a distinct price from 10 to 95 coins, with
+the transfer market ordered from cheapest to most expensive. Players train through Academy,
 Bronze, Silver, Gold and Legend. The collection and transfer market both have room
 for all 18. Existing player ids, coins and earned badges survive the expansion.
 

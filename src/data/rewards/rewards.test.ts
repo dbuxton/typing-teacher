@@ -38,8 +38,9 @@ describe.each(THEMES)('$name growth stages', (theme) => {
     }
   })
 
-  it('never charges less for something further down the shop', () => {
+  it('offers distinct prices from cheapest to most expensive', () => {
     const costs = theme.kinds.map((k) => k.cost)
+    expect(new Set(costs).size).toBe(costs.length)
     expect(costs).toEqual([...costs].sort((a, b) => a - b))
   })
 
@@ -127,10 +128,6 @@ describe('football', () => {
     for (const kind of football.kinds) {
       expect(kind.stages.map((s) => s.id)).toEqual(TIERS.map((t) => `${kind.id}:${t}`))
     }
-  })
-
-  it('charges the same for every player, so nobody’s favourite is "the cheap one"', () => {
-    expect(new Set(football.kinds.map((k) => k.cost)).size).toBe(1)
   })
 
   it('fields an eighteen-player squad with two keepers', () => {

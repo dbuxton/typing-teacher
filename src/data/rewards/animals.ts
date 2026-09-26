@@ -8,34 +8,33 @@ export function animalStageNames(id: string): readonly string[] {
 }
 
 export const ANIMAL_SPECIES = [
-  { id: 'robin', name: 'Robin', group: 'Birds' },
-  { id: 'barn-owl', name: 'Barn owl', group: 'Birds' },
-  { id: 'puffin', name: 'Puffin', group: 'Birds' },
-  { id: 'kingfisher', name: 'Kingfisher', group: 'Birds' },
-  { id: 'flamingo', name: 'Flamingo', group: 'Birds' },
-  { id: 'penguin', name: 'Penguin', group: 'Birds' },
-  { id: 'red-fox', name: 'Red fox', group: 'Mammals' },
-  { id: 'rabbit', name: 'Rabbit', group: 'Mammals' },
-  { id: 'hedgehog', name: 'Hedgehog', group: 'Mammals' },
-  { id: 'red-panda', name: 'Red panda', group: 'Mammals' },
-  { id: 'otter', name: 'Otter', group: 'Mammals' },
-  { id: 'elephant', name: 'Elephant', group: 'Mammals' },
-  { id: 'tortoise', name: 'Tortoise', group: 'More animals' },
-  { id: 'tree-frog', name: 'Tree frog', group: 'More animals' },
-  { id: 'gecko', name: 'Gecko', group: 'More animals' },
-  { id: 'seahorse', name: 'Seahorse', group: 'More animals' },
-  { id: 'octopus', name: 'Octopus', group: 'More animals' },
-  { id: 'butterfly', name: 'Butterfly', group: 'More animals' },
+  { id: 'robin', name: 'Robin', group: 'Birds', cost: 10 },
+  { id: 'barn-owl', name: 'Barn owl', group: 'Birds', cost: 50 },
+  { id: 'puffin', name: 'Puffin', group: 'Birds', cost: 55 },
+  { id: 'kingfisher', name: 'Kingfisher', group: 'Birds', cost: 65 },
+  { id: 'flamingo', name: 'Flamingo', group: 'Birds', cost: 80 },
+  { id: 'penguin', name: 'Penguin', group: 'Birds', cost: 70 },
+  { id: 'red-fox', name: 'Red fox', group: 'Mammals', cost: 40 },
+  { id: 'rabbit', name: 'Rabbit', group: 'Mammals', cost: 15 },
+  { id: 'hedgehog', name: 'Hedgehog', group: 'Mammals', cost: 20 },
+  { id: 'red-panda', name: 'Red panda', group: 'Mammals', cost: 90 },
+  { id: 'otter', name: 'Otter', group: 'Mammals', cost: 60 },
+  { id: 'elephant', name: 'Elephant', group: 'Mammals', cost: 95 },
+  { id: 'tortoise', name: 'Tortoise', group: 'More animals', cost: 45 },
+  { id: 'tree-frog', name: 'Tree frog', group: 'More animals', cost: 30 },
+  { id: 'gecko', name: 'Gecko', group: 'More animals', cost: 35 },
+  { id: 'seahorse', name: 'Seahorse', group: 'More animals', cost: 75 },
+  { id: 'octopus', name: 'Octopus', group: 'More animals', cost: 85 },
+  { id: 'butterfly', name: 'Butterfly', group: 'More animals', cost: 25 },
 ] as const
 
 const FRIENDS: RewardKind[] = ANIMAL_SPECIES.map(animal => ({
   ...animal,
-  cost: 20,
   stages: animalStageNames(animal.id).map((stage, index) => ({
     id: [animal.id + '-baby', animal.id + '-juvenile', animal.id][index],
     name: animal.name + ' · ' + stage,
   })),
-}))
+})).sort((a, b) => a.cost - b.cost)
 
 export const ANIMALS: RewardTheme = {
   id: 'animals',
