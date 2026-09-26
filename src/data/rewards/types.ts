@@ -1,6 +1,6 @@
 /**
  * A reward theme is the thing coins buy and lessons grow: a garden of plants, a
- * squad of footballers, a team of Pokémon. The mechanics are identical across
+ * squad of footballers, a team of Pokémon or animal friends. The mechanics are identical across
  * themes — buy something, and every completed lesson moves it up one stage —
  * only the art and the words change.
  *
@@ -8,7 +8,7 @@
  * nothing is generated at runtime.
  */
 
-export type ThemeId = 'garden' | 'football' | 'pokemon'
+export type ThemeId = 'garden' | 'football' | 'pokemon' | 'animals'
 
 export type RewardStage = {
   /** Unique within the theme. For the garden it's the emoji itself. */
@@ -21,6 +21,8 @@ export type RewardKind = {
   id: string
   name: string
   cost: number
+  /** Optional shop category, for example Birds or Mammals. */
+  group?: string
   /** In growth order; the last one is fully grown. */
   stages: RewardStage[]
 }
@@ -42,6 +44,7 @@ export type RewardTheme = {
   /** Word on a shop item's button area when it's already owned (unique themes). */
   ownedLabel: string
   emptySlotLabel: string
+  /** Starting spaces and collection badge milestone. Repeatable themes expand. */
   slots: number
   /** Each kind can be bought once. Two of the same real footballer makes no sense. */
   unique: boolean

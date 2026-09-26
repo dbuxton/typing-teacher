@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { existsSync } from 'node:fs'
 import { POKEMON_IMAGES } from '../../art/assets'
-import { THEMES, isFullyGrown, rewardKind, rewardStage, shopPreviewStage, themeById } from '.'
+import { THEMES, collectionIsFull, collectionSlots, isFullyGrown, rewardKind, rewardStage, shopPreviewStage, themeById } from '.'
+import { ANIMAL_SPECIES } from './animals'
 import { EGG_PREFIX, eggColour } from './pokemon'
 import { PLAYERS, TIERS } from './football'
 
@@ -132,9 +133,16 @@ describe('football', () => {
     expect(new Set(football.kinds.map((k) => k.cost)).size).toBe(1)
   })
 
-  it('fields a proper eleven: one keeper and ten outfield players', () => {
-    expect(PLAYERS).toHaveLength(11)
-    expect(PLAYERS.filter((p) => p.position === 'GK')).toHaveLength(1)
+  it('fields an eighteen-player squad with two keepers', () => {
+    expect(PLAYERS).toHaveLength(18)
+    expect(PLAYERS.filter((p) => p.position === 'GK')).toHaveLength(2)
+    expect(PLAYERS.slice(0, 11).filter(player => player.position === 'GK')).toHaveLength(1)
+  })
+
+  it('has an individual portrait for every footballer', () => {
+    for (const player of PLAYERS) {
+      expect(existsSync(new URL(`../../../public/art/rewards/football/${player.id}.webp`, import.meta.url)), player.fullName).toBe(true)
+    }
   })
 
   it('maps every kind back to a player', () => {
@@ -146,5 +154,48 @@ describe('themeById', () => {
   it('falls back to the garden for anything it does not recognise', () => {
     expect(themeById('dinosaurs').id).toBe('garden')
     expect(themeById(undefined).id).toBe('garden')
+  })
+})
+
+describe('animal friends', () => {
+  it('offers six birds, six mammals and six other animals with three distinct illustrated ages', () => {
+    const animals = themeById('animals')
+    expect(animals.id).toBe('animals')
+    expect(animals.kinds).toHaveLength(18)
+    for (const group of ['Birds', 'Mammals', 'More animals']) {
+      expect(ANIMAL_SPECIES.filter(animal => animal.group === group)).toHaveLength(6)
+    }
+    for (const kind of animals.kinds) {
+      expect(kind.stages).toHaveLength(3)
+      expect(new Set(kind.stages.map(stage => stage.id)).size).toBe(3)
+      for (const stage of kind.stages) {
+        expect(existsSync(new URL(`../../../public/art/rewards/animals/${stage.id}.webp`, import.meta.url)), stage.name).toBe(true)
+      }
+    }
+  })
+
+  it('uses natural life stages for frogs and butterflies', () => {
+    expect(rewardKind('animals', 'robin')?.stages.map(stage => stage.name)).toEqual(['Robin · Baby', 'Robin · Juvenile', 'Robin · Adult'])
+    expect(rewardKind('animals', 'tree-frog')?.stages.map(stage => stage.name)).toEqual(['Tree frog · Tadpole', 'Tree frog · Froglet', 'Tree frog · Adult'])
+    expect(rewardKind('animals', 'butterfly')?.stages.map(stage => stage.name)).toEqual(['Butterfly · Caterpillar', 'Butterfly · Chrysalis', 'Butterfly · Adult'])
+  })
+})
+
+describe('collection space', () => {
+  it.each(['garden', 'pokemon', 'animals'])('%s starts at 18 and always has room for another reward', id => {
+    const theme = themeById(id)
+    for (const [owned, expected] of [[0, 18], [12, 18], [17, 18], [18, 24], [23, 24], [24, 30], [90, 96]]) {
+      expect(collectionSlots(theme, owned)).toBe(expected)
+      expect(collectionIsFull(theme, owned)).toBe(false)
+    }
+  })
+
+  it('fills an eighteen-player squad, without hiding extra items from an old save', () => {
+    const theme = themeById('football')
+    expect(collectionSlots(theme, 0)).toBe(18)
+    expect(collectionSlots(theme, 11)).toBe(18)
+    expect(collectionIsFull(theme, 17)).toBe(false)
+    expect(collectionIsFull(theme, 18)).toBe(true)
+    expect(collectionSlots(theme, 24)).toBe(24)
   })
 })

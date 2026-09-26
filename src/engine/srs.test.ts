@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { applyResults, intervalForBox, newProgress, review, selectSpellingWords, MAX_BOX } from './srs'
 import { makeRng } from './rng'
+import { wordsForLevel } from '../data/spellingWords'
 import type { SpellingProgress } from '../store/schema'
 
 const rng = () => makeRng(1)
@@ -30,9 +31,14 @@ describe('leitner review', () => {
 })
 
 describe('selecting words for a lesson', () => {
+  it('does not force a premature review just to fill the requested count', () => {
+    const resting = wordsForLevel(4).map(entry => ({ ...newProgress(entry.word, 1), dueAt: 3 }))
+    expect(selectSpellingWords(resting, 4, 2, 3, rng())).toEqual([])
+  })
   it('brings a word the kid got wrong back within a lesson or two', () => {
     const spelling = applyResults([], [{ word: 'friend', correct: false }], 5)
-    const next = selectSpellingWords(spelling, 10, 6, 2, rng())
+    expect(selectSpellingWords(spelling, 10, 6, 2, rng())).not.toContain('friend')
+    const next = selectSpellingWords(spelling, 10, 7, 2, rng())
     expect(next).toContain('friend')
   })
 

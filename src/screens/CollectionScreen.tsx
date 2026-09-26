@@ -1,10 +1,11 @@
-import { isFullyGrown, rewardStage, shopPreviewStage, themeById } from '../data/rewards'
+import { useState } from 'react'
+import { collectionIsFull, collectionSlots, isFullyGrown, rewardStage, shopPreviewStage, themeById } from '../data/rewards'
 import { RewardArt } from '../art/RewardArt'
 import { useStore } from '../store/profileStore'
 import type { Profile } from '../store/schema'
 
 /**
- * The collection: a garden, a football squad or a Pokémon team, depending on the
+ * The collection: plants, players, Pokémon or animal friends, depending on the
  * theme the kid picked. Coins buy things, and every lesson makes each one grow,
  * train or evolve a bit.
  *
@@ -15,20 +16,24 @@ import type { Profile } from '../store/schema'
 export function CollectionScreen({ profile }: { profile: Profile }) {
   const collectReward = useStore((s) => s.collectReward)
   const setScreen = useStore((s) => s.setScreen)
+  const [group, setGroup] = useState('all')
 
   const theme = themeById(profile.theme)
-  const slots = Array.from({ length: theme.slots }, (_, i) => profile.garden[i] ?? null)
-  const full = profile.garden.length >= theme.slots
+  const slots = Array.from({ length: collectionSlots(theme, profile.garden.length) }, (_, i) => profile.garden[i] ?? null)
+  const full = collectionIsFull(theme, profile.garden.length)
   const owned = new Set(profile.garden.map((p) => p.kindId))
+  const groups = [...new Set(theme.kinds.flatMap(kind => kind.group ? [kind.group] : []))]
+  const shopKinds = groups.length && group !== 'all' ? theme.kinds.filter(kind => kind.group === group) : theme.kinds
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 p-4 pb-12">
       <div className="text-center">
         <h2 className="text-3xl font-extrabold text-slate-800">{theme.collectionTitle}</h2>
         <p className="text-slate-500">{theme.collectionBlurb}</p>
+        {!theme.unique && <p className="mt-2 text-sm text-slate-500">More spaces appear as your collection grows.</p>}
       </div>
 
-      <div className={`grid grid-cols-4 gap-3 rounded-3xl p-5 shadow-inner sm:grid-cols-6 ${theme.backdropClass}`}>
+      <div aria-label="Your collection" className={`grid grid-cols-3 gap-3 rounded-3xl p-5 shadow-inner sm:grid-cols-6 ${theme.backdropClass}`}>
         {slots.map((item, index) => {
           const name = item ? rewardStage(theme.id, item.kindId, item.stage)?.name : undefined
           return (
@@ -49,7 +54,7 @@ export function CollectionScreen({ profile }: { profile: Profile }) {
                       theme={theme.id}
                       kindId={item.kindId}
                       stage={item.stage}
-                      size={theme.id === 'football' ? 96 : 64}
+                      size={theme.id === 'football' || theme.id === 'animals' ? 96 : 64}
                       className="h-auto max-h-full w-auto max-w-full"
                     />
                   </span>
@@ -73,8 +78,18 @@ export function CollectionScreen({ profile }: { profile: Profile }) {
           {theme.shopTitle}{' '}
           {full && <span className="text-sm font-normal text-slate-400">(all full!)</span>}
         </h3>
+        {groups.length > 0 && (
+          <div role="group" aria-label="Animal types" className="mb-4 flex flex-wrap justify-center gap-2">
+            {['all', ...groups].map(option => (
+              <button key={option} aria-pressed={group === option} onClick={() => setGroup(option)}
+                className={`rounded-full px-4 py-2 text-sm font-bold transition ${group === option ? 'bg-teal-700 text-white' : 'bg-white text-slate-600 shadow-sm hover:bg-teal-50'}`}>
+                {option === 'all' ? 'All animals' : option}
+              </button>
+            ))}
+          </div>
+        )}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {theme.kinds.map((kind) => {
+          {shopKinds.map((kind) => {
             const alreadyOwned = theme.unique && owned.has(kind.id)
             const affordable = profile.coins >= kind.cost && !full && !alreadyOwned
             const last = kind.stages[kind.stages.length - 1]

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
 import type { LessonItem } from './generator'
+import type { PracticeAnswer } from '../store/schema'
 import { CATCH_WINDOW_MS, catchKeyFor, scheduleStars, starDueAt, type StarSchedule } from './sneakyStars'
 import { makeRng } from './rng'
 
@@ -39,6 +40,7 @@ export type SessionState = {
   sneakyStarsShown: number
 
   spellingAnswers: { word: string; correct: boolean }[]
+  practiceAnswers: PracticeAnswer[]
   /** Whether the current item has been typed with no mistakes so far. */
   itemClean: boolean
   /**
@@ -82,6 +84,7 @@ function initialState(items: LessonItem[]): SessionState {
     sneakyStarsCaught: 0,
     sneakyStarsShown: 0,
     spellingAnswers: [],
+    practiceAnswers: [],
     itemClean: true,
     keyErrors: {},
     keyAttempts: {},
@@ -177,10 +180,14 @@ function makeReducer(items: LessonItem[]) {
       }
 
       case 'advance': {
+        if (state.done || state.revealing || state.cursor < item.text.length) return state
         const isSpelling = item.kind === 'spelling'
         const spellingAnswers = isSpelling
           ? [...state.spellingAnswers, { word: item.text, correct: state.itemClean }]
           : state.spellingAnswers
+        const practiceAnswers = item.kind !== 'spelling'
+          ? [...state.practiceAnswers, { kind: item.kind, text: item.text, correct: state.itemClean }]
+          : state.practiceAnswers
 
         // A star still on screen when the item ends was cut short by finishing
         // the word, not missed. Don't count it against them — the catch rate has
@@ -195,6 +202,7 @@ function makeReducer(items: LessonItem[]) {
           return {
             ...state,
             spellingAnswers,
+            practiceAnswers,
             sneakyStarsShown,
             done: true,
             finishedAt: action.now,
@@ -213,6 +221,7 @@ function makeReducer(items: LessonItem[]) {
           starCaughtThisItem: false,
           sneakyStarsShown,
           spellingAnswers,
+          practiceAnswers,
           itemClean: true,
         }
       }

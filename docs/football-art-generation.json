@@ -1,0 +1,112 @@
+{
+  "generator": "Built-in image_gen",
+  "date": "2026-09-26",
+  "note": "Individual requests using each player\u2019s club photo as an identity reference. Alpha preserved; no background-removal model needed. Exact final prompts and reference sources are in football-art-prompts.json.",
+  "assets": [
+    {
+      "id": "tullis-joyce",
+      "file": "public/art/rewards/football/tullis-joyce.webp",
+      "generatedOriginal": "exec-30084778-c3fb-4c8f-a762-8e49727de8b9.png",
+      "sha256": "7d6ff4f5f7661c1598f88fcad53ba94d9b031e628f8fbfcb051dee15a16ddd83",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 56842
+    },
+    {
+      "id": "wubben-moy",
+      "file": "public/art/rewards/football/wubben-moy.webp",
+      "generatedOriginal": "exec-913ff2a7-827a-427e-9a44-f38288d808be.png",
+      "sha256": "7a800d9739070d55441a88ab8e38c9c9f8f468b8f92f6782fd6aabf69e0d621b",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 39494
+    },
+    {
+      "id": "girma",
+      "file": "public/art/rewards/football/girma.webp",
+      "generatedOriginal": "exec-3090d166-5356-47b1-ab92-37b12d8a28dd.png",
+      "sha256": "17f94a6d6d92d4be0e7dfac9a9d90bc7e00fde6cfd0ea7c935088fa04ec5904b",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 49950
+    },
+    {
+      "id": "nusken",
+      "file": "public/art/rewards/football/nusken.webp",
+      "generatedOriginal": "exec-291bbf55-a405-42cb-8ed5-1e3659fce23a.png",
+      "sha256": "78258765da932a40b2b4b4719edfb6487ff27bf5eeefaedf5abdface2cd5a393",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 49952
+    },
+    {
+      "id": "park",
+      "file": "public/art/rewards/football/park.webp",
+      "generatedOriginal": "exec-7130d315-8933-499d-be72-2a1efd21a7f3.png",
+      "sha256": "615ea7f878b772de50dafd6a9c30e6a3cad37dc78470c668a5a21f33d918be98",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 46000
+    },
+    {
+      "id": "hemp",
+      "file": "public/art/rewards/football/hemp.webp",
+      "generatedOriginal": "exec-0911c9dd-e0b7-45dc-9774-e373ef38b767.png",
+      "sha256": "2d33503bdda835e3763535154c55a18be25bc83137ccb53844f0769a637d9a85",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 50374
+    },
+    {
+      "id": "beever-jones",
+      "file": "public/art/rewards/football/beever-jones.webp",
+      "generatedOriginal": "exec-762569a2-0b34-466b-9de9-da7a15d465fe.png",
+      "sha256": "a924771e707d3918e0ed8dc722366a4a0d61d6efb0b9709fd0b27acda4a5a7d0",
+      "dimensions": [
+        512,
+        512
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 55906
+    }
+  ]
+}

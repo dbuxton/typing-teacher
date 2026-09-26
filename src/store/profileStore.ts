@@ -6,17 +6,19 @@ import {
   STORAGE_KEY,
   type LessonResult,
   type Profile,
+  type PracticeAnswer,
   type SaveFile,
   daysBetween,
   makeProfile,
   migrate,
   today,
 } from './schema'
-import { maxStage, rewardKind, themeById, type ThemeId } from '../data/rewards'
+import { collectionIsFull, maxStage, rewardKind, themeById, type ThemeId } from '../data/rewards'
 import { newlyEarnedBadges } from '../data/badges'
 import { assistAfterLesson, previousAssistLevel } from '../engine/assist'
 import { applyResults } from '../engine/srs'
 import { applyLesson, mergeKeyStats, newKeyAccuracyFor } from '../engine/adaptive'
+import { rememberPractice } from '../engine/practice'
 
 export type Screen = 'home' | 'map' | 'lesson' | 'results' | 'collection' | 'badges'
 
@@ -30,6 +32,7 @@ export type LessonOutcome = {
   sneakyStarsCaught: number
   sneakyStarsTotal: number
   spellingAnswers: { word: string; correct: boolean }[]
+  practiceAnswers: PracticeAnswer[]
   keyErrors: Record<string, number>
   keyAttempts: Record<string, number>
   wordsTyped: number
@@ -62,7 +65,7 @@ type State = {
   toggleSneakyStars: () => void
   toggleReadAloud: () => void
   recordLesson: (outcome: LessonOutcome) => void
-  /** Spend coins on a seed, a player or an egg — whatever the theme sells. */
+  /** Spend coins on a seed, player, egg or animal — whatever the theme sells. */
   collectReward: (kindId: string) => void
 }
 
@@ -213,6 +216,7 @@ export const useStore = create<State>()(
             difficulty: adaptive.difficulty,
             personalWpm: adaptive.personalWpm,
             spelling,
+            practice: rememberPractice(current.practice, outcome.practiceAnswers, lessonNumber),
             highestLevelUnlocked: adaptive.unlockedTo,
             // Move them onto the newly unlocked level; if they didn't advance,
             // leave them where they are rather than dragging them backwards.
@@ -254,7 +258,7 @@ export const useStore = create<State>()(
           const kind = rewardKind(theme.id, kindId)
           if (!kind) return state
           if (current.coins < kind.cost) return state
-          if (current.garden.length >= theme.slots) return state
+          if (collectionIsFull(theme, current.garden.length)) return state
           if (theme.unique && current.garden.some((p) => p.kindId === kindId)) return state
 
           return {

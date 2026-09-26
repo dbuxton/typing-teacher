@@ -45,14 +45,14 @@ export const GARDEN: RewardTheme = {
   shopTitle: 'Seed shop',
   ownedLabel: 'Planted',
   emptySlotLabel: 'Empty plot',
-  slots: 12,
+  slots: 18,
   unique: false,
   showcase: { kindId: 'sunflower', stage: 2 },
   shopPreviewStage: -1,
   backdropClass: 'bg-gradient-to-b from-emerald-100 to-amber-50',
   badgeCopy: {
     first: { name: 'Green Fingers', emoji: '🌱', how: 'Plant your first seed' },
-    full: { name: 'Garden Party', emoji: '🌻', how: 'Fill every plot in the garden' },
+    full: { name: 'Garden Party', emoji: '🌻', how: 'Collect 18 plants in your garden' },
   },
   kinds: PLANTS,
 }

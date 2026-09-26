@@ -58,14 +58,14 @@ export const POKEMON: RewardTheme = {
   shopTitle: 'Egg shop',
   ownedLabel: 'On your team',
   emptySlotLabel: 'Empty nest',
-  slots: 12,
+  slots: 18,
   unique: false,
   showcase: { kindId: 'pichu', stage: 2 },
   shopPreviewStage: 1, // the first form out of the egg
   backdropClass: 'bg-gradient-to-b from-sky-100 to-lime-100',
   badgeCopy: {
     first: { name: 'Hatchling', emoji: '🥚', how: 'Get your first Pokémon egg' },
-    full: { name: 'Full Team', emoji: '⭐', how: 'Fill every nest with a Pokémon' },
+    full: { name: 'Full Team', emoji: '⭐', how: 'Collect 18 Pokémon' },
   },
   kinds: TEAM,
 }

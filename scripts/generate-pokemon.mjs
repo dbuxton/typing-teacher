@@ -95,7 +95,7 @@ export async function generateImage({ prompt, apiKey, reference, fetchImpl = fet
   return { bytes, extension, usage: result.usageMetadata };
 }
 
-export async function runJobs({ jobs, outputDir, apiKey, reference, dryRun = false, fetchImpl = fetch, log = console.log }) {
+export async function runJobs({ jobs, outputDir, apiKey, reference, referenceForJob, dryRun = false, fetchImpl = fetch, log = console.log }) {
   const pending = jobs.filter(job => {
     const exists = Object.values(EXTENSIONS).some(ext => existsSync(join(outputDir, `${job.id}${ext}`)));
     if (exists) log(`Skipping ${job.id}: already saved.`);
@@ -123,7 +123,8 @@ export async function runJobs({ jobs, outputDir, apiKey, reference, dryRun = fal
         continue;
       }
       log(`[${index + 1}/${pending.length}] Generating ${job.id}…`);
-      const { bytes, extension, usage } = await generateImage({ prompt: job.prompt, apiKey, reference, fetchImpl });
+      const jobReference = referenceForJob ? await referenceForJob(job) : reference;
+      const { bytes, extension, usage } = await generateImage({ prompt: job.prompt, apiKey, reference: jobReference, fetchImpl });
       const path = join(outputDir, `${job.id}${extension}`);
       const temporaryPath = `${path}.partial`;
       try {
@@ -132,7 +133,7 @@ export async function runJobs({ jobs, outputDir, apiKey, reference, dryRun = fal
       } finally { await rm(temporaryPath, { force: true }); }
       await writeFile(join(outputDir, `${job.id}.json`), JSON.stringify({
         id: job.id, model: MODEL, prompt: job.prompt,
-        aspectRatio: '1:1', imageSize: '1K', usedReference: Boolean(reference),
+        aspectRatio: '1:1', imageSize: '1K', usedReference: Boolean(jobReference),
         generatedAt: new Date().toISOString(), usage,
       }, null, 2) + '\n');
       log(`Saved ${path}`);

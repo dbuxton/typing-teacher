@@ -148,6 +148,13 @@ describe('v2 -> v3 migration', () => {
 })
 
 describe('reward themes', () => {
+  it('migrates a v3 collection with its coins and badges intact and empty practice memory', () => {
+    const old: Partial<Profile> = { ...makeProfile('Ada', '🦉', 'football'), coins: 80, badges: ['full-garden'], garden: [{ kindId: 'russo', stage: 4 }] }
+    delete old.practice
+    const migrated = migrate({ version: 3, profiles: [old], activeProfileId: old.id }, 3)
+    expect(migrated.version).toBe(4)
+    expect(migrated.profiles[0]).toMatchObject({ coins: 80, badges: ['full-garden'], theme: 'football', garden: old.garden, practice: [] })
+  })
   it('starts a new player on the theme they picked', () => {
     expect(makeProfile('Ada', '🦉', 'pokemon').theme).toBe('pokemon')
     expect(makeProfile('Ada', '🦉').theme).toBe('garden')

@@ -1,14 +1,26 @@
 import { FOOTBALL } from './football'
 import { GARDEN } from './garden'
 import { POKEMON } from './pokemon'
+import { ANIMALS } from './animals'
 import type { RewardKind, RewardStage, RewardTheme, ThemeId } from './types'
 
 export type { RewardKind, RewardStage, RewardTheme, ThemeId } from './types'
 
 /** In picker order. The garden comes first because it's the default. */
-export const THEMES: RewardTheme[] = [GARDEN, FOOTBALL, POKEMON]
+export const THEMES: RewardTheme[] = [GARDEN, FOOTBALL, POKEMON, ANIMALS]
 
 export const DEFAULT_THEME: ThemeId = 'garden'
+
+/** Repeatable collections always have room for another reward, in six-space rows. */
+export function collectionSlots(theme: RewardTheme, ownedCount: number): number {
+  if (theme.unique) return Math.max(theme.slots, ownedCount)
+  return Math.max(theme.slots, (Math.floor(ownedCount / 6) + 1) * 6)
+}
+
+/** Only finite, unique catalogues can fill up. */
+export function collectionIsFull(theme: RewardTheme, ownedCount: number): boolean {
+  return theme.unique && ownedCount >= theme.slots
+}
 
 export function isThemeId(value: unknown): value is ThemeId {
   return THEMES.some((t) => t.id === value)

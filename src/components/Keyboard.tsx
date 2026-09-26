@@ -39,7 +39,7 @@ function KeyCap({
   const colour = colourFor(char)
   return (
     <div
-      className={`relative flex h-11 w-11 items-center justify-center rounded-lg border-2 text-lg font-bold transition-all sm:h-12 sm:w-12 ${
+      className={`keyboard-key relative flex items-center justify-center rounded-lg border-2 font-bold transition-all ${
         isNext ? 'key-next border-slate-700 shadow-lg' : 'border-transparent'
       }`}
       style={{
@@ -75,16 +75,16 @@ function KeyboardImpl({ nextChar, assist, visible }: Props) {
   const shiftSide = nextChar && needsShift(nextChar) ? shiftSideFor(nextChar) : null
 
   return (
-    <div className="flex flex-col items-center gap-1.5 select-none">
+    <div className="typing-keyboard flex flex-col items-center select-none">
       {KEYBOARD_ROWS.map((row, rowIndex) => (
         <div
           key={rowIndex}
-          className="flex gap-1.5"
-          style={{ paddingLeft: rowIndex * 18 }}
+          className="keyboard-row flex"
+          style={{ paddingLeft: `calc(var(--key-size) * ${rowIndex * 0.375})` }}
         >
           {rowIndex === 2 && (
             <div
-              className={`flex h-11 w-16 items-center justify-center rounded-lg border-2 text-xs font-bold sm:h-12 ${
+              className={`keyboard-shift flex items-center justify-center rounded-lg border-2 text-xs font-bold ${
                 shiftSide === 'left' ? 'key-next border-slate-700 text-white' : 'border-transparent text-slate-500'
               }`}
               style={{
@@ -104,7 +104,7 @@ function KeyboardImpl({ nextChar, assist, visible }: Props) {
           ))}
           {rowIndex === 2 && (
             <div
-              className={`flex h-11 w-16 items-center justify-center rounded-lg border-2 text-xs font-bold sm:h-12 ${
+              className={`keyboard-shift flex items-center justify-center rounded-lg border-2 text-xs font-bold ${
                 shiftSide === 'right' ? 'key-next border-slate-700 text-white' : 'border-transparent text-slate-500'
               }`}
               style={{

@@ -87,6 +87,20 @@ test('dry run requires no key and never calls the API or writes files', async t 
   assert.deepEqual(await readdir(outputDir), []);
 });
 
+test('uses each animal’s own reference for its growth-stage request', async t => {
+  const outputDir = await temporaryDirectory(t);
+  const seen = [];
+  await runJobs({ jobs, outputDir, apiKey: 'test', log: () => {},
+    referenceForJob: async job => ({ mimeType: 'image/png', data: job.id }),
+    fetchImpl: async (_url, options) => {
+      seen.push(JSON.parse(options.body).contents[0].parts[1].inlineData.data);
+      return success();
+    },
+  });
+  assert.deepEqual(seen, jobs.map(job => job.id));
+  assert.equal(JSON.parse(await readFile(join(outputDir, 'magikarp.json'), 'utf8')).usedReference, true);
+});
+
 test('stops after the first failure and releases the output lock', async t => {
   const outputDir = await temporaryDirectory(t);
   let calls = 0;

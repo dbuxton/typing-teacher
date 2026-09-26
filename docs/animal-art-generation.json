@@ -1,0 +1,398 @@
+{
+  "provider": "Google Gemini API (Nano Banana 2)",
+  "model": "gemini-3.1-flash-image",
+  "date": "2026-09-26",
+  "rejected": [
+    {
+      "id": "clownfish",
+      "prompt": "Use case: illustration-story. Create one polished hand-painted 3D storybook animal illustration for a children's typing-game collection. The attached Pikachu is a STYLE REFERENCE ONLY: match its softly sculpted forms, subtle painted texture, warm gentle studio lighting, cheerful colour and friendly expressive eyes. Depict the real animal described below, never a fantasy creature or Pikachu hybrid. Keep the animal's recognisable species markings and correct anatomy.\n\nExactly one animal, full body, centred in a square composition with at least 8% clear margin all around. Fit all ears, wings, legs, antennae and tail inside the frame. Use a completely plain solid white background for later background removal. No checkerboard, scenery, ground plane, cast shadow, text, labels, border, card frame, costume, accessories, logos, extra creatures or glow beyond the silhouette. A premium cohesive collectible illustration, readable at a small size. Produce one image only.\n\nSubject: An orange clownfish with three broad white bands edged narrowly in black, dark fin edges and friendly round eyes. Swimming in a compact three-quarter side view, all fins and tail visible, no water or bubbles.",
+      "attempts": 2,
+      "finishReason": "PROHIBITED_CONTENT",
+      "replacement": "seahorse"
+    }
+  ],
+  "stagesPerSpecies": 3,
+  "speciesCount": 18,
+  "imageCount": 54,
+  "referenceStrategy": "Initial animals use Pikachu as a style reference. New growth stages use their own species illustration. The initial young elephant is reused as the juvenile.",
+  "images": [
+    {
+      "id": "robin",
+      "animalId": "robin",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:45:12.599Z"
+    },
+    {
+      "id": "barn-owl",
+      "animalId": "barn-owl",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:47:50.830Z"
+    },
+    {
+      "id": "puffin",
+      "animalId": "puffin",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:47:57.727Z"
+    },
+    {
+      "id": "kingfisher",
+      "animalId": "kingfisher",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:48:06.339Z"
+    },
+    {
+      "id": "flamingo",
+      "animalId": "flamingo",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:48:13.185Z"
+    },
+    {
+      "id": "penguin",
+      "animalId": "penguin",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:48:21.295Z"
+    },
+    {
+      "id": "red-fox",
+      "animalId": "red-fox",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:48:29.348Z"
+    },
+    {
+      "id": "rabbit",
+      "animalId": "rabbit",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:48:36.494Z"
+    },
+    {
+      "id": "hedgehog",
+      "animalId": "hedgehog",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:48:45.318Z"
+    },
+    {
+      "id": "red-panda",
+      "animalId": "red-panda",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:48:54.372Z"
+    },
+    {
+      "id": "otter",
+      "animalId": "otter",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:49:02.965Z"
+    },
+    {
+      "id": "elephant",
+      "animalId": "elephant",
+      "stage": "adult",
+      "reference": "animals/elephant-juvenile",
+      "generatedAt": "2026-09-26T15:59:21.960Z"
+    },
+    {
+      "id": "tortoise",
+      "animalId": "tortoise",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:49:19.088Z"
+    },
+    {
+      "id": "tree-frog",
+      "animalId": "tree-frog",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:49:26.483Z"
+    },
+    {
+      "id": "gecko",
+      "animalId": "gecko",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:49:35.614Z"
+    },
+    {
+      "id": "seahorse",
+      "animalId": "seahorse",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:52:37.618Z"
+    },
+    {
+      "id": "octopus",
+      "animalId": "octopus",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:51:41.752Z"
+    },
+    {
+      "id": "butterfly",
+      "animalId": "butterfly",
+      "stage": "adult",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:51:50.091Z"
+    },
+    {
+      "id": "robin-baby",
+      "animalId": "robin",
+      "stage": "baby",
+      "reference": "animals/robin",
+      "generatedAt": "2026-09-26T15:59:30.737Z"
+    },
+    {
+      "id": "robin-juvenile",
+      "animalId": "robin",
+      "stage": "juvenile",
+      "reference": "animals/robin",
+      "generatedAt": "2026-09-26T15:59:39.621Z"
+    },
+    {
+      "id": "barn-owl-baby",
+      "animalId": "barn-owl",
+      "stage": "baby",
+      "reference": "animals/barn-owl",
+      "generatedAt": "2026-09-26T15:59:47.663Z"
+    },
+    {
+      "id": "barn-owl-juvenile",
+      "animalId": "barn-owl",
+      "stage": "juvenile",
+      "reference": "animals/barn-owl",
+      "generatedAt": "2026-09-26T15:59:56.130Z"
+    },
+    {
+      "id": "puffin-baby",
+      "animalId": "puffin",
+      "stage": "baby",
+      "reference": "animals/puffin",
+      "generatedAt": "2026-09-26T16:00:04.832Z"
+    },
+    {
+      "id": "puffin-juvenile",
+      "animalId": "puffin",
+      "stage": "juvenile",
+      "reference": "animals/puffin",
+      "generatedAt": "2026-09-26T16:00:14.925Z"
+    },
+    {
+      "id": "kingfisher-baby",
+      "animalId": "kingfisher",
+      "stage": "baby",
+      "reference": "animals/kingfisher",
+      "generatedAt": "2026-09-26T16:00:25.719Z"
+    },
+    {
+      "id": "kingfisher-juvenile",
+      "animalId": "kingfisher",
+      "stage": "juvenile",
+      "reference": "animals/kingfisher",
+      "generatedAt": "2026-09-26T16:00:33.980Z"
+    },
+    {
+      "id": "flamingo-baby",
+      "animalId": "flamingo",
+      "stage": "baby",
+      "reference": "animals/flamingo",
+      "generatedAt": "2026-09-26T16:01:16.663Z"
+    },
+    {
+      "id": "flamingo-juvenile",
+      "animalId": "flamingo",
+      "stage": "juvenile",
+      "reference": "animals/flamingo",
+      "generatedAt": "2026-09-26T16:01:24.452Z"
+    },
+    {
+      "id": "penguin-baby",
+      "animalId": "penguin",
+      "stage": "baby",
+      "reference": "animals/penguin",
+      "generatedAt": "2026-09-26T16:01:33.718Z"
+    },
+    {
+      "id": "penguin-juvenile",
+      "animalId": "penguin",
+      "stage": "juvenile",
+      "reference": "animals/penguin",
+      "generatedAt": "2026-09-26T16:01:42.309Z"
+    },
+    {
+      "id": "red-fox-baby",
+      "animalId": "red-fox",
+      "stage": "baby",
+      "reference": "animals/red-fox",
+      "generatedAt": "2026-09-26T16:01:50.199Z"
+    },
+    {
+      "id": "red-fox-juvenile",
+      "animalId": "red-fox",
+      "stage": "juvenile",
+      "reference": "animals/red-fox",
+      "generatedAt": "2026-09-26T16:01:58.514Z"
+    },
+    {
+      "id": "rabbit-baby",
+      "animalId": "rabbit",
+      "stage": "baby",
+      "reference": "animals/rabbit",
+      "generatedAt": "2026-09-26T16:02:11.848Z"
+    },
+    {
+      "id": "rabbit-juvenile",
+      "animalId": "rabbit",
+      "stage": "juvenile",
+      "reference": "animals/rabbit",
+      "generatedAt": "2026-09-26T16:02:20.268Z"
+    },
+    {
+      "id": "hedgehog-baby",
+      "animalId": "hedgehog",
+      "stage": "baby",
+      "reference": "animals/hedgehog",
+      "generatedAt": "2026-09-26T16:02:29.666Z"
+    },
+    {
+      "id": "hedgehog-juvenile",
+      "animalId": "hedgehog",
+      "stage": "juvenile",
+      "reference": "animals/hedgehog",
+      "generatedAt": "2026-09-26T16:02:39.152Z"
+    },
+    {
+      "id": "red-panda-baby",
+      "animalId": "red-panda",
+      "stage": "baby",
+      "reference": "animals/red-panda",
+      "generatedAt": "2026-09-26T16:02:46.401Z"
+    },
+    {
+      "id": "red-panda-juvenile",
+      "animalId": "red-panda",
+      "stage": "juvenile",
+      "reference": "animals/red-panda",
+      "generatedAt": "2026-09-26T16:02:55.719Z"
+    },
+    {
+      "id": "otter-baby",
+      "animalId": "otter",
+      "stage": "baby",
+      "reference": "animals/otter",
+      "generatedAt": "2026-09-26T16:03:05.065Z"
+    },
+    {
+      "id": "otter-juvenile",
+      "animalId": "otter",
+      "stage": "juvenile",
+      "reference": "animals/otter",
+      "generatedAt": "2026-09-26T16:03:13.500Z"
+    },
+    {
+      "id": "elephant-baby",
+      "animalId": "elephant",
+      "stage": "baby",
+      "reference": "animals/elephant-juvenile",
+      "generatedAt": "2026-09-26T16:03:21.813Z"
+    },
+    {
+      "id": "tortoise-baby",
+      "animalId": "tortoise",
+      "stage": "baby",
+      "reference": "animals/tortoise",
+      "generatedAt": "2026-09-26T16:03:32.231Z"
+    },
+    {
+      "id": "tortoise-juvenile",
+      "animalId": "tortoise",
+      "stage": "juvenile",
+      "reference": "animals/tortoise",
+      "generatedAt": "2026-09-26T16:03:40.615Z"
+    },
+    {
+      "id": "tree-frog-baby",
+      "animalId": "tree-frog",
+      "stage": "baby",
+      "reference": "animals/tree-frog",
+      "generatedAt": "2026-09-26T16:03:49.264Z"
+    },
+    {
+      "id": "tree-frog-juvenile",
+      "animalId": "tree-frog",
+      "stage": "juvenile",
+      "reference": "animals/tree-frog",
+      "generatedAt": "2026-09-26T16:03:58.622Z"
+    },
+    {
+      "id": "gecko-baby",
+      "animalId": "gecko",
+      "stage": "baby",
+      "reference": "animals/gecko",
+      "generatedAt": "2026-09-26T16:04:07.462Z"
+    },
+    {
+      "id": "gecko-juvenile",
+      "animalId": "gecko",
+      "stage": "juvenile",
+      "reference": "animals/gecko",
+      "generatedAt": "2026-09-26T16:04:15.814Z"
+    },
+    {
+      "id": "seahorse-baby",
+      "animalId": "seahorse",
+      "stage": "baby",
+      "reference": "animals/seahorse",
+      "generatedAt": "2026-09-26T16:04:25.038Z"
+    },
+    {
+      "id": "seahorse-juvenile",
+      "animalId": "seahorse",
+      "stage": "juvenile",
+      "reference": "animals/seahorse",
+      "generatedAt": "2026-09-26T16:04:34.061Z"
+    },
+    {
+      "id": "octopus-baby",
+      "animalId": "octopus",
+      "stage": "baby",
+      "reference": "animals/octopus",
+      "generatedAt": "2026-09-26T16:04:43.274Z"
+    },
+    {
+      "id": "octopus-juvenile",
+      "animalId": "octopus",
+      "stage": "juvenile",
+      "reference": "animals/octopus",
+      "generatedAt": "2026-09-26T16:04:51.539Z"
+    },
+    {
+      "id": "butterfly-baby",
+      "animalId": "butterfly",
+      "stage": "baby",
+      "reference": "animals/butterfly",
+      "generatedAt": "2026-09-26T16:04:59.392Z"
+    },
+    {
+      "id": "butterfly-juvenile",
+      "animalId": "butterfly",
+      "stage": "juvenile",
+      "reference": "animals/butterfly",
+      "generatedAt": "2026-09-26T16:05:07.522Z"
+    },
+    {
+      "id": "elephant-juvenile",
+      "animalId": "elephant",
+      "stage": "juvenile",
+      "reference": "pokemon/pikachu",
+      "generatedAt": "2026-09-26T15:49:11.188Z"
+    }
+  ]
+}

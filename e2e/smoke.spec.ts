@@ -186,3 +186,153 @@ test('a kid who picks Pokémon collects eggs instead of seeds', async ({ page })
   await expect(page.getByText('Hatchling')).toBeVisible()
   await expect(page.getByText('Green Fingers')).toHaveCount(0)
 })
+
+test('baby animals can be found by type, collected and grown through lessons', async ({ page }) => {
+  await createPlayer(page, 'Ava', /^Animals/)
+  // Start with enough coins for one baby; grow it by typing a real lesson.
+  await page.evaluate(() => {
+    const key = 'typing-teacher.save.v1'
+    const saved = JSON.parse(localStorage.getItem(key)!)
+    saved.state.save.profiles[0].coins = 20
+    localStorage.setItem(key, JSON.stringify(saved))
+  })
+  await page.reload()
+  await page.getByText('Ava', { exact: true }).click()
+  await page.getByRole('button', { name: /Animals/ }).click()
+  await expect(page.getByRole('heading', { name: 'Your animal friends' })).toBeVisible()
+  await expect(page.locator('[aria-label="Your collection"] > div')).toHaveCount(18)
+  await page.getByRole('button', { name: 'Birds', exact: true }).click()
+  await expect(page.getByRole('button', { name: /Robin/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /Red fox/ })).toHaveCount(0)
+  await page.getByRole('button', { name: 'Mammals', exact: true }).click()
+  await expect(page.getByRole('button', { name: /Red fox/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /Robin/ })).toHaveCount(0)
+  await page.getByRole('button', { name: 'More animals', exact: true }).click()
+  await expect(page.getByRole('button', { name: /Octopus/ })).toBeVisible()
+  await page.getByRole('button', { name: 'All animals', exact: true }).click()
+  await page.getByRole('button', { name: /Robin/ }).click()
+  await expect(page.getByText('Robin · Baby', { exact: true })).toBeVisible()
+  await expect(page.locator('[aria-label="Your collection"] img')).toHaveAttribute('src', /robin-baby\.webp$/)
+  await page.locator('[aria-label="Your collection"] img').evaluate(image => (image as HTMLImageElement).decode())
+  const babyWidth = (await page.locator('[aria-label="Your collection"] img').boundingBox())!.width
+  await page.getByRole('button', { name: /Back to lessons/ }).click()
+  await page.getByRole('button', { name: /Carry on with Level 1/ }).click()
+  for (let item = 0; item < 6; item++) {
+    await typeCurrentItem(page)
+    await page.waitForTimeout(500)
+  }
+  await page.getByRole('button', { name: /Spend coins/ }).click()
+  await expect(page.getByText('Robin · Juvenile', { exact: true })).toBeVisible()
+  await expect(page.locator('[aria-label="Your collection"] img')).toHaveAttribute('src', /robin-juvenile\.webp$/)
+  await page.locator('[aria-label="Your collection"] img').evaluate(image => (image as HTMLImageElement).decode())
+  expect((await page.locator('[aria-label="Your collection"] img').boundingBox())!.width).toBeGreaterThan(babyWidth)
+  await page.reload()
+  await page.getByText('Ava', { exact: true }).click()
+  await page.getByRole('button', { name: /Animals/ }).click()
+  await expect(page.getByText('Robin · Juvenile', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: /Badges/ }).click()
+  await expect(page.getByText('Animal Friend', { exact: true })).toBeVisible()
+})
+
+for (const theme of [
+  { picker: /^Garden/, nav: /Garden/, kind: 'daisy', name: /Daisy/ },
+  { picker: /^Pokémon/, nav: /Pokémon/, kind: 'magikarp', name: /Magikarp/ },
+  { picker: /^Animals/, nav: /Animals/, kind: 'robin', name: /Robin/ },
+]) {
+  test(`${theme.kind} collections grow past 18 and 24 without blocking the shop`, async ({ page }) => {
+    await createPlayer(page, 'Max', theme.picker)
+    await page.evaluate(({ kind }) => {
+      const key = 'typing-teacher.save.v1'
+      const saved = JSON.parse(localStorage.getItem(key)!)
+      saved.state.save.profiles[0].coins = 1000
+      saved.state.save.profiles[0].garden = Array.from({ length: 17 }, () => ({ kindId: kind, stage: 0 }))
+      localStorage.setItem(key, JSON.stringify(saved))
+    }, { kind: theme.kind })
+    await page.reload()
+    await page.getByText('Max', { exact: true }).click()
+    await page.getByRole('button', { name: theme.nav }).click()
+    const slots = page.locator('[aria-label="Your collection"] > div')
+    const buy = page.getByRole('button', { name: theme.name })
+    await expect(slots).toHaveCount(18)
+    await buy.click()
+    await expect(slots).toHaveCount(24)
+    for (let i = 0; i < 7; i++) await buy.click()
+    await expect(slots).toHaveCount(30)
+    await expect(buy).toBeEnabled()
+    await page.reload()
+    await page.getByText('Max', { exact: true }).click()
+    await page.getByRole('button', { name: theme.nav }).click()
+    await expect(slots).toHaveCount(30)
+    const owned = await page.evaluate(() => JSON.parse(localStorage.getItem('typing-teacher.save.v1')!).state.save.profiles[0].garden.length)
+    expect(owned).toBe(25)
+  })
+}
+
+test('a tricky lesson gets fresh practice before a missed pattern returns', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 900 })
+  await createPlayer(page, 'Rowan')
+  await page.getByRole('checkbox').first().uncheck()
+  await page.getByRole('button', { name: /Carry on with Level 1/ }).click()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  const keyboard = await page.locator('.typing-keyboard').boundingBox()
+  expect(keyboard!.x).toBeGreaterThanOrEqual(0)
+  expect(keyboard!.x + keyboard!.width).toBeLessThanOrEqual(375)
+  const firstRound: string[] = []
+  for (let item = 0; item < 6; item++) {
+    const text = await currentText(page)
+    firstRound.push(text)
+    for (const char of text) {
+      if (item === 0) for (let miss = 0; miss < 3; miss++) await page.keyboard.press('k')
+      await page.keyboard.press(char === ' ' ? 'Space' : char)
+    }
+    await page.waitForTimeout(500)
+  }
+  await expect(page.getByText('Same keys, a fresh mix next time.', { exact: false })).toBeVisible()
+  const memory = await page.evaluate(() => JSON.parse(localStorage.getItem('typing-teacher.save.v1')!).state.save.profiles[0].practice)
+  expect(memory.find((item: { text: string }) => item.text === firstRound[0])).toMatchObject({ lastSeenAt: 1, dueAt: 3 })
+  await page.getByRole('button', { name: 'Try a fresh mix!' }).click()
+  for (let item = 0; item < 6; item++) {
+    expect(firstRound).not.toContain(await currentText(page))
+    await typeCurrentItem(page)
+    await page.waitForTimeout(500)
+  }
+  // Reload before the due review: it must survive a real saved-profile reload.
+  await page.reload()
+  await page.getByText('Rowan', { exact: true }).click()
+  await page.getByRole('button', { name: /Carry on with Level 1/ }).click()
+  await typeCurrentItem(page)
+  await expect(page.getByText('🌱 Look how far you’ve come', { exact: true })).toBeVisible()
+  expect(await currentText(page)).toBe(firstRound[0])
+})
+
+test('an old starting eleven can fill its expanded squad with seven more players', async ({ page }) => {
+  await createPlayer(page, 'Skipper', /^Women's Super League/)
+  const newNames = ['Phallon Tullis-Joyce', 'Lotte Wubben-Moy', 'Naomi Girma', 'Sjoeke Nüsken', 'Jess Park', 'Lauren Hemp', 'Aggie Beever-Jones']
+  await page.evaluate(() => {
+    const key = 'typing-teacher.save.v1'
+    const saved = JSON.parse(localStorage.getItem(key)!)
+    saved.version = 3
+    saved.state.save.version = 3
+    const p = saved.state.save.profiles[0]
+    delete p.practice
+    p.coins = 140
+    p.badges = ['full-garden']
+    p.garden = ['hampton', 'bronze', 'bright', 'williamson', 'greenwood', 'walsh', 'toone', 'mariona', 'james', 'russo', 'shaw'].map(kindId => ({ kindId, stage: 4 }))
+    localStorage.setItem(key, JSON.stringify(saved))
+  })
+  await page.reload()
+  await page.getByText('Skipper', { exact: true }).click()
+  await page.getByRole('button', { name: /Squad/ }).click()
+  await expect(page.locator('[aria-label="Your collection"] > div')).toHaveCount(18)
+  for (const name of newNames) await page.getByRole('button', { name: new RegExp(name) }).click()
+  await expect(page.locator('[aria-label="Your collection"] img')).toHaveCount(18)
+  const images = await page.locator('[aria-label="Your collection"] img').evaluateAll(async imgs => {
+    await Promise.all(imgs.map(img => (img as HTMLImageElement).decode()))
+    return imgs.every(img => (img as HTMLImageElement).naturalWidth > 0)
+  })
+  expect(images).toBe(true)
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('typing-teacher.save.v1')!))
+  expect(saved.version).toBe(4)
+  expect(saved.state.save.profiles[0]).toMatchObject({ coins: 0, badges: ['full-garden'], practice: [] })
+  await expect(page.getByRole('button', { name: /Phallon Tullis-Joyce/ })).toBeDisabled()
+})

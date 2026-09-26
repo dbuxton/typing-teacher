@@ -25,11 +25,16 @@ can manage.
   lucky lesson doesn't promote a kid into material they can't handle, and one bad
   day doesn't undo their progress either.
 - **Lessons get gentler when they're struggling.** Fewer items, shorter words, no
-  sentence, fewer Spelling Stars. In the first version every lesson was identical
-  and a struggling kid simply failed to unlock, over and over, which is
-  demoralising in a way that's easy to miss from the code.
+  sentence, fewer Spelling Stars. Repeat lessons rotate short key patterns and
+  draw fresh words from the wider bank, always using unlocked keys. Most words
+  target the new keys, with familiar material mixed in for confidence.
+- **Tricky bits return after a break.** Recent words and patterns are remembered
+  across reloads. A missed typing item gets a full lesson's gap, then at most one
+  exact typing review appears per lesson. A clean return earns a longer gap; two
+  clean returns retire it. Spelling also respects a full lesson's gap after a miss.
+  Progression still depends on accuracy, and every completed round earns rewards.
 - **Help comes back.** If accuracy stays low the keyboard steps back in, and the app
-  *offers* an easier level — as an offer, with "no, stay here" right beside it.
+  *offers* an easier level — as an offer, with a fresh mix on the current level right beside it.
 - **Speed is personal.** Three stars is measured against the kid's own recent best,
   never a fixed words-per-minute, so it stays reachable at 7 and still means
   something at 9.
@@ -57,8 +62,8 @@ weeks is the one they keep, and hunt-and-peck is horrible to unlearn. So:
   (`src/engine/scoring.ts`) if you want to retune it.
 
 **Drills are the warm-up, not the workout.** Two short drill items per lesson,
-then real words and sentences. Levels 1–2 are unavoidably drill-heavy (there are
-no words in "f j"), so they're short — the aim is to reach real words in the
+then real words and sentences. Level 1 is unavoidably drill-only (there are
+no words in "f j"), so it stays short — the aim is to reach real words in the
 first session, because that's the session that decides if there's a second one.
 
 **Spelling is woven in, and it's a real spelling test.** From level 4, a couple of
@@ -79,7 +84,7 @@ a fortnight and it's exactly as you left it.
 Each player picks what their coins buy when they're created:
 
 - **Garden** — painted seedlings that grow into illustrated flowers and trees.
-- **Women's Super League** — sign a starting eleven of WSL and Lionesses players.
+- **Women's Super League** — collect an 18-player squad of WSL and Lionesses players.
   Each lesson is a training session that upgrades her card: Academy → Bronze →
   Silver → Gold → Legend. Each card has its own illustrated player portrait,
   a shirt in club colours, and a frame that upgrades. Every player costs the same. The squad and their clubs
@@ -87,12 +92,24 @@ Each player picks what their coins buy when they're created:
 - **Pokémon** — eggs that hatch and then evolve, across nine evolution lines.
   Speckled eggs and all 26 characters use painted illustrations with transparent
   backgrounds. These are generated fan illustrations, not official artwork.
+- **Animals** — 18 species with three illustrations each: six birds, six mammals, and six more
+  animals including reptiles, a frog, a seahorse, an octopus and a butterfly.
+  Browse by animal type. Each baby costs 20 coins; every lesson grows it one
+  stage: Baby → Juvenile → Adult. Frogs grow from tadpoles through froglets,
+  and butterflies from caterpillars through chrysalises.
+
+Garden, Pokémon and Animals start with **18 spaces** and automatically add six
+more whenever the collection fills. There is no purchase limit for these themes,
+so a longer practice journey never runs out of rewards. Their collection badge
+is earned at 18; badges earned under the old 12-space limit stay earned.
+Football has 18 unique players: a starting eleven plus seven more squad members.
+The full-squad badge now targets 18; an already-earned football badge stays earned.
 
 Generated images live in `public/art/rewards/` as transparent 512px WebP files.
 Each plant, egg and player portrait was requested individually using the built-in
-image generator. The Pokémon were generated individually with Nano Banana 2,
+image generator. The Pokémon and animals were generated individually with Nano Banana 2,
 using the supplied Pikachu as a style reference. The exact prompt set and asset
-notes are in `docs/reward-art.md`; `docs/nano-banana-2.md` explains regeneration.
+notes are in `docs/reward-art.md`; `docs/nano-banana-2.md`, `docs/animal-art.md` and `docs/football-art.md` explain regeneration.
 All images load locally; names, prices, card tiers and saved growth stages remain data.
 
 The theme can't be changed later, because switching would leave a whole
@@ -120,9 +137,9 @@ lesson map to switch them off.
 ```
 src/
   data/      curriculum.ts (12 levels), spellingWords.ts, badges.ts,
-             rewards/ (garden, football and pokemon themes)
+             rewards/ (garden, football, pokemon and animals themes)
   art/       RewardArt, portrait cards, asset mappings and fallback egg art
-  engine/    pure logic, all unit-tested — adaptive, generator, scoring, srs,
+  engine/    pure logic, all unit-tested — adaptive, generator, practice, scoring, srs,
              sneakyStars, assist, speech, keymap, and the useTypingSession hook
   store/     schema.ts (versioned save + migrations), profileStore.ts (zustand)
   components/ Keyboard, Hands, TypingArea, SpellingCard, SneakyStar, Chrome
@@ -167,7 +184,7 @@ change that to match or the assets 404.
 Everything lives in `localStorage` under `typing-teacher.save.v1`, keyed by
 player, so several kids can share one computer with separate collections. The
 save is versioned with a migration hook (`src/store/schema.ts`), currently at
-version 3. `src/store/schema.test.ts` checks that older saves keep their coins,
+version 4. The v3 → v4 migration adds empty practice memory. `src/store/schema.test.ts` checks that older saves keep their coins,
 garden, badges and level rather than resetting (v1 and v2 players become
 gardeners). Clearing site data clears the lot;
 there's no backup, because there's no server.

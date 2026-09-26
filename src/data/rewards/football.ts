@@ -38,7 +38,7 @@ export type Player = {
   club: Club
 }
 
-/** A starting eleven in a 4-3-3, keeper first. */
+/** The original starting eleven, plus seven more players to fill an 18-player squad. */
 export const PLAYERS: Player[] = [
   { id: 'hampton', fullName: 'Hannah Hampton', cardName: 'Hampton', position: 'GK', club: CLUBS.chelsea },
   { id: 'bronze', fullName: 'Lucy Bronze', cardName: 'Bronze', position: 'DEF', club: CLUBS.chelsea },
@@ -51,6 +51,13 @@ export const PLAYERS: Player[] = [
   { id: 'james', fullName: 'Lauren James', cardName: 'James', position: 'FWD', club: CLUBS.chelsea },
   { id: 'russo', fullName: 'Alessia Russo', cardName: 'Russo', position: 'FWD', club: CLUBS.arsenal },
   { id: 'shaw', fullName: 'Khadija Shaw', cardName: 'Shaw', position: 'FWD', club: CLUBS.city },
+  { id: 'tullis-joyce', fullName: 'Phallon Tullis-Joyce', cardName: 'Tullis-Joyce', position: 'GK', club: CLUBS.united },
+  { id: 'wubben-moy', fullName: 'Lotte Wubben-Moy', cardName: 'Wubben-Moy', position: 'DEF', club: CLUBS.arsenal },
+  { id: 'girma', fullName: 'Naomi Girma', cardName: 'Girma', position: 'DEF', club: CLUBS.chelsea },
+  { id: 'nusken', fullName: 'Sjoeke Nüsken', cardName: 'Nüsken', position: 'MID', club: CLUBS.chelsea },
+  { id: 'park', fullName: 'Jess Park', cardName: 'Park', position: 'MID', club: CLUBS.united },
+  { id: 'hemp', fullName: 'Lauren Hemp', cardName: 'Hemp', position: 'FWD', club: CLUBS.city },
+  { id: 'beever-jones', fullName: 'Aggie Beever-Jones', cardName: 'Beever-Jones', position: 'FWD', club: CLUBS.chelsea },
 ]
 
 /** Card tiers, lowest first. The stage number is the index into this list. */
@@ -88,7 +95,7 @@ export const FOOTBALL: RewardTheme = {
   backdropClass: 'bg-gradient-to-b from-green-200 to-green-50',
   badgeCopy: {
     first: { name: 'Signed!', emoji: '✍️', how: 'Sign your first player' },
-    full: { name: 'Full XI', emoji: '⚽', how: 'Sign a whole starting eleven' },
+    full: { name: 'Full Squad', emoji: '⚽', how: 'Sign all 18 players' },
   },
   kinds: SQUAD,
 }

@@ -11,6 +11,8 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "art:pokemon": "node scripts/generate-pokemon.mjs",
+    "art:animals": "node scripts/generate-animals.mjs",
+    "art:football": "node scripts/generate-football.mjs",
     "art:test": "node --test scripts/generate-pokemon.test.mjs"
   },
   "dependencies": {
