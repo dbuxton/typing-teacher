@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { getPlanet, keyLabel } from '../data/planets'
+import { getPlanet, keyLabel, keysInWords, type Planet } from '../data/planets'
 import { shipPart } from '../data/ship'
 import { playSound } from '../engine/sound'
 import { useStarTrail } from '../store/pilotStore'
@@ -31,6 +31,13 @@ function powerOrder(keys: readonly string[]): string[] {
 function matches(eventKey: string, key: string): boolean {
   const capital = key !== key.toLowerCase()
   return capital ? eventKey === key : eventKey.toLowerCase() === key
+}
+
+/** What this planet's trails need, in words. */
+function trailKeys(planet: Planet): string {
+  if (planet.id === 1) return 'the home row'
+  if (planet.newKeys.includes('Shift')) return 'capital letters, made with Shift'
+  return `new keys: ${keysInWords(planet.newKeys)}`
 }
 
 function instruction(key: string, first: boolean, planetId: number): string {
@@ -87,8 +94,9 @@ export function Arrival({ pilot }: { pilot: Pilot }) {
             Welcome to {planet.name}
           </h1>
           <p className="max-w-lg text-lg">
-            The crew of the Lost Ship hid its <strong>{shipPart(planet.partId).name.toLowerCase()}</strong> here, in three
-            pieces. Their trails use {planet.id === 1 ? 'the home row' : 'some new keys'} — let’s power them up.
+            The crew hid the Lost Ship’s <strong>{shipPart(planet.partId).name.toLowerCase()}</strong> here, in three
+            pieces. Their trails use {trailKeys(planet)} — power {planet.newKeys.length === 1 ? 'it' : 'them'} up so your
+            ship can read them.
           </p>
         </div>
 

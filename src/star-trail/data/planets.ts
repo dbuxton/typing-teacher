@@ -11,7 +11,9 @@ import type { ShipPartId } from './ship'
  * intro powers them up first instead). `? ! '` never appear: the key map has no
  * finger for them.
  *
- * Names and colours are placeholders — rename away.
+ * Each planet's name hides its new letters — Seal Isle for E and I, Yeti Tundra
+ * for Y and T — and matches the silly things in its messages (seals skiing,
+ * yetis eating stardust jelly). A test keeps every renamed planet doing that.
  */
 
 export type Planet = {
@@ -30,14 +32,14 @@ export type Planet = {
 
 const PLANET_INFO: { levelId: number; name: string; hue: string; partId: ShipPartId }[] = [
   { levelId: 2, name: 'Home Moon', hue: '#5ef2ff', partId: 'hull' },
-  { levelId: 3, name: 'Echo', hue: '#a6ff6a', partId: 'cockpit' },
+  { levelId: 3, name: 'Seal Isle', hue: '#a6ff6a', partId: 'cockpit' },
   { levelId: 4, name: 'Rusty Rock', hue: '#ff8f70', partId: 'nose-cone' },
-  { levelId: 5, name: 'Twinkle Twins', hue: '#ff6fd8', partId: 'wings' },
-  { levelId: 6, name: 'Glow Giant', hue: '#ffe36e', partId: 'fuel-tanks' },
-  { levelId: 7, name: 'Orbit Nine', hue: '#a98bff', partId: 'landing-legs' },
-  { levelId: 8, name: 'Comet Valley', hue: '#4dffc3', partId: 'tail-fin' },
-  { levelId: 9, name: 'Quasar Point', hue: '#6aa8ff', partId: 'radar-dish' },
-  { levelId: 10, name: 'Buzz Nebula', hue: '#ff5c8a', partId: 'main-engine' },
+  { levelId: 5, name: 'Yeti Tundra', hue: '#ff6fd8', partId: 'wings' },
+  { levelId: 6, name: 'Glow Heights', hue: '#ffe36e', partId: 'fuel-tanks' },
+  { levelId: 7, name: 'Planet Doughnut', hue: '#a98bff', partId: 'landing-legs' },
+  { levelId: 8, name: 'Volcano Moon', hue: '#4dffc3', partId: 'tail-fin' },
+  { levelId: 9, name: 'Warp Quasar', hue: '#6aa8ff', partId: 'radar-dish' },
+  { levelId: 10, name: 'Buzzbox', hue: '#ff5c8a', partId: 'main-engine' },
   { levelId: 11, name: 'Capital Star', hue: '#fff4c2', partId: 'star-drive' },
 ]
 
@@ -85,4 +87,12 @@ export function keyLabel(key: string): string {
   if (key === ' ') return 'Space'
   if (key === 'Shift') return 'Shift'
   return key.toUpperCase()
+}
+
+const KEY_NAMES: Record<string, string> = { ',': 'comma', '.': 'full stop', ';': 'semicolon' }
+
+/** Keys as words for a sentence: "E and I", "B, X, Z, comma and full stop". */
+export function keysInWords(keys: readonly string[]): string {
+  const words = keys.map((key) => KEY_NAMES[key] ?? keyLabel(key))
+  return words.length <= 1 ? (words[0] ?? '') : `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}`
 }

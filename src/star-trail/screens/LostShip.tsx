@@ -23,7 +23,8 @@ export function LostShip({ pilot }: { pilot: Pilot }) {
       <main className="relative z-10 mx-auto flex w-full max-w-4xl flex-1 flex-col items-center gap-5 px-4 pb-10 text-center">
         <h1 className="neon-title text-5xl font-black text-neon-cyan">The Lost Ship</h1>
         <p className="text-dim">
-          {found} of {TOTAL_PIECES} pieces found. Each planet hides one part, in three pieces.
+          {found} of {TOTAL_PIECES} pieces found. Each planet hides one part, in three pieces. Rebuild the ship and it
+          will take you to its crew.
         </p>
         <div className="st-panel w-full p-4">
           <LostShipArt pieces={pilot.pieces} size={640} />

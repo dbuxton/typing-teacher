@@ -5,6 +5,7 @@ import { PLANETS, isTypeableOn, keysFor, newKeysIn } from './planets'
 import { SENTENCES } from './sentences'
 import { SHIP_PARTS } from './ship'
 import { ENDING } from './ending'
+import { CREW, STORY } from './story'
 import { SHIP_SHAPES } from '../components/shipShapes'
 
 describe('planets', () => {
@@ -32,6 +33,16 @@ describe('planets', () => {
   it('never asks for the keys that catch sparkles, skip a letter or pause', () => {
     for (const planet of PLANETS) {
       for (const key of [CATCH_KEY, SKIP_KEY, PAUSE_KEY]) expect(planet.allKeys, planet.name).not.toContain(key)
+    }
+  })
+
+  it('names each planet so it hides the letters it teaches', () => {
+    // Seal Isle teaches E and I, Yeti Tundra Y and T… The home row and the
+    // Shift planet are named for what they teach instead.
+    for (const planet of PLANETS.filter((p) => p.id !== 1)) {
+      for (const letter of planet.newKeys.filter((key) => /^[a-z]$/.test(key))) {
+        expect(planet.name.toLowerCase(), `${planet.name} should hide ${letter}`).toContain(letter)
+      }
     }
   })
 
@@ -119,8 +130,12 @@ describe('the Lost Ship', () => {
     }
   })
 
-  it('has an ending to reach', () => {
+  it('has an ending that finds the crew from the story', () => {
     expect(ENDING.title.length).toBeGreaterThan(0)
     expect(ENDING.lines.length).toBeGreaterThan(0)
+    for (const member of CREW) {
+      expect(STORY.premise, member).toContain(member)
+      expect(ENDING.lines.join(' '), member).toContain(member)
+    }
   })
 })

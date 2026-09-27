@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getPlanet } from '../data/planets'
+import { STORY } from '../data/story'
 import { totalPieces, TOTAL_PIECES } from '../engine/settle'
 import { useStarTrail } from '../store/pilotStore'
 import { NeonButton } from '../components/Chrome'
@@ -35,9 +36,8 @@ export function Hangar() {
       <div className="flex flex-col items-center gap-3 text-center">
         <ShipSprite size={120} className="text-neon-cyan" />
         <h1 className="neon-title text-6xl font-black tracking-wide text-neon-cyan sm:text-7xl">Star Trail</h1>
-        <p className="max-w-md text-lg text-dim">
-          Follow the glowing letters across the galaxy and find the pieces of the Lost Ship.
-        </p>
+        <p className="max-w-xl text-lg text-dim">{STORY.premise}</p>
+        <p className="max-w-xl text-lg font-bold text-ink">{STORY.callToAction}</p>
       </div>
 
       {touchOnly && (

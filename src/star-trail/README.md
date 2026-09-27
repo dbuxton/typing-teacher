@@ -14,6 +14,22 @@ in a kid's notebook:
 npm run dev    # then open http://localhost:5173/typing-teacher/star-trail/
 ```
 
+## The story
+
+Long ago, a star storm broke the Lost Ship into thirty pieces. Its crew,
+Captain Zog, Commander Pip and Robot Bleep, hid the pieces on ten planets. Then
+they drifted off in their escape pod, leaving a trail of glowing letters to
+every piece. The messages on the trails are theirs, and they're a silly bunch.
+Rebuild the ship and it takes you to them. The premise is in `data/story.ts`
+and the payoff in `data/ending.ts`.
+
+Each planet's name hides the letters it teaches, as a memory aid: Seal Isle
+(E, I), Rusty Rock (R, U), Yeti Tundra (T, Y), Glow Heights (G, H), Planet
+Doughnut (O, N), Volcano Moon (C, V, M), Warp Quasar (W, Q, P) and Buzzbox
+(B, X, Z). Home Moon is the home row and Capital Star is for capitals. The
+names also match the planets' messages: seals skiing, yetis eating stardust
+jelly, and a lost treasure inside the volcano.
+
 ## How it plays
 
 **Follow the trail.** A trail of glowing letters stretches across space. Only
@@ -63,8 +79,8 @@ data:
 | To change… | Edit |
 |---|---|
 | The messages on the trails | `data/sentences.ts`. `npm test` checks every message only uses its planet's keys. |
-| Planet names and colours | `data/planets.ts` |
-| Where the Lost Ship takes you at the end | `data/ending.ts` |
+| Planet names and colours | `data/planets.ts`. A test checks each name still hides its planet's new letters. |
+| The story, and where the Lost Ship takes you at the end | `data/story.ts` and `data/ending.ts` |
 | Ship part names | `data/ship.ts` |
 | Prices, fuel, trail lengths and every other number | `engine/balance.ts` |
 

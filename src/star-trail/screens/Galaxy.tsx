@@ -1,4 +1,4 @@
-import { PLANETS, getPlanet, keyLabel } from '../data/planets'
+import { PLANETS, getPlanet, keyLabel, keysInWords } from '../data/planets'
 import { shipPart } from '../data/ship'
 import { PIECES_PER_PLANET } from '../engine/balance'
 import { launchCheck } from '../engine/economy'
@@ -151,7 +151,7 @@ function LaunchPanel({ pilot, onLaunch, onStation }: { pilot: Pilot; onLaunch: (
     <section className="st-panel flex flex-col gap-3 p-5" aria-label="Next planet">
       <h2 className="text-xl font-extrabold">
         Next stop: <span style={{ color: next.hue }}>{next.name}</span>
-        <span className="ml-2 text-sm font-bold text-dim">new keys: {next.newKeys.map(keyLabel).join(' ')}</span>
+        <span className="ml-2 text-sm font-bold text-dim">new keys: {keysInWords(next.newKeys)}</span>
       </h2>
       <ul className="flex flex-col gap-1">
         <Tick done={check.piecesFound >= check.piecesNeeded}>

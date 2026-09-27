@@ -257,7 +257,7 @@ test('launching waits for the engines, then lands on a planet with new keys', as
     { planet: 1, result: 'found', practice: false, letters: 30, slips: 1, accuracy: 0.97, newKeyTries: 30, newKeySlips: 1, stardust: 30, help: 'letters', date: '2026-09-27' },
   ]
   await seed(page, { pieces: { 1: 3 }, stardust: 120, history, introsSeen: [1] })
-  const launch = page.getByRole('button', { name: /Launch to Echo/ })
+  const launch = page.getByRole('button', { name: /Launch to Seal Isle/ })
   await expect(launch).toBeDisabled()
 
   await page.getByRole('button', { name: /Station/ }).click()
@@ -266,7 +266,7 @@ test('launching waits for the engines, then lands on a planet with new keys', as
   await expect(launch).toBeEnabled()
   await launch.click()
 
-  await expect(page.getByRole('heading', { name: 'Welcome to Echo' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Welcome to Seal Isle' })).toBeVisible()
   await expect(page.locator('[data-power-key]')).toHaveText(['E', 'I'])
 })
 
