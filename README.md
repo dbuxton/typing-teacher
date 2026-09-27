@@ -165,6 +165,22 @@ that — a word using a letter the kid hasn't met yet fails the build. (It caugh
 "they" sitting two levels before `h` is taught, and `because` five levels before
 `b`.)
 
+## Also in this repo: Star Trail
+
+A second, quite different typing game lives at **`/typing-teacher/star-trail/`**
+(its own page, its own save, no links between the two). You fly a little ship
+along a trail of glowing letters. Only the next letter shows, and the letters
+build into words and then a message that leads to a piece of the Lost Ship.
+Stardust buys a scanner, shields, a robot sidekick and bigger engines. Wrong
+keys burn fuel, and running dry means a tow home. It's all drawn in neon, in
+code, with no image files.
+
+It teaches keys from scratch in the same order as the lessons here, and shares
+only Typing Teacher's key map, random numbers, speech and curriculum key order.
+Everything else is in `src/star-trail/`; see
+[`src/star-trail/README.md`](src/star-trail/README.md) for how it plays and how
+to change the messages, planet names, ending and difficulty.
+
 ## Commands
 
 ```bash
@@ -182,6 +198,8 @@ at it instead: `PLAYWRIGHT_CHROMIUM_PATH=/path/to/chrome npm run e2e`.
 
 `.github/workflows/deploy.yml` builds and publishes on every push to `main`. It
 needs one manual step, once: **Settings → Pages → Source → GitHub Actions**.
+Both pages go out together: Typing Teacher at the root and Star Trail at
+`star-trail/`.
 
 The site is served from a sub-path, so `vite.config.ts` sets
 `base: '/typing-teacher/'`. If you fork this under a different repository name,
