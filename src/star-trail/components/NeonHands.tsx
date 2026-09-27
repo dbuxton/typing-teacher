@@ -33,15 +33,15 @@ function Hand({ fingers, active, side }: { fingers: Finger[]; active?: Finger; s
     <svg width="92" height="82" viewBox="0 0 96 86" aria-hidden className="st-hand">
       {/* Drawn back to front: thumb and fingers first, then the palm over their roots. */}
       <rect
-        x={side === 'left' ? 70 : 8}
-        y="56"
+        x={side === 'left' ? 76 : 2}
+        y="54"
         width="18"
         height="14"
         rx="7"
         fill={thumb ?? SKY}
         stroke={thumb ?? IDLE}
         strokeWidth="2"
-        transform={`rotate(${side === 'left' ? -25 : 25} ${side === 'left' ? 79 : 17} 63)`}
+        transform={`rotate(${side === 'left' ? -25 : 25} ${side === 'left' ? 85 : 11} 61)`}
         className={thumb ? 'st-finger-lit' : undefined}
       />
       {fingers.map((finger, index) => {
