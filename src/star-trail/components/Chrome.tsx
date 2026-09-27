@@ -100,6 +100,8 @@ export function useEnterToContinue(action: () => void, delayMs = 700) {
     const armedAt = Date.now() + delayMs
     function onKeyDown(event: KeyboardEvent) {
       if (event.key !== 'Enter' || event.repeat || Date.now() < armedAt) return
+      // Enter on a focused button or field belongs to that control.
+      if (event.target instanceof Element && event.target.closest('button, a, input, select, textarea')) return
       event.preventDefault()
       ref.current()
     }

@@ -58,7 +58,7 @@ export const TOW_STREAK_SPARES = [0, 0, 1, 2]
 /** Most spare cans Mission Control will add when even a short trail looks risky. */
 export const MAX_TOP_UP = 3
 
-// ─── Max's rule: helpers make the next hunt harder, but it pays more ───────
+// ─── The notebook's rule: helpers make the next hunt harder, but it pays more
 
 /** Each scanner, shield or robot level makes trails this many letters longer. */
 export const LETTERS_PER_HELPER_LEVEL = 1.5

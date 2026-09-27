@@ -25,7 +25,7 @@ import {
  *  - WHICH KEYS: only ever the planet's. Nothing bought can add a key the kid
  *    hasn't been taught.
  *  - HOW LONG AND HOW DARK: this file. Trails grow with every piece found and
- *    every planet flown to, and — Max's rule — with every helper bought: better
+ *    every planet flown to, and — the notebook's rule — with every helper bought: better
  *    kit lets you go deeper, where it's darker and the trail is longer, but the
  *    stardust is richer.
  *

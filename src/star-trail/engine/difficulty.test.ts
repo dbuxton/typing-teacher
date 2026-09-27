@@ -107,7 +107,7 @@ describe('trail length', () => {
   })
 })
 
-describe('Max’s rule: helpers make the next hunt harder, but it pays more', () => {
+describe('The notebook’s rule: helpers make the next hunt harder, but it pays more', () => {
   const kit = (scanner: number, shields: number, robot: number, engines = 0): Upgrades => ({
     scanner,
     shields,

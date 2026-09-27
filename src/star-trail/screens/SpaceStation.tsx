@@ -13,7 +13,7 @@ import { Starfield } from '../components/Starfield'
  * The space station: where stardust becomes helpers. Four tracks, each with a
  * few levels; higher levels arrive in stock as the pilot flies further.
  *
- * Max's rule is spelled out here rather than hidden: better kit takes you
+ * The notebook's rule is spelled out here rather than hidden: better kit takes you
  * deeper, where trails are longer and darker — and stardust is worth more.
  */
 export function SpaceStation({ pilot }: { pilot: Pilot }) {
