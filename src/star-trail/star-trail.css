@@ -1,0 +1,58 @@
+/*
+ * Star Trail's own stylesheet. `source('./')` points Tailwind at this folder
+ * only, so Typing Teacher's classes never end up in here (and the page's HTML,
+ * which sits outside this folder, is deliberately unstyled — body styles live
+ * below instead).
+ *
+ * Everything is drawn in code: the neon look is layered text- and box-shadows
+ * over a near-black sky. Mistakes are amber, never red — same rule as Typing
+ * Teacher, same reason.
+ */
+@import 'tailwindcss' source('./');
+
+@theme {
+  --font-sans: ui-rounded, 'Nunito', 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, 'Courier New', monospace;
+
+  --color-space-950: #03040c;
+  --color-space-900: #070a1c;
+  --color-space-800: #0d1233;
+  --color-space-700: #161d4a;
+  --color-space-600: #242d66;
+  --color-ink: #e8edff;
+  --color-dim: #8a93c9;
+
+  --color-neon-cyan: #5ef2ff;
+  --color-neon-pink: #ff6fd8;
+  --color-neon-lime: #a6ff6a;
+  --color-neon-violet: #a98bff;
+  --color-neon-gold: #ffe36e;
+  --color-neon-amber: #ffb547;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 15% -10%, #16205a 0%, transparent 55%),
+    radial-gradient(ellipse at 95% 110%, #2b0f4d 0%, transparent 50%),
+    var(--color-space-950);
+  background-attachment: fixed;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  /* A kid holding a key down shouldn't select the whole page. */
+  user-select: none;
+}
+
+.neon-title {
+  text-shadow:
+    0 0 4px currentColor,
+    0 0 14px currentColor,
+    0 0 36px color-mix(in srgb, currentColor 60%, transparent);
+}
