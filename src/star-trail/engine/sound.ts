@@ -1,3 +1,6 @@
+import type { HornTune } from '../data/makeovers'
+import type { PetId } from './balance'
+
 /**
  * Little synthesised sound effects — no audio files, nothing to download.
  *
@@ -113,6 +116,58 @@ export function playSound(kind: SoundKind): void {
       break
     case 'power':
       tone(ac, 300, 0.2, 'sawtooth', 0.025, 0, 900)
+      break
+  }
+}
+
+/** The horn a pilot bought at the station, played when a piece is found. */
+export function playHorn(tune: HornTune): void {
+  const ac = audio()
+  if (!ac) return
+  switch (tune) {
+    case 'chime':
+      playSound('found')
+      break
+    case 'trumpet':
+      ;[392, 523, 659].forEach((f, i) => tone(ac, f, 0.16, 'sawtooth', 0.035, i * 0.13))
+      tone(ac, 784, 0.55, 'sawtooth', 0.04, 0.39)
+      break
+    case 'robot':
+      ;[880, 660, 990, 740, 1320].forEach((f, i) => tone(ac, f, 0.07, 'square', 0.03, i * 0.09))
+      tone(ac, 1760, 0.2, 'square', 0.025, 0.47)
+      break
+    case 'slide':
+      tone(ac, 380, 0.55, 'sine', 0.07, 0, 1500)
+      tone(ac, 1500, 0.25, 'sine', 0.06, 0.55, 900)
+      break
+    case 'fanfare':
+      ;[523, 523, 523].forEach((f, i) => tone(ac, f, 0.1, 'triangle', 0.06, i * 0.13))
+      tone(ac, 698, 0.3, 'triangle', 0.07, 0.4)
+      tone(ac, 659, 0.12, 'triangle', 0.06, 0.72)
+      tone(ac, 784, 0.6, 'triangle', 0.07, 0.86)
+      break
+  }
+}
+
+/** A pet doing its trick: a mew, a woof, a warble or a puff. */
+export function playPetSound(pet: PetId): void {
+  const ac = audio()
+  if (!ac) return
+  switch (pet) {
+    case 'cat':
+      tone(ac, 880, 0.2, 'sine', 0.05, 0, 620)
+      break
+    case 'puppy':
+      tone(ac, 420, 0.1, 'square', 0.03, 0, 200)
+      tone(ac, 420, 0.1, 'square', 0.03, 0.14, 200)
+      break
+    case 'alien':
+      tone(ac, 600, 0.09, 'sine', 0.05, 0, 1300)
+      tone(ac, 1300, 0.12, 'sine', 0.045, 0.09, 700)
+      break
+    case 'dragon':
+      whoosh(ac, 0.5, 0.12)
+      tone(ac, 150, 0.4, 'sawtooth', 0.02, 0, 80)
       break
   }
 }

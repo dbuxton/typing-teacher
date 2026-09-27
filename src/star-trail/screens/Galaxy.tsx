@@ -1,11 +1,16 @@
+import { makeRng } from '../../engine/rng'
 import { PLANETS, getPlanet, keyLabel, keysInWords } from '../data/planets'
+import { petFor } from '../data/pets'
 import { shipPart } from '../data/ship'
-import { PIECES_PER_PLANET } from '../engine/balance'
+import { GADGET_INFO } from '../data/shop'
+import { GADGETS, PIECES_PER_PLANET } from '../engine/balance'
 import { launchCheck } from '../engine/economy'
 import { TOTAL_PIECES, totalPieces } from '../engine/settle'
 import { useStarTrail } from '../store/pilotStore'
 import type { Pilot } from '../store/schema'
 import { NeonButton, TopBar, useEnterToContinue } from '../components/Chrome'
+import { PetSprite } from '../components/PetSprite'
+import { ShipSprite } from '../components/PilotShip'
 import { PlanetOrb } from '../components/Sprites'
 import { Starfield } from '../components/Starfield'
 
@@ -25,6 +30,8 @@ export function Galaxy({ pilot }: { pilot: Pilot }) {
   const atFrontier = pilot.planet === pilot.highestPlanet
   const check = launchCheck(pilot)
   const shipDone = totalPieces(pilot) === TOTAL_PIECES
+  const pet = petFor(pilot.look.pet)
+  const loaded = GADGETS.filter((gadget) => pilot.cargo[gadget] > 0)
 
   useEnterToContinue(() => startHunt(), 300)
 
@@ -74,7 +81,13 @@ export function Galaxy({ pilot }: { pilot: Pilot }) {
         )}
 
         <section className="st-panel flex flex-col gap-4 p-5 sm:flex-row sm:items-center">
-          <PlanetOrb hue={planet.hue} size={110} ringed={planet.id % 3 === 0} />
+          <div className="flex shrink-0 items-center justify-center self-center">
+            <PlanetOrb hue={planet.hue} size={110} ringed={planet.id % 3 === 0} />
+            <div className="-ml-2 flex items-end self-end" title="Your ship">
+              {pet && <PetSprite pet={pet.pet} size={26} />}
+              <ShipSprite size={70} look={pilot.look} />
+            </div>
+          </div>
           <div className="flex flex-1 flex-col gap-2">
             <h1 className="neon-text text-3xl font-black" style={{ color: planet.hue }}>
               {planet.name}
@@ -111,6 +124,17 @@ export function Galaxy({ pilot }: { pilot: Pilot }) {
               Hunt! 🔭
             </NeonButton>
             <span className="text-xs text-dim">or press Enter</span>
+            {loaded.length > 0 && (
+              <span className="mt-1 flex flex-wrap justify-center gap-1" data-testid="cargo">
+                {loaded.map((gadget) => (
+                  <span key={gadget} className="st-chip text-neon-gold" title={GADGET_INFO[gadget].name}>
+                    {GADGET_INFO[gadget].icon}
+                    {pilot.cargo[gadget] > 1 ? ` ×${pilot.cargo[gadget]}` : ''}
+                  </span>
+                ))}
+                <span className="w-full text-xs text-dim">loaded for your next hunt</span>
+              </span>
+            )}
           </div>
         </section>
 
@@ -123,6 +147,8 @@ export function Galaxy({ pilot }: { pilot: Pilot }) {
         )}
 
         {atFrontier && check.next !== null && <LaunchPanel pilot={pilot} onLaunch={launch} onStation={() => goTo('station')} />}
+
+        {pilot.stars.length > 0 && <NamedStars stars={pilot.stars} />}
       </main>
     </div>
   )
@@ -182,6 +208,37 @@ function LaunchPanel({ pilot, onLaunch, onStation }: { pilot: Pilot; onLaunch: (
           Launch to {next.name}! 🚀
         </NeonButton>
       </div>
+    </section>
+  )
+}
+
+/** Stars the pilot has named at the space station, each twinkling in its own spot. */
+function NamedStars({ stars }: { stars: string[] }) {
+  const columns = 4
+  return (
+    <section className="st-panel p-4" aria-label="Your named stars">
+      <h2 className="text-sm font-extrabold uppercase tracking-wide text-neon-gold">⭐ Your stars</h2>
+      <ul className="st-sky" style={{ height: `${Math.ceil(stars.length / columns) * 4.5 + 1}rem` }}>
+        {stars.map((name, index) => {
+          const rng = makeRng(index * 7919 + 17)
+          const column = index % columns
+          const row = Math.floor(index / columns)
+          return (
+            <li
+              key={index}
+              className="st-named-star"
+              style={{
+                left: `${((column + 0.15 + 0.5 * rng()) / columns) * 100}%`,
+                top: `${row * 4.5 + 0.6 + rng() * 1.2}rem`,
+                animationDelay: `${rng() * 3}s`,
+              }}
+            >
+              <span className="st-named-star-glow" aria-hidden />
+              <span className="st-named-star-name">{name}</span>
+            </li>
+          )
+        })}
+      </ul>
     </section>
   )
 }

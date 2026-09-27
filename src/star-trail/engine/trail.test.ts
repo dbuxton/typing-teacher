@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { MISSES_BEFORE_SKIP, SHIELD_REGEN_STREAK } from './balance'
+import { CAT_STREAK, MISSES_BEFORE_SKIP, SHIELD_REGEN_STREAK } from './balance'
 import {
   initTrail,
   isNearEnd,
@@ -8,6 +8,7 @@ import {
   nextChar,
   outcomeOf,
   visibleAhead,
+  wordsAhead,
   type TrailAction,
   type TrailSetup,
   type TrailState,
@@ -23,6 +24,7 @@ function setupFor(text: string, overrides: Partial<TrailSetup> = {}): TrailSetup
     training: false,
     stardustPerLetter: 1,
     lootPerCatch: null,
+    pet: null,
     ...overrides,
   }
 }
@@ -213,6 +215,49 @@ describe('sparkles and the robot', () => {
   })
 })
 
+describe('pets', () => {
+  const long = 'asdf jkl; asdf jkl; asdf'
+
+  it('makes the space cat purr for every run of clean letters, starting again after a slip', () => {
+    const setup = setupFor(long, { pet: { id: 'cat', bonus: 2, fetchAt: null } })
+    const clean = run(setup, typed(long.slice(0, CAT_STREAK)))
+    expect(clean).toMatchObject({ petTricks: 1, petBonus: 2 })
+    expect(clean.event?.kind).toBe('pet')
+
+    const slipped = run(setup, [...typed(long.slice(0, CAT_STREAK - 1)), ...miss(), key(long[CAT_STREAK - 1])])
+    expect(slipped.petTricks).toBe(0)
+    expect(run(setup, typed(long)).petTricks).toBe(Math.floor(long.length / CAT_STREAK))
+  })
+
+  it('makes the baby alien wave at every word', () => {
+    const setup = setupFor('as dad falls', { pet: { id: 'alien', bonus: 1, fetchAt: null } })
+    expect(run(setup, typed('as da')).petTricks).toBe(1)
+    expect(run(setup, typed('as dad'))).toMatchObject({ petTricks: 2, petBonus: 2, event: { kind: 'pet' } })
+    expect(run(setup, typed('as dad falls')).petTricks).toBe(3)
+  })
+
+  it('sends the moon puppy to fetch a sparkle once, where the plan says', () => {
+    const setup = setupFor(long, { pet: { id: 'puppy', bonus: 3, fetchAt: 6 } })
+    expect(run(setup, typed(long.slice(0, 5))).petTricks).toBe(0)
+    expect(run(setup, typed(long.slice(0, 6)))).toMatchObject({ petTricks: 1, petBonus: 3 })
+    expect(run(setup, typed(long)).petTricks).toBe(1)
+  })
+
+  it('lets the star dragon puff its ring only when the tank wasn’t touched', () => {
+    const setup = setupFor('as dad', { shields: 1, pet: { id: 'dragon', bonus: 5, fetchAt: null } })
+    // A shield took the slip: the tank is still full.
+    expect(run(setup, [...miss(), ...typed('as dad')])).toMatchObject({ status: 'found', petTricks: 1, petBonus: 5 })
+    const burned = run(setup, [...miss(), key('a'), ...miss(), ...typed('s dad')])
+    expect(burned).toMatchObject({ status: 'found', petTricks: 0 })
+  })
+
+  it('keeps what the pet brought after a tow', () => {
+    const setup = setupFor('as dad', { shields: 0, tank: 1, pet: { id: 'alien', bonus: 1, fetchAt: null } })
+    const towed = run(setup, [...typed('as '), ...miss()])
+    expect(outcomeOf(towed, 0)).toMatchObject({ result: 'towed', petBonus: 1, petTricks: 1 })
+  })
+})
+
 describe('bookkeeping', () => {
   it('counts one try per letter, and capitals towards Shift as well', () => {
     const setup = setupFor('Ab')
@@ -273,6 +318,15 @@ describe('what the pilot can see', () => {
     expect(messageSoFar(run(setup, typed('as dad')), setup)).toBe('as dad')
     expect(messageSoFar(run(setup, typed('as dad f')), setup)).toBe('as dad')
     expect(messageSoFar(run(setup, typed('as dad falls')), setup)).toBe('as dad falls')
+  })
+
+  it('knows the words still to come, for the star map', () => {
+    expect(wordsAhead(initTrail(setup), setup)).toEqual([2, 3, 5])
+    // Part-way through a word, that word still counts…
+    expect(wordsAhead(run(setup, typed('as d')), setup)).toEqual([3, 5])
+    // …and on the space after it, it's done.
+    expect(wordsAhead(run(setup, typed('as dad')), setup)).toEqual([5])
+    expect(wordsAhead(run(setup, typed('as dad falls')), setup)).toEqual([])
   })
 
   it('knows when the piece is close', () => {

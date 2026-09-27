@@ -1,5 +1,5 @@
 import {
-  FUEL_TANK,
+  DEEPER_TRACKS,
   HELPER_LEVELS_PER_DEEP_STEP,
   LETTERS_PER_HELPER_LEVEL,
   MAX_TOP_UP,
@@ -12,6 +12,7 @@ import {
   SHIELD_PIPS,
   SLIP_RATE_FALL,
   SLIP_RATE_RISE,
+  TANK_CANS,
   TOW_STREAK_SHRINK,
   TOW_STREAK_SPARES,
   TRAINING_FLIGHTS,
@@ -33,9 +34,13 @@ import {
  * the pilot's recent slip rate and their fuel plus shields can safely cover.
  */
 
-/** Scanner, shield and robot levels together. Engines don't count: they only change where you are. */
+/**
+ * Helper levels that take the pilot deeper: scanner, shields, robot and fuel
+ * tank. Engines only change where you are; the star map and the magnet don't
+ * make a hunt any easier.
+ */
 export function helperLevels(upgrades: Upgrades): number {
-  return upgrades.scanner + upgrades.shields + upgrades.robot
+  return DEEPER_TRACKS.reduce((sum, track) => sum + upgrades[track], 0)
 }
 
 /** How much deeper than the planet's own darkness the pilot's kit takes them. */
@@ -56,9 +61,14 @@ export function maxShields(upgrades: Upgrades): number {
   return SHIELD_PIPS[upgrades.shields]
 }
 
+/** Fuel cans in the tank, bigger with each fuel-tank level. */
+export function tankCans(upgrades: Upgrades): number {
+  return TANK_CANS[upgrades.tank]
+}
+
 /** Slips a pilot can make and still finish (the next one is a tow). */
 export function slack(upgrades: Upgrades): number {
-  return FUEL_TANK + maxShields(upgrades) - 1
+  return tankCans(upgrades) + maxShields(upgrades) - 1
 }
 
 /**

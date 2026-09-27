@@ -60,7 +60,7 @@ export const MAX_TOP_UP = 3
 
 // ─── The notebook's rule: helpers make the next hunt harder, but it pays more
 
-/** Each scanner, shield or robot level makes trails this many letters longer. */
+/** Each scanner, shield, robot or fuel-tank level makes trails this many letters longer. */
 export const LETTERS_PER_HELPER_LEVEL = 1.5
 /** Every this-many helper levels, the pilot flies one step deeper (darker) into space… */
 export const HELPER_LEVELS_PER_DEEP_STEP = 3
@@ -113,12 +113,21 @@ export function planetBalance(planetId: number): PlanetBalance {
 
 // ─── The space station ─────────────────────────────────────────────────────
 
-export type TrackId = 'scanner' | 'shields' | 'robot' | 'engines'
-export const TRACKS: readonly TrackId[] = ['scanner', 'shields', 'robot', 'engines']
+export type TrackId = 'scanner' | 'shields' | 'robot' | 'tank' | 'map' | 'magnet' | 'engines'
+export const TRACKS: readonly TrackId[] = ['scanner', 'shields', 'robot', 'tank', 'map', 'magnet', 'engines']
+/** The helpers: everything the station sells but engines, which only change where you are. */
+export const HELPER_TRACKS: readonly TrackId[] = TRACKS.filter((track) => track !== 'engines')
+/**
+ * The helpers that make a hunt easier, and so (the notebook's rule) take the
+ * pilot deeper. The star map only shows where you are, and the magnet only
+ * brings stardust: "money, not something that helps you". Counting them too
+ * made the shakiest simulated kids take far longer, for no help in return.
+ */
+export const DEEPER_TRACKS: readonly TrackId[] = ['scanner', 'shields', 'robot', 'tank']
 
 /** A pilot's level on each station track. */
 export type Upgrades = Record<TrackId, number>
-export const NO_UPGRADES: Upgrades = { scanner: 0, shields: 0, robot: 0, engines: 0 }
+export const NO_UPGRADES: Upgrades = { scanner: 0, shields: 0, robot: 0, tank: 0, map: 0, magnet: 0, engines: 0 }
 
 export type StockLevel = {
   price: number
@@ -164,6 +173,34 @@ export const ROBOT_LEVELS: readonly RobotLevel[] = [
   { price: 90, stockAt: 5, catchMs: 2000, lootPerCatch: 4, sparkleEvery: 15 },
   { price: 160, stockAt: 8, catchMs: 2500, lootPerCatch: 5, sparkleEvery: 12 },
 ]
+/** Fuel cans in the tank at each fuel-tank level. */
+export const TANK_CANS = [FUEL_TANK, 6, 7, 8]
+export const TANK_LEVELS: readonly StockLevel[] = [
+  { price: 50, stockAt: 2 },
+  { price: 110, stockAt: 4 },
+  { price: 190, stockAt: 7 },
+]
+
+/**
+ * The star map. Level 1 counts the words left to the piece; level 2 also shows
+ * the shape of the words still to come, as blanks — handy for pacing a long trail.
+ */
+export const MAP_LEVELS: readonly StockLevel[] = [
+  { price: 35, stockAt: 1 },
+  { price: 90, stockAt: 4 },
+]
+
+/** Extra stardust from every letter at each magnet level (added to the deep-space bonus). */
+export const MAGNET_BONUS = [0, 0.1, 0.2, 0.3]
+export const MAGNET_LEVELS: readonly StockLevel[] = [
+  { price: 45, stockAt: 2 },
+  { price: 100, stockAt: 5 },
+  { price: 170, stockAt: 8 },
+]
+
+/** A pilot slipping on this share of letters or more is steered towards shields and fuel. */
+export const SHAKY_SLIP_RATE = 0.12
+
 /** Sparkles per trail stay between these, and away from the very start and end. */
 export const MIN_SPARKLES = 1
 export const MAX_SPARKLES = 4
@@ -171,6 +208,41 @@ export const SPARKLE_FROM = 0.2
 export const SPARKLE_TO = 0.8
 /** How long an uncatchable sparkle drifts past a pilot with no robot yet. */
 export const NUDGE_SPARKLE_MS = 1500
+
+// ─── Gadgets: bought at the station, used up on the next hunt ──────────────
+
+export type GadgetId = 'fuel' | 'shield' | 'flare' | 'clover'
+export const GADGETS: readonly GadgetId[] = ['fuel', 'shield', 'flare', 'clover']
+/** The most of each gadget one hunt can use, which is also how many can be loaded. */
+export const GADGET_MAX: Record<GadgetId, number> = { fuel: 3, shield: 3, flare: 1, clover: 1 }
+/**
+ * Prices on the first planet. Further out they rise in step with what a trail
+ * pays there, so a gadget always costs roughly the same share of a hunt: a
+ * lucky clover stays a gamble that pays off on a good hunt, rather than a way to
+ * print stardust.
+ */
+export const GADGET_PRICE: Record<GadgetId, number> = { fuel: 10, shield: 10, flare: 15, clover: 20 }
+/** Extra letters a flare lights up, on top of the scanner. */
+export const FLARE_LETTERS = 3
+/** A lucky clover multiplies the stardust from every letter, sparkle and pet by this. */
+export const CLOVER_MULTIPLIER = 2
+
+// ─── Pets: one rides along, and brings a little stardust ───────────────────
+
+export type PetId = 'cat' | 'puppy' | 'alien' | 'dragon'
+/** Clean letters in a row that make the space cat purr. */
+export const CAT_STREAK = 10
+/** What each of a pet's tricks is worth, as a multiple of the hunt's stardust per letter. */
+export const PET_BONUS: Record<PetId, number> = { cat: 2, puppy: 3, alien: 0.5, dragon: 5 }
+/** Where along the trail the moon puppy fetches its sparkle. */
+export const PUPPY_FROM = 0.3
+export const PUPPY_TO = 0.7
+
+// ─── Named stars ───────────────────────────────────────────────────────────
+
+export const STAR_PRICE = 50
+export const MAX_NAMED_STARS = 12
+export const STAR_NAME_LENGTH = 16
 
 // ─── The navigator check (launching to a new planet) ───────────────────────
 

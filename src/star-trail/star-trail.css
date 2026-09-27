@@ -242,8 +242,21 @@ button.st-chip:focus-visible {
   text-shadow: 0 0 6px currentColor;
 }
 
-.st-cell-clean { color: var(--color-neon-cyan); }
+/* Clean letters glow in the pilot's trail colour (some trails take turns, letter by letter). */
+.st-cell-clean { color: var(--tint, var(--trail, var(--color-neon-cyan))); }
 .st-cell-slipped { color: var(--color-neon-amber); }
+
+/* A dot under a slipped letter, so it still stands out whatever colour the trail is. */
+.st-cell-slipped::after {
+  position: absolute;
+  bottom: 0.02em;
+  width: 0.2em;
+  height: 0.2em;
+  border-radius: 50%;
+  background: var(--color-neon-amber);
+  box-shadow: 0 0 6px var(--color-neon-amber);
+  content: '';
+}
 
 .st-cell-skipped {
   color: var(--color-dim);
@@ -335,6 +348,67 @@ button.st-chip:focus-visible {
   animation: st-bob 2.4s ease-in-out infinite;
 }
 
+/* The pet rides just behind the ship, and bounces when it does its trick. */
+.st-pet-ride {
+  position: absolute;
+  right: calc(100% - 10px);
+  bottom: 40%;
+}
+
+.st-pet-trick {
+  animation: st-pet-hop 0.6s ease-out;
+}
+
+.st-pet-trick .st-pet-wave {
+  transform-origin: 27px 25px;
+  animation: st-pet-wave 0.3s ease-in-out 2 alternate;
+}
+
+@keyframes st-pet-hop {
+  0%, 100% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-14px) scale(1.15); }
+  60% { transform: translateY(0) scale(0.95); }
+}
+
+@keyframes st-pet-wave {
+  from { transform: rotate(-20deg); }
+  to { transform: rotate(20deg); }
+}
+
+/* Rainbow paint and flames shimmer through the neon colours. */
+.st-rainbow-colour {
+  animation: st-rainbow-colour 3s linear infinite;
+}
+
+/* On the trail the ship also bobs, and a flame always flickers: keep both going. */
+.st-trail-ship > svg.st-rainbow-colour {
+  animation:
+    st-bob 2.4s ease-in-out infinite,
+    st-rainbow-colour 3s linear infinite;
+}
+
+.st-flame.st-rainbow-fill {
+  animation:
+    st-flicker 0.18s ease-in-out infinite alternate,
+    st-rainbow-fill 2s linear infinite;
+}
+
+@keyframes st-rainbow-colour {
+  0%, 100% { color: #ff6fd8; }
+  20% { color: #ffe36e; }
+  40% { color: #a6ff6a; }
+  60% { color: #5ef2ff; }
+  80% { color: #a98bff; }
+}
+
+@keyframes st-rainbow-fill {
+  0%, 100% { fill: #ff6fd8; }
+  20% { fill: #ffe36e; }
+  40% { fill: #a6ff6a; }
+  60% { fill: #5ef2ff; }
+  80% { fill: #a98bff; }
+}
+
 .st-trail-found .st-cell-clean,
 .st-trail-found .st-cell-slipped {
   color: var(--color-neon-gold);
@@ -401,6 +475,23 @@ button.st-chip:focus-visible {
 
 @keyframes st-blink {
   50% { opacity: 0; }
+}
+
+/* The star map's picture of the words still to come. */
+.st-map-shape {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+  margin-left: 0.6em;
+  vertical-align: middle;
+}
+
+.st-map-word {
+  display: inline-block;
+  height: 0.28em;
+  border-radius: 0.14em;
+  background: var(--color-neon-violet);
+  opacity: 0.55;
 }
 
 /* ─── Keyboard and hands ─────────────────────────────────────────────────── */
@@ -537,6 +628,126 @@ button.st-chip:focus-visible {
   50% { transform: translateX(10px) rotate(2deg); }
 }
 
+/* ─── The space station ──────────────────────────────────────────────────── */
+
+.st-tab {
+  border: 2px solid color-mix(in srgb, var(--color-neon-pink) 35%, transparent);
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  color: var(--color-dim);
+  font-weight: 900;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.st-tab:hover {
+  background: color-mix(in srgb, var(--color-neon-pink) 10%, transparent);
+  color: var(--color-ink);
+}
+
+.st-tab[aria-selected='true'] {
+  border-color: var(--color-neon-pink);
+  background: color-mix(in srgb, var(--color-neon-pink) 18%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--color-neon-pink) 35%, transparent);
+  color: var(--color-neon-pink);
+}
+
+.st-tab:focus-visible,
+.st-tile-try:focus-visible {
+  outline: 3px solid var(--color-neon-gold);
+  outline-offset: 3px;
+}
+
+.st-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--color-neon-cyan) 20%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--color-space-800) 75%, transparent);
+  padding: 0.75rem 0.5rem;
+}
+
+.st-tile-wearing {
+  border-color: var(--color-neon-lime);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--color-neon-lime) 30%, transparent);
+}
+
+.st-tile-trying {
+  border-color: var(--color-neon-gold);
+}
+
+.st-tile-try {
+  display: flex;
+  min-height: 52px;
+  min-width: 80px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+.st-tile-try:hover {
+  background: rgb(255 255 255 / 6%);
+}
+
+.st-preview-letter {
+  text-shadow: 0 0 6px currentColor;
+}
+
+/* How close the pilot is to affording the next engine. */
+.st-meter {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-space-700);
+}
+
+.st-meter > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-neon-gold);
+  box-shadow: 0 0 10px var(--color-neon-gold);
+}
+
+/* Stars a pilot has named, on the galaxy map. */
+.st-sky {
+  position: relative;
+}
+
+.st-named-star {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  transform: translateX(-50%);
+}
+
+.st-named-star-glow {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 6px #fff,
+    0 0 14px var(--color-neon-gold),
+    0 0 28px var(--color-neon-gold);
+  animation: st-twinkle 3s ease-in-out infinite;
+  animation-delay: inherit;
+}
+
+.st-named-star-name {
+  color: var(--color-neon-gold);
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+  text-shadow: 0 0 6px color-mix(in srgb, var(--color-neon-gold) 60%, transparent);
+}
+
 /* ─── The Lost Ship ──────────────────────────────────────────────────────── */
 
 /* The part a piece was just found for pulses brighter for a moment. */
@@ -579,7 +790,13 @@ button.st-chip:focus-visible {
   .st-trail-found .st-cell-slipped,
   .st-part-new,
   .st-ending-flight,
-  .st-ship-flying path {
+  .st-ship-flying path,
+  .st-pet-trick,
+  .st-pet-trick .st-pet-wave,
+  .st-rainbow-colour,
+  .st-trail-ship > svg.st-rainbow-colour,
+  .st-flame.st-rainbow-fill,
+  .st-named-star-glow {
     animation: none;
   }
 

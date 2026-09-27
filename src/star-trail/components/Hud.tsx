@@ -1,9 +1,8 @@
-import { FUEL_TANK } from '../engine/balance'
-
 /**
  * The flight gauges: shields, fuel and stardust. Deliberately few and big — a
  * kid should read "two shields, three cans" at a glance without looking away
- * from the trail for long.
+ * from the trail for long. Gadgets in use and the star map's count sit beside
+ * them.
  */
 
 function FuelCan({ state }: { state: 'full' | 'empty' | 'spare' }) {
@@ -28,16 +27,26 @@ export function Gauges({
   shields,
   maxShields,
   tank,
+  tankSize,
   spare,
   stardust,
   training,
+  clover,
+  flare,
+  wordsLeft,
 }: {
   shields: number
   maxShields: number
   tank: number
+  /** Cans a full tank holds. */
+  tankSize: number
   spare: number
   stardust: number
   training: boolean
+  clover: boolean
+  flare: boolean
+  /** Words left to the piece, when there's a star map to count them. */
+  wordsLeft: number | null
 }) {
   return (
     <div className="flex flex-wrap items-center gap-x-5 gap-y-2" data-tank={tank} data-spare={spare} data-shields={shields}>
@@ -46,8 +55,8 @@ export function Gauges({
           <ShieldPip key={i} on={i < shields} />
         ))}
       </div>
-      <div className="flex items-center gap-1" aria-label={`Fuel: ${tank} of ${FUEL_TANK} cans${spare ? `, ${spare} spare` : ''}`} title="Fuel">
-        {Array.from({ length: FUEL_TANK }, (_, i) => (
+      <div className="flex items-center gap-1" aria-label={`Fuel: ${tank} of ${tankSize} cans${spare ? `, ${spare} spare` : ''}`} title="Fuel">
+        {Array.from({ length: tankSize }, (_, i) => (
           <FuelCan key={i} state={i < tank ? 'full' : 'empty'} />
         ))}
         {Array.from({ length: spare }, (_, i) => (
@@ -57,6 +66,13 @@ export function Gauges({
       <span className="st-chip text-neon-gold" aria-label={`${stardust} stardust this hunt`}>
         ✨ {stardust}
       </span>
+      {wordsLeft !== null && wordsLeft > 0 && (
+        <span className="st-chip text-neon-violet" data-testid="map-count">
+          🗺️ {wordsLeft} {wordsLeft === 1 ? 'word' : 'words'} to the piece
+        </span>
+      )}
+      {clover && <span className="st-chip text-neon-lime">🍀 Double stardust</span>}
+      {flare && <span className="st-chip text-neon-gold">🎇 Flare lit</span>}
       {training && <span className="st-chip text-neon-lime">Training flight: the tank can’t run dry</span>}
     </div>
   )

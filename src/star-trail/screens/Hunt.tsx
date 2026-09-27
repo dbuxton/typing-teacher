@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { worn } from '../data/makeovers'
 import { getPlanet, keyLabel } from '../data/planets'
 import { PIECES_PER_PLANET } from '../engine/balance'
 import { effectiveHelp, showsKeyboard } from '../engine/help'
 import { CATCH_KEY } from '../engine/keys'
 import type { HuntPlan } from '../engine/plan'
+import { wordsAhead } from '../engine/trail'
 import { useTrail } from '../engine/useTrail'
 import { useStarTrail } from '../store/pilotStore'
 import type { Pilot } from '../store/schema'
@@ -31,12 +33,16 @@ export function Hunt({ pilot, plan }: { pilot: Pilot; plan: HuntPlan }) {
     plan,
     onFinish: recordHunt,
     sound: pilot.sound,
+    horn: worn(pilot.look, 'horn').tune,
   })
 
   const help = effectiveHelp(plan.help, state.missesHere)
   const keyboardOn = showsKeyboard(help, state.recentlyMissed)
   const piecesHere = pilot.pieces[plan.planetId] ?? 0
-  const pop = useStardustPops(state.event, state.banked + state.loot)
+  const earned = state.banked + state.loot + state.petBonus
+  const pop = useStardustPops(state.event, earned)
+  // The star map: how many words are left, and at level 2 their shapes too.
+  const words = plan.mapLevel > 0 ? wordsAhead(state, plan) : []
 
   return (
     <div className="st-screen">
@@ -62,9 +68,13 @@ export function Hunt({ pilot, plan }: { pilot: Pilot; plan: HuntPlan }) {
           shields={state.shields}
           maxShields={plan.maxShields}
           tank={state.tank}
+          tankSize={plan.tank}
           spare={state.spare}
-          stardust={state.banked + state.loot}
+          stardust={earned}
           training={plan.training}
+          clover={plan.gadgets.clover > 0}
+          flare={plan.gadgets.flare > 0}
+          wordsLeft={plan.mapLevel > 0 && state.status === 'flying' ? words.length : null}
         />
 
         <p className="st-message" aria-live="polite" data-testid="message">
@@ -73,13 +83,20 @@ export function Hunt({ pilot, plan }: { pilot: Pilot; plan: HuntPlan }) {
           </span>
           {message}
           {state.status === 'flying' && <span className="st-caret" aria-hidden />}
+          {plan.mapLevel > 1 && words.length > 0 && (
+            <span className="st-map-shape" aria-hidden data-testid="map-shape">
+              {words.map((length, index) => (
+                <span key={index} className="st-map-word" style={{ width: `${length * 0.62}em` }} />
+              ))}
+            </span>
+          )}
         </p>
 
         <div className="relative">
-          <TrailView plan={plan} state={state} ahead={ahead} hue={planet.hue} />
+          <TrailView plan={plan} state={state} ahead={ahead} hue={planet.hue} look={pilot.look} />
           {state.sparkle && (
             <div
-              key={state.sparkle.id}
+              key={`sparkle-${state.sparkle.id}`}
               className="st-sparkle"
               style={{ '--drift-ms': `${plan.catchMs}ms` } as React.CSSProperties}
               data-testid="sparkle"
@@ -93,7 +110,7 @@ export function Hunt({ pilot, plan }: { pilot: Pilot; plan: HuntPlan }) {
             </div>
           )}
           {pop && state.status === 'flying' && (
-            <span key={pop.seq} className="st-pop absolute left-[38%] top-2 font-black text-neon-gold neon-text">
+            <span key={`pop-${pop.seq}`} className="st-pop absolute left-[38%] top-2 font-black text-neon-gold neon-text">
               +{pop.amount} ✨
             </span>
           )}
@@ -141,9 +158,7 @@ export function Hunt({ pilot, plan }: { pilot: Pilot; plan: HuntPlan }) {
                 Back to base
               </button>
             </div>
-            {state.banked + state.loot > 0 && (
-              <p className="text-sm text-dim">You’ll keep the ✨ {state.banked + state.loot} stardust you’ve banked.</p>
-            )}
+            {earned > 0 && <p className="text-sm text-dim">You’ll keep the ✨ {earned} stardust you’ve banked.</p>}
           </div>
         </div>
       )}

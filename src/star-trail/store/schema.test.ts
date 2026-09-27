@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { PLANET_COUNT } from '../data/planets'
-import { START_SLIP_RATE } from '../engine/balance'
-import { SAVE_VERSION, makePilot, maxLevel, migrate, sanitizeSave, type Pilot } from './schema'
+import { DEFAULT_LOOK } from '../data/makeovers'
+import { GADGET_MAX, NO_UPGRADES, STAR_NAME_LENGTH, START_SLIP_RATE } from '../engine/balance'
+import { SAVE_VERSION, emptyCargo, makePilot, maxLevel, migrate, sanitizeSave, type Pilot } from './schema'
 
 describe('reading a save', () => {
   it('turns anything unreadable into an empty save rather than a crash', () => {
@@ -51,7 +52,7 @@ describe('reading a save', () => {
     expect(pilot.stardust).toBe(0)
     expect(pilot.planet).toBe(4)
     expect(pilot.pieces).toEqual({ 1: 3 })
-    expect(pilot.upgrades).toEqual({ scanner: maxLevel('scanner'), shields: 0, robot: 0, engines: 3 })
+    expect(pilot.upgrades).toEqual({ ...NO_UPGRADES, scanner: maxLevel('scanner'), engines: 3 })
     expect(pilot.slipRate).toBe(START_SLIP_RATE)
     expect(pilot.help).toBe('letters')
     expect(pilot.keyStats).toEqual({ a: { attempts: 5, errors: 5 } })
@@ -70,6 +71,30 @@ describe('reading a save', () => {
     const save = sanitizeSave({ pilots: [pilot, pilot], activePilotId: 'someone-deleted' })
     expect(new Set(save.pilots.map((p) => p.id)).size).toBe(2)
     expect(save.activePilotId).toBeNull()
+  })
+
+  it('gives an old save’s pilots an empty cargo hold, a plain ship and no stars', () => {
+    const [pilot] = sanitizeSave({ pilots: [{ name: 'Old', stardust: 5 }] }).pilots
+    expect(pilot).toMatchObject({ cargo: emptyCargo(), owned: [], look: DEFAULT_LOOK, stars: [] })
+  })
+
+  it('only lets a ship wear what the pilot owns, but never forgets a purchase', () => {
+    const [pilot] = sanitizeSave({
+      pilots: [
+        {
+          name: 'Zed',
+          // 'paint:plaid' might come from a newer build: kept, but not worn.
+          owned: ['paint:pink', 'pet:cat', 'paint:plaid', 'paint:pink', 7],
+          look: { paint: 'paint:plaid', ship: 'ship:saucer', trail: 'trail:cyan', horn: 42, pet: 'pet:cat' },
+          cargo: { fuel: 99, clover: -1, flare: 'yes' },
+          stars: ['  Mum  ', '', 'A name far too long to fit on the galaxy map', 3],
+        },
+      ],
+    }).pilots
+    expect(pilot.owned).toEqual(['paint:pink', 'pet:cat', 'paint:plaid'])
+    expect(pilot.look).toEqual({ ...DEFAULT_LOOK, pet: 'pet:cat' })
+    expect(pilot.cargo).toEqual({ ...emptyCargo(), fuel: GADGET_MAX.fuel })
+    expect(pilot.stars).toEqual(['Mum', 'A name far too lo'.slice(0, STAR_NAME_LENGTH).trim()])
   })
 
   it('gives the same answer when run twice', () => {

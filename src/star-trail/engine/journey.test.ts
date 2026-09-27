@@ -3,8 +3,8 @@ import process from 'node:process'
 import { makeRng, type Rng } from '../../engine/rng'
 import { PLANET_COUNT, getPlanet } from '../data/planets'
 import { makePilot, type Pilot } from '../store/schema'
-import { TRAINING_FLIGHTS, type TrackId } from './balance'
-import { buyUpgrade, launch, stockStatus } from './economy'
+import { HELPER_TRACKS, TRAINING_FLIGHTS, type TrackId } from './balance'
+import { buyUpgrade, launch, stockStatus, suggestHelper } from './economy'
 import { planHunt } from './plan'
 import { settleHunt, TOTAL_PIECES, totalPieces } from './settle'
 import { initTrail, makeTrailReducer, outcomeOf } from './trail'
@@ -21,7 +21,7 @@ import { initTrail, makeTrailReducer, outcomeOf } from './trail'
  *  - running out of fuel is real but occasional, and never happens in a row
  *    more than a few times;
  *  - trails grow as the kid does, and a shaky kid gets shorter ones;
- *  - buying helpers pays off.
+ *  - buying helpers pays off — the ones Mission Control suggests, at least.
  *
  * Kids are modelled simply: a chance of slipping on each letter that is higher
  * on keys new to them (and eases as they practise), eases a little overall as
@@ -42,7 +42,7 @@ type Journey = {
   lengthsPerPlanet: number[][]
 }
 
-const HELPERS: TrackId[] = ['scanner', 'shields', 'robot']
+const HELPERS = HELPER_TRACKS
 const MAX_HUNTS = 600
 
 function flyHunt(pilot: Pilot, kid: Kid, rng: Rng, seed: number, lettersSoFar: number) {
@@ -108,10 +108,10 @@ function shop(pilot: Pilot, kid: Kid, boughtHere: Set<number>): Pilot {
     tryBuy('engines')
     return current
   }
-  // Mixed: one helper per planet, then save up for the engine.
+  // Mixed: one helper per planet (the one Mission Control suggests), then save up for the engine.
   if (!boughtHere.has(current.highestPlanet)) {
-    const option = cheapest()
-    if (option && tryBuy(option.track)) boughtHere.add(current.highestPlanet)
+    const tip = suggestHelper(current)
+    if (tip && tryBuy(tip)) boughtHere.add(current.highestPlanet)
   }
   return current
 }

@@ -1,14 +1,24 @@
+import { DEFAULT_LOOK, MAKEOVER_KINDS, makeover, type Look } from '../data/makeovers'
 import { PLANET_COUNT } from '../data/planets'
+import { petFor } from '../data/pets'
 import {
+  GADGETS,
+  GADGET_MAX,
   HISTORY_LIMIT,
+  MAX_NAMED_STARS,
+  MAGNET_LEVELS,
+  MAP_LEVELS,
   NO_UPGRADES,
   PIECES_PER_PLANET,
   RECENT_LIMIT,
   ROBOT_LEVELS,
   SCANNER_LEVELS,
   SHIELD_LEVELS,
+  STAR_NAME_LENGTH,
   START_SLIP_RATE,
+  TANK_LEVELS,
   TRACKS,
+  type GadgetId,
   type TrackId,
   type Upgrades,
 } from '../engine/balance'
@@ -80,6 +90,14 @@ export type Pilot = {
   endingSeen: boolean
   sound: boolean
   history: HuntRecord[]
+  /** Gadgets loaded for the next hunt. */
+  cargo: Record<GadgetId, number>
+  /** Makeovers and pets bought, by id. The free makeovers are never listed. */
+  owned: string[]
+  /** What the ship looks like, and who rides along. */
+  look: Look
+  /** Stars the pilot has named, in the order they were named. */
+  stars: string[]
 }
 
 export type SaveFile = {
@@ -128,7 +146,20 @@ export function makePilot(name: string, avatar: string): Pilot {
     endingSeen: false,
     sound: true,
     history: [],
+    cargo: emptyCargo(),
+    owned: [],
+    look: { ...DEFAULT_LOOK },
+    stars: [],
   }
+}
+
+export function emptyCargo(): Record<GadgetId, number> {
+  return { fuel: 0, shield: 0, flare: 0, clover: 0 }
+}
+
+/** Tidy a star's name: single spaces, and not too long to fit on the map. */
+export function cleanStarName(name: string): string {
+  return name.replace(/\s+/g, ' ').trim().slice(0, STAR_NAME_LENGTH).trim()
 }
 
 /** The highest level each station track goes to. */
@@ -140,6 +171,12 @@ export function maxLevel(track: TrackId): number {
       return SHIELD_LEVELS.length
     case 'robot':
       return ROBOT_LEVELS.length
+    case 'tank':
+      return TANK_LEVELS.length
+    case 'map':
+      return MAP_LEVELS.length
+    case 'magnet':
+      return MAGNET_LEVELS.length
     case 'engines':
       return PLANET_COUNT - 1
   }
@@ -222,6 +259,45 @@ function huntRecord(value: unknown): HuntRecord | null {
   }
 }
 
+function cargo(value: unknown): Record<GadgetId, number> {
+  const out = emptyCargo()
+  if (!isObject(value)) return out
+  for (const gadget of GADGETS) out[gadget] = int(value[gadget], 0, GADGET_MAX[gadget], 0)
+  return out
+}
+
+/**
+ * Everything bought, by id. Ids this build doesn't know are kept: they may be
+ * from a newer build, and dropping them would lose a kid's purchase for good.
+ */
+function owned(value: unknown): string[] {
+  if (!Array.isArray(value)) return []
+  const ids = value.filter((id): id is string => typeof id === 'string' && id.length > 0 && id.length <= 40)
+  return [...new Set(ids)].slice(0, 200)
+}
+
+/** Only what the pilot owns (or is free) can be worn; anything else goes back to the default. */
+function look(value: unknown, have: readonly string[]): Look {
+  const out: Look = { ...DEFAULT_LOOK }
+  if (!isObject(value)) return out
+  for (const kind of MAKEOVER_KINDS) {
+    const item = typeof value[kind] === 'string' ? makeover(value[kind] as string) : undefined
+    if (item && item.kind === kind && (item.price === 0 || have.includes(item.id))) out[kind] = item.id
+  }
+  const pet = typeof value.pet === 'string' ? petFor(value.pet) : undefined
+  out.pet = pet && have.includes(pet.id) ? pet.id : null
+  return out
+}
+
+function stars(value: unknown): string[] {
+  if (!Array.isArray(value)) return []
+  return value
+    .filter((name): name is string => typeof name === 'string')
+    .map(cleanStarName)
+    .filter((name) => name.length > 0)
+    .slice(0, MAX_NAMED_STARS)
+}
+
 export function sanitizePilot(value: unknown): Pilot | null {
   if (!isObject(value)) return null
   const base = makePilot(text(value.name, 'Pilot'), text(value.avatar, '🧑‍🚀'))
@@ -242,6 +318,7 @@ export function sanitizePilot(value: unknown): Pilot | null {
     : []
 
   const stardust = int(value.stardust, 0, Number.MAX_SAFE_INTEGER, 0)
+  const have = owned(value.owned)
 
   return {
     // Unknown fields ride along untouched, in case a newer build wrote them.
@@ -268,6 +345,10 @@ export function sanitizePilot(value: unknown): Pilot | null {
     endingSeen: value.endingSeen === true,
     sound: value.sound !== false,
     history,
+    cargo: cargo(value.cargo),
+    owned: have,
+    look: look(value.look, have),
+    stars: stars(value.stars),
   }
 }
 

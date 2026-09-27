@@ -1,9 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { RECENT_LIMIT, type TrackId } from '../engine/balance'
+import { RECENT_LIMIT, type GadgetId, type TrackId } from '../engine/balance'
 import { buyUpgrade, launch, travelTo } from '../engine/economy'
 import { planHunt, type HuntPlan } from '../engine/plan'
 import { settleHunt, type HuntSummary } from '../engine/settle'
+import { buyGadget, buyItem, leavePetHome, nameStar, wear } from '../engine/shop'
 import type { HuntOutcome } from '../engine/trail'
 import { safeStorage } from './safeStorage'
 import {
@@ -51,6 +52,14 @@ type Actions = {
   finishIntro(): void
   recordHunt(outcome: HuntOutcome): void
   buyUpgrade(track: TrackId): void
+  /** Load a gadget for the next hunt. */
+  buyGadget(gadget: GadgetId): void
+  /** Buy a makeover or a pet, and put it straight on. */
+  buyItem(id: string): void
+  /** Wear a makeover already owned, or take an owned pet along. */
+  wear(id: string): void
+  leavePetHome(): void
+  nameStar(name: string): void
   launch(): void
   toggleSound(): void
   finishEnding(): void
@@ -177,6 +186,26 @@ export const useStarTrail = create<Store>()(
 
       buyUpgrade(track) {
         set((state) => ({ save: updatePilot(state.save, state.save.activePilotId, (pilot) => buyUpgrade(pilot, track)) }))
+      },
+
+      buyGadget(gadget) {
+        set((state) => ({ save: updatePilot(state.save, state.save.activePilotId, (pilot) => buyGadget(pilot, gadget)) }))
+      },
+
+      buyItem(id) {
+        set((state) => ({ save: updatePilot(state.save, state.save.activePilotId, (pilot) => buyItem(pilot, id)) }))
+      },
+
+      wear(id) {
+        set((state) => ({ save: updatePilot(state.save, state.save.activePilotId, (pilot) => wear(pilot, id)) }))
+      },
+
+      leavePetHome() {
+        set((state) => ({ save: updatePilot(state.save, state.save.activePilotId, leavePetHome) }))
+      },
+
+      nameStar(name) {
+        set((state) => ({ save: updatePilot(state.save, state.save.activePilotId, (pilot) => nameStar(pilot, name)) }))
       },
 
       launch() {

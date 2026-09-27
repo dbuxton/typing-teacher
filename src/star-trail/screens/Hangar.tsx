@@ -4,7 +4,7 @@ import { STORY } from '../data/story'
 import { totalPieces, TOTAL_PIECES } from '../engine/settle'
 import { useStarTrail } from '../store/pilotStore'
 import { NeonButton } from '../components/Chrome'
-import { ShipSprite } from '../components/Sprites'
+import { ShipSprite } from '../components/PilotShip'
 
 const AVATARS = ['🧑‍🚀', '👩‍🚀', '👨‍🚀', '🤖', '👽', '🐙', '🦊', '🐱', '🐸', '🦄', '🐉', '🦉']
 
@@ -56,6 +56,7 @@ export function Hangar() {
                 className="flex flex-1 items-center gap-4 rounded-xl p-1 text-left hover:bg-white/5"
               >
                 <span className="text-4xl">{pilot.avatar}</span>
+                <ShipSprite size={64} look={pilot.look} flame={false} />
                 <span className="flex-1">
                   <span className="block text-xl font-extrabold">{pilot.name}</span>
                   <span className="block text-sm text-dim">

@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { NO_UPGRADES } from '../engine/balance'
 import type { HuntOutcome } from '../engine/trail'
 import { makePilot, SAVE_VERSION, STORAGE_KEY, type Pilot } from './schema'
 
@@ -23,6 +24,8 @@ function outcome(result: HuntOutcome['result'], extra: Partial<HuntOutcome> = {}
     keyErrors: { a: 1 },
     banked: 14,
     loot: 0,
+    petBonus: 0,
+    petTricks: 0,
     tankLeft: result === 'towed' ? 0 : 5,
     sparklesShown: 0,
     sparklesCaught: 0,
@@ -106,6 +109,26 @@ describe('the Star Trail store', () => {
     expect(pilot()).toMatchObject({ stardust: 10, upgrades: { shields: 0 } })
   })
 
+  it('loads gadgets, sells and swaps makeovers and pets, and names stars', () => {
+    seed({ stardust: 500 })
+    const store = useStarTrail.getState()
+    store.buyGadget('clover')
+    store.buyItem('paint:gold')
+    store.buyItem('pet:cat')
+    store.wear('paint:cyan')
+    store.leavePetHome()
+    store.nameStar('Biscuit')
+    expect(pilot()).toMatchObject({
+      cargo: { clover: 1 },
+      owned: ['paint:gold', 'pet:cat'],
+      look: { paint: 'paint:cyan', pet: null },
+      stars: ['Biscuit'],
+    })
+    // Nothing can be worn that isn't owned.
+    store.wear('ship:cruiser')
+    expect(pilot().look.ship).toBe('ship:dart')
+  })
+
   it('launches only when the pieces, engine and navigator are all ready', () => {
     const history = [
       { planet: 1, result: 'found' as const, practice: false, letters: 30, slips: 1, accuracy: 0.97, newKeyTries: 30, newKeySlips: 1, stardust: 30, help: 'letters' as const, date: '2026-09-27' },
@@ -114,7 +137,7 @@ describe('the Star Trail store', () => {
     useStarTrail.getState().launch()
     expect(pilot().highestPlanet).toBe(1)
 
-    seed({ pieces: { 1: 3 }, history, upgrades: { scanner: 0, shields: 0, robot: 0, engines: 1 } })
+    seed({ pieces: { 1: 3 }, history, upgrades: { ...NO_UPGRADES, engines: 1 } })
     useStarTrail.getState().launch()
     expect(pilot()).toMatchObject({ planet: 2, highestPlanet: 2 })
     expect(useStarTrail.getState()).toMatchObject({ screen: 'arrival', justLaunched: true })

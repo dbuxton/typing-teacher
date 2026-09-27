@@ -1,7 +1,19 @@
 import { describe, expect, it } from 'vitest'
+import { DEFAULT_LOOK } from '../data/makeovers'
 import { PLANETS } from '../data/planets'
 import { makePilot, type Pilot } from '../store/schema'
-import { HISTORY_LIMIT, PIECES_PER_PLANET, planetBalance } from './balance'
+import {
+  CLOVER_MULTIPLIER,
+  FLARE_LETTERS,
+  HISTORY_LIMIT,
+  NO_UPGRADES,
+  PET_BONUS,
+  PIECES_PER_PLANET,
+  PUPPY_FROM,
+  PUPPY_TO,
+  TANK_CANS,
+  planetBalance,
+} from './balance'
 import { planHunt, type HuntPlan } from './plan'
 import { settleHunt, totalPieces, TOTAL_PIECES } from './settle'
 import type { HuntOutcome } from './trail'
@@ -18,6 +30,8 @@ function outcome(result: HuntOutcome['result'], extra: Partial<HuntOutcome> = {}
     keyErrors: { a: 2 },
     banked: 20,
     loot: 0,
+    petBonus: 0,
+    petTricks: 0,
     tankLeft: 5,
     sparklesShown: 0,
     sparklesCaught: 0,
@@ -106,5 +120,58 @@ describe('after a hunt', () => {
     let pilot = pilotWith()
     for (let i = 0; i < HISTORY_LIMIT + 5; i++) pilot = settleHunt(pilot, planFor(pilot), outcome('found')).pilot
     expect(pilot.history).toHaveLength(HISTORY_LIMIT)
+  })
+})
+
+describe('gadgets, a bigger tank and pets', () => {
+  const loaded = { fuel: 2, shield: 1, flare: 1, clover: 1 }
+
+  it('fills the tank the fuel-tank level buys', () => {
+    expect(planFor(pilotWith()).tank).toBe(TANK_CANS[0])
+    expect(planFor(pilotWith({ upgrades: { ...NO_UPGRADES, tank: 2 } })).tank).toBe(TANK_CANS[2])
+  })
+
+  it('uses every loaded gadget on the next hunt, and only that one', () => {
+    const plain = planFor(pilotWith())
+    const pilot = pilotWith({ cargo: loaded })
+    const plan = planFor(pilot)
+    expect(plan.gadgets).toEqual(loaded)
+    expect(plan.spare).toBe(plain.spare + 2)
+    expect(plan).toMatchObject({ shields: plain.shields + 1, maxShields: plain.maxShields + 1 })
+    expect(plan.visible).toBe(plain.visible + FLARE_LETTERS)
+    expect(plan.stardustPerLetter).toBe(plain.stardustPerLetter * CLOVER_MULTIPLIER)
+    // The trail doesn't grow to swallow them: they're a head start, not a harder hunt.
+    expect(plan.text).toBe(plain.text)
+
+    const { pilot: after, summary } = settleHunt(pilot, plan, outcome('found'))
+    expect(after.cargo).toEqual({ fuel: 0, shield: 0, flare: 0, clover: 0 })
+    expect(summary.gadgets).toEqual(loaded)
+  })
+
+  it('saves extra fuel and shields for after the training flights, when they can matter', () => {
+    const pilot = pilotWith({ huntsFlown: 0, cargo: loaded })
+    const plan = planFor(pilot)
+    expect(plan.training).toBe(true)
+    expect(plan.gadgets).toEqual({ fuel: 0, shield: 0, flare: 1, clover: 1 })
+    expect(settleHunt(pilot, plan, outcome('found')).pilot.cargo).toEqual({ fuel: 2, shield: 1, flare: 0, clover: 0 })
+  })
+
+  it('keeps the gadgets when a pilot backs out before typing a letter', () => {
+    const pilot = pilotWith({ cargo: loaded })
+    const { pilot: after } = settleHunt(pilot, planFor(pilot), outcome('aborted', { letters: 0, banked: 0 }))
+    expect(after.cargo).toEqual(loaded)
+  })
+
+  it('takes the chosen pet along, and pays for its tricks', () => {
+    expect(planFor(pilotWith()).pet).toBeNull()
+    const pilot = pilotWith({ owned: ['pet:puppy'], look: { ...DEFAULT_LOOK, pet: 'pet:puppy' } })
+    const plan = planFor(pilot)
+    expect(plan.pet).toMatchObject({ id: 'puppy', bonus: Math.round(PET_BONUS.puppy * plan.stardustPerLetter) })
+    expect(plan.pet!.fetchAt).toBeGreaterThanOrEqual(Math.ceil(plan.text.length * PUPPY_FROM))
+    expect(plan.pet!.fetchAt).toBeLessThanOrEqual(Math.floor(plan.text.length * PUPPY_TO))
+
+    const { pilot: after, summary } = settleHunt(pilot, plan, outcome('found', { petBonus: 3, petTricks: 1 }))
+    expect(summary).toMatchObject({ pet: 'pet:puppy', petTricks: 1, payout: { pet: 3 } })
+    expect(after.stardust).toBe(summary.payout.total)
   })
 })
