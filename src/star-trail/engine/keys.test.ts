@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { intentFor, preventsDefault } from './keys'
+import { intentFor, layoutDiffers, preventsDefault } from './keys'
 
 describe('reading the keyboard', () => {
   it('turns letters, the space bar and punctuation into keystrokes', () => {
@@ -47,5 +47,14 @@ describe('reading the keyboard', () => {
       expect(preventsDefault(key), key).toBe(true)
     }
     for (const key of ['F5', 'Escape', 'Shift']) expect(preventsDefault(key), key).toBe(false)
+  })
+
+  it('notices a keyboard laid out differently from the QWERTY picture', () => {
+    expect(layoutDiffers('KeyA', 'a')).toBe(false)
+    expect(layoutDiffers('KeyA', 'A')).toBe(false)
+    expect(layoutDiffers('KeyQ', 'a')).toBe(true) // AZERTY
+    expect(layoutDiffers('KeyY', 'z')).toBe(true) // QWERTZ
+    expect(layoutDiffers('Space', ' ')).toBe(false)
+    expect(layoutDiffers('Semicolon', 'm')).toBe(false) // only letter keys are compared
   })
 })

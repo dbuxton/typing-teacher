@@ -54,3 +54,14 @@ export function intentFor(input: KeyInput): KeyIntent | null {
 export function preventsDefault(key: string): boolean {
   return key.length === 1 || ['Backspace', 'Tab', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key)
 }
+
+/**
+ * Is the kid's keyboard laid out differently from the QWERTY picture on screen?
+ * A letter key reports where it physically is (`code`) as well as what it typed
+ * (`key`); on AZERTY or Dvorak those disagree, and the finger guide can't be
+ * trusted. Worth one gentle heads-up rather than silent confusion.
+ */
+export function layoutDiffers(code: string, key: string): boolean {
+  if (!/^Key[A-Z]$/.test(code) || !/^[a-z]$/i.test(key)) return false
+  return code.slice(3).toLowerCase() !== key.toLowerCase()
+}

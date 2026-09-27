@@ -4,6 +4,8 @@ import { CATCH_KEY, PAUSE_KEY, SKIP_KEY } from '../engine/keys'
 import { PLANETS, isTypeableOn, keysFor, newKeysIn } from './planets'
 import { SENTENCES } from './sentences'
 import { SHIP_PARTS } from './ship'
+import { ENDING } from './ending'
+import { SHIP_SHAPES } from '../components/shipShapes'
 
 describe('planets', () => {
   it('teaches keys in a pinned order, so a change to Typing Teacher’s curriculum fails loudly', () => {
@@ -106,5 +108,19 @@ describe('the whole galaxy of messages', () => {
     for (const planet of PLANETS.filter((p) => p.newKeys.includes('Shift'))) {
       for (const message of SENTENCES[planet.id]) expect(message[0], message).toMatch(/[A-Z]/)
     }
+  })
+})
+
+describe('the Lost Ship', () => {
+  it('draws every part in three pieces', () => {
+    for (const part of SHIP_PARTS) {
+      expect(SHIP_SHAPES[part.id], part.name).toHaveLength(3)
+      for (const path of SHIP_SHAPES[part.id]) expect(path.trim().startsWith('M'), part.name).toBe(true)
+    }
+  })
+
+  it('has an ending to reach', () => {
+    expect(ENDING.title.length).toBeGreaterThan(0)
+    expect(ENDING.lines.length).toBeGreaterThan(0)
   })
 })
