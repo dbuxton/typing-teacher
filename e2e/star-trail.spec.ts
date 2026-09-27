@@ -312,3 +312,73 @@ test('the last piece completes the Lost Ship and plays the ending', async ({ pag
   await page.getByRole('button', { name: /The Lost Ship is complete/ }).click()
   await expect(page.getByTestId('ending-title')).toHaveText('The Lost Ship flies again!')
 })
+
+test('makeovers bought at the station fly on the next hunt, and are saved', async ({ page }) => {
+  await seed(page, { stardust: 300 })
+  await page.getByRole('button', { name: /Station/ }).click()
+  await page.getByRole('tab', { name: 'Makeovers' }).click()
+  await page.getByRole('button', { name: 'Buy Bubblegum pink for 20 stardust' }).click()
+  await page.getByRole('button', { name: /Ships/ }).click()
+  // Trying one on is free: only the preview changes.
+  await page.getByRole('button', { name: 'Try on Space shuttle' }).click()
+  await expect(page.getByTestId('preview').locator('[data-ship="shuttle"]')).toBeVisible()
+  await expect(page.getByTestId('stardust')).toHaveText('280')
+  await page.getByRole('button', { name: 'Buy Flying saucer for 90 stardust' }).click()
+  await page.getByRole('button', { name: /Trail colours/ }).click()
+  await page.getByRole('button', { name: 'Buy Slime for 25 stardust' }).click()
+  await expect(page.getByTestId('stardust')).toHaveText('165')
+
+  await page.getByRole('button', { name: /Galaxy/ }).first().click()
+  await page.getByRole('button', { name: /Hunt!/ }).click()
+  await expect(trail(page)).toHaveAttribute('data-trail', 'trail:lime')
+  await expect(trail(page).locator('[data-ship="saucer"][data-paint="paint:pink"]')).toBeVisible()
+
+  const saved = await savedPilot(page)
+  expect(saved.owned).toEqual(['paint:pink', 'ship:saucer', 'trail:lime'])
+  expect(saved.look).toMatchObject({ paint: 'paint:pink', ship: 'ship:saucer', trail: 'trail:lime' })
+})
+
+test('a pet rides along on the hunt and brings its own stardust', async ({ page }) => {
+  await seed(page, { stardust: 150 })
+  await page.getByRole('button', { name: /Station/ }).click()
+  await page.getByRole('tab', { name: 'Pets' }).click()
+  await page.getByRole('button', { name: 'Adopt Baby alien for 100 stardust' }).click()
+  await expect(page.getByText('Riding along ✓')).toBeVisible()
+
+  await page.getByRole('button', { name: /Galaxy/ }).first().click()
+  await page.getByRole('button', { name: /Hunt!/ }).click()
+  await expect(page.getByTestId('pet').locator('[data-pet="alien"]')).toBeVisible()
+  await flyToTheEnd(page)
+  await expect(page.getByText(/Your baby alien waved at \d+ words?/)).toBeVisible()
+})
+
+test('gadgets and a star map are loaded for the next hunt, then used up', async ({ page }) => {
+  await seed(page, { stardust: 100 })
+  await page.getByRole('button', { name: /Station/ }).click()
+  await page.getByRole('button', { name: 'Buy Star map level 1 for 35 stardust' }).click()
+  await page.getByRole('tab', { name: 'Gadgets' }).click()
+  await page.getByRole('button', { name: 'Buy Emergency fuel for 10 stardust' }).click()
+  await expect(page.getByText('Loaded 1 of 3')).toBeVisible()
+
+  await page.getByRole('button', { name: /Galaxy/ }).first().click()
+  await expect(page.getByTestId('cargo')).toContainText('🥫')
+  await page.getByRole('button', { name: /Hunt!/ }).click()
+  await expect(gauges(page)).toHaveAttribute('data-spare', '1')
+  await expect(page.getByTestId('map-count')).toContainText(/\d+ words? to the piece/)
+  await flyToTheEnd(page)
+  await expect(page.getByRole('heading', { name: 'Found it!' })).toBeVisible()
+  expect((await savedPilot(page)).cargo.fuel).toBe(0)
+})
+
+test('a star named at the station twinkles on the galaxy map', async ({ page }) => {
+  await seed(page, { stardust: 60 })
+  await page.getByRole('button', { name: /Station/ }).click()
+  await page.getByRole('tab', { name: 'Name a star' }).click()
+  await page.getByLabel('Star name').fill('Biscuit')
+  await page.getByLabel('Star name').press('Enter')
+  await expect(page.getByRole('list', { name: 'Stars you’ve named' })).toContainText('Biscuit')
+  await expect(page.getByTestId('stardust')).toHaveText('10')
+
+  await page.getByRole('button', { name: /Galaxy/ }).first().click()
+  await expect(page.getByRole('region', { name: 'Your named stars' })).toContainText('Biscuit')
+})

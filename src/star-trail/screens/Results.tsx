@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { speak } from '../../engine/speech'
 import { getPlanet } from '../data/planets'
+import { petFor } from '../data/pets'
 import { shipPart } from '../data/ship'
 import { PIECES_PER_PLANET } from '../engine/balance'
 import { lessHelpMessage, moreHelpMessage, HELP_ORDER } from '../engine/help'
@@ -8,7 +9,9 @@ import { useStarTrail } from '../store/pilotStore'
 import type { Pilot } from '../store/schema'
 import { NeonButton, TopBar, useEnterToContinue } from '../components/Chrome'
 import { LostShipArt } from '../components/LostShipArt'
-import { ShipSprite, TowDroneSprite } from '../components/Sprites'
+import { PetSprite } from '../components/PetSprite'
+import { ShipSprite } from '../components/PilotShip'
+import { TowDroneSprite } from '../components/Sprites'
 import { Starfield } from '../components/Starfield'
 
 /** The two ways a hunt can end: a piece found, or a tow home. */
@@ -34,6 +37,7 @@ export function Found({ pilot }: { pilot: Pilot }) {
   const rightFirstTime = summary.letters - summary.slips
   const helpChanged = summary.helpAfter !== summary.helpBefore
   const lessHelp = HELP_ORDER.indexOf(summary.helpAfter) > HELP_ORDER.indexOf(summary.helpBefore)
+  const pet = petFor(summary.pet)
 
   return (
     <div className="st-screen">
@@ -90,11 +94,24 @@ export function Found({ pilot }: { pilot: Pilot }) {
               <dd className="text-right font-bold">✨ {payout.loot}</dd>
             </>
           )}
+          {payout.pet > 0 && pet && (
+            <>
+              <dt className="flex items-center gap-2 text-dim">
+                <PetSprite pet={pet.pet} size={24} />
+                Your {pet.name.toLowerCase()} {pet.did(summary.petTricks)}
+              </dt>
+              <dd className="text-right font-bold">✨ {payout.pet}</dd>
+            </>
+          )}
           <dt className="border-t border-space-600 pt-1 font-extrabold text-neon-gold">Total</dt>
           <dd className="border-t border-space-600 pt-1 text-right font-extrabold text-neon-gold" data-testid="payout-total">
             +{payout.total} ✨
           </dd>
         </dl>
+
+        {summary.gadgets.clover > 0 && (
+          <p className="font-bold text-neon-lime">🍀 Your lucky clover doubled the stardust from every letter!</p>
+        )}
 
         <p className="text-dim">
           {rightFirstTime} of {summary.letters} letters right first time
@@ -145,7 +162,7 @@ export function Towed({ pilot }: { pilot: Pilot }) {
       <main className="relative z-10 mx-auto flex w-full max-w-2xl flex-1 flex-col items-center gap-5 px-4 pb-10 text-center">
         <div className="st-tow flex flex-col items-center">
           <TowDroneSprite size={120} />
-          <ShipSprite size={90} flame={false} className="text-neon-amber" />
+          <ShipSprite size={90} flame={false} look={pilot.look} tint="var(--color-neon-amber)" />
         </div>
         <h1 className="neon-title text-5xl font-black text-neon-amber">Out of fuel!</h1>
         <p className="text-xl">No problem — the tow-drone has brought you safely home.</p>
@@ -155,8 +172,8 @@ export function Towed({ pilot }: { pilot: Pilot }) {
           </p>
         )}
         <p className="text-dim">
-          The next trail will be a bit shorter{spareComing ? ', and Mission Control is adding spare fuel' : ''}. Shields from the
-          space station soak up slips before they cost fuel.
+          The next trail will be a bit shorter{spareComing ? ', and Mission Control is adding spare fuel' : ''}. Shields and a
+          bigger fuel tank from the space station give you room for more slips.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <NeonButton tone="lime" size="lg" onClick={() => startHunt()}>

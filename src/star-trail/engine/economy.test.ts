@@ -1,15 +1,20 @@
 import { describe, expect, it } from 'vitest'
-import { makePilot, type HuntRecord, type Pilot } from '../store/schema'
+import { makePilot, maxLevel, type HuntRecord, type Pilot } from '../store/schema'
 import {
+  MAGNET_LEVELS,
+  MAP_LEVELS,
   NAV_ACCURACY,
   NAV_FLOOR,
   NAV_MIN_TRIES,
+  NO_UPGRADES,
   PLANET_BALANCE,
   ROBOT_LEVELS,
   SCANNER_LEVELS,
   SHIELD_LEVELS,
+  TANK_LEVELS,
   TRACKS,
   planetBalance,
+  type Upgrades,
 } from './balance'
 import {
   buyUpgrade,
@@ -21,6 +26,7 @@ import {
   payoutFor,
   stardustPerLetter,
   stockStatus,
+  suggestHelper,
   travelTo,
 } from './economy'
 import type { HuntOutcome } from './trail'
@@ -37,6 +43,8 @@ function outcome(result: HuntOutcome['result'], extra: Partial<HuntOutcome> = {}
     keyErrors: {},
     banked: 20,
     loot: 6,
+    petBonus: 0,
+    petTricks: 0,
     tankLeft: 4,
     sparklesShown: 2,
     sparklesCaught: 2,
@@ -68,13 +76,14 @@ function hunt(planet: number, newKeyTries: number, newKeySlips: number): HuntRec
 describe('payouts', () => {
   const balance = planetBalance(2)
 
-  it('pays for the trail, the piece, the fuel left and the robot’s catches', () => {
-    expect(payoutFor(2, false, outcome('found'))).toEqual({
+  it('pays for the trail, the piece, the fuel left, the robot’s catches and the pet’s tricks', () => {
+    expect(payoutFor(2, false, outcome('found', { petBonus: 4, petTricks: 2 }))).toEqual({
       trail: 20,
       piece: balance.pieceBonus,
       fuel: balance.fuelBonus * 4,
       loot: 6,
-      total: 20 + balance.pieceBonus + balance.fuelBonus * 4 + 6,
+      pet: 4,
+      total: 20 + balance.pieceBonus + balance.fuelBonus * 4 + 6 + 4,
     })
   })
 
@@ -84,25 +93,38 @@ describe('payouts', () => {
 
   it('keeps what was banked after a tow or a trip back to base, and nothing more', () => {
     for (const result of ['towed', 'aborted'] as const) {
-      expect(payoutFor(2, false, outcome(result))).toEqual({ trail: 20, piece: 0, fuel: 0, loot: 6, total: 26 })
+      expect(payoutFor(2, false, outcome(result, { petBonus: 3 }))).toEqual({
+        trail: 20,
+        piece: 0,
+        fuel: 0,
+        loot: 6,
+        pet: 3,
+        total: 29,
+      })
     }
   })
 
   it('pays more per letter deeper in space', () => {
-    const shallow = stardustPerLetter(4, { scanner: 1, shields: 1, robot: 0, engines: 3 })
-    const deep = stardustPerLetter(4, { scanner: 1, shields: 1, robot: 1, engines: 3 })
+    const shallow = stardustPerLetter(4, { ...NO_UPGRADES, scanner: 1, shields: 1, robot: 0, engines: 3 })
+    const deep = stardustPerLetter(4, { ...NO_UPGRADES, scanner: 1, shields: 1, robot: 1, engines: 3 })
     expect(deep).toBeGreaterThan(shallow)
   })
 
+  it('pays a tenth more per letter for every level of stardust magnet', () => {
+    const plain = stardustPerLetter(1, NO_UPGRADES)
+    expect(stardustPerLetter(1, { ...NO_UPGRADES, magnet: 1 })).toBeCloseTo(plain * 1.1)
+    expect(stardustPerLetter(1, { ...NO_UPGRADES, magnet: 2 })).toBeCloseTo(plain * 1.2)
+  })
+
   it('only lets a robot catch anything', () => {
-    expect(lootPerCatch(3, { scanner: 0, shields: 0, robot: 0, engines: 2 })).toBeNull()
-    expect(lootPerCatch(3, { scanner: 0, shields: 0, robot: 1, engines: 2 })).toBeGreaterThan(0)
+    expect(lootPerCatch(3, { ...NO_UPGRADES, scanner: 0, shields: 0, robot: 0, engines: 2 })).toBeNull()
+    expect(lootPerCatch(3, { ...NO_UPGRADES, scanner: 0, shields: 0, robot: 1, engines: 2 })).toBeGreaterThan(0)
   })
 })
 
 describe('the space station', () => {
   it('charges more for every level, on every track', () => {
-    for (const levels of [SCANNER_LEVELS, SHIELD_LEVELS, ROBOT_LEVELS]) {
+    for (const levels of [SCANNER_LEVELS, SHIELD_LEVELS, ROBOT_LEVELS, TANK_LEVELS, MAP_LEVELS, MAGNET_LEVELS]) {
       for (let i = 1; i < levels.length; i++) expect(levels[i].price).toBeGreaterThan(levels[i - 1].price)
     }
     const engines = PLANET_BALANCE.slice(0, -1).map((b) => b.enginePrice ?? 0)
@@ -110,13 +132,15 @@ describe('the space station', () => {
   })
 
   it('stocks higher levels only once the pilot has flown far enough', () => {
-    const rich = pilotWith({ stardust: 10_000, upgrades: { scanner: 1, shields: 0, robot: 0, engines: 0 } })
+    const rich = pilotWith({ stardust: 10_000, upgrades: { ...NO_UPGRADES, scanner: 1, shields: 0, robot: 0, engines: 0 } })
     expect(stockStatus(rich, 'scanner').status).toBe('not-yet')
     expect(stockStatus({ ...rich, highestPlanet: 3, upgrades: { ...rich.upgrades, engines: 2 } }, 'scanner').status).toBe(
       'buy',
     )
-    // The robot isn't sold on the first planet at all.
-    expect(stockStatus(rich, 'robot').status).toBe('not-yet')
+    // The robot, the bigger tank and the magnet aren't sold on the first planet
+    // at all; the star map is, so there's something new to buy straight away.
+    for (const track of ['robot', 'tank', 'magnet'] as const) expect(stockStatus(rich, track).status, track).toBe('not-yet')
+    expect(stockStatus(rich, 'map').status).toBe('buy')
   })
 
   it('sells the engine for the next planet only', () => {
@@ -136,15 +160,30 @@ describe('the space station', () => {
   })
 
   it('stops at the top of every track', () => {
-    const maxed = pilotWith({
-      stardust: 100_000,
-      highestPlanet: 10,
-      upgrades: { scanner: 4, shields: 4, robot: 3, engines: 9 },
-    })
+    const top = Object.fromEntries(TRACKS.map((track) => [track, maxLevel(track)])) as Upgrades
+    const maxed = pilotWith({ stardust: 100_000, highestPlanet: 10, upgrades: top })
     for (const track of TRACKS) {
       expect(stockStatus(maxed, track).status).toBe('maxed')
       expect(buyUpgrade(maxed, track)).toBeNull()
     }
+  })
+})
+
+describe('Mission Control’s tip', () => {
+  it('points a shaky pilot at room for slips, and a steady one at reading ahead', () => {
+    const shaky = pilotWith({ stardust: 0, slipRate: 0.25 })
+    expect(suggestHelper(shaky)).toBe('shields')
+    const steady = pilotWith({ stardust: 0, slipRate: 0.05 })
+    expect(suggestHelper(steady)).toBe('scanner')
+    // Just towed: fuel matters most, whatever the average says.
+    expect(suggestHelper({ ...steady, failStreak: 1 })).toBe('shields')
+  })
+
+  it('only ever suggests a helper that makes hunts easier, and one in stock', () => {
+    const far = pilotWith({ highestPlanet: 8, slipRate: 0.25, upgrades: { ...NO_UPGRADES, shields: 4, engines: 7 } })
+    expect(suggestHelper(far)).toBe('tank')
+    const everything = Object.fromEntries(TRACKS.map((track) => [track, maxLevel(track)])) as Upgrades
+    expect(suggestHelper(pilotWith({ highestPlanet: 10, upgrades: { ...everything, map: 0, magnet: 0 } }))).toBeNull()
   })
 })
 
@@ -163,7 +202,7 @@ describe('the navigator check', () => {
   })
 
   it('only counts hunts on the planet being left, and only recent ones', () => {
-    const elsewhere = pilotWith({ history: [hunt(1, 40, 0)], highestPlanet: 2, upgrades: { scanner: 0, shields: 0, robot: 0, engines: 1 } })
+    const elsewhere = pilotWith({ history: [hunt(1, 40, 0)], highestPlanet: 2, upgrades: { ...NO_UPGRADES, scanner: 0, shields: 0, robot: 0, engines: 1 } })
     expect(navCheck(elsewhere).tries).toBe(0)
     // A shaky start long ago shouldn't count against a pilot who has since improved.
     const improved = pilotWith({ history: [hunt(1, 40, 20), hunt(1, 20, 1), hunt(1, 20, 1)] })
@@ -180,7 +219,7 @@ describe('the navigator check', () => {
 describe('launching', () => {
   const ready = pilotWith({
     pieces: { 1: 3 },
-    upgrades: { scanner: 0, shields: 0, robot: 0, engines: 1 },
+    upgrades: { ...NO_UPGRADES, scanner: 0, shields: 0, robot: 0, engines: 1 },
     history: [hunt(1, 30, 1)],
   })
 
@@ -196,13 +235,13 @@ describe('launching', () => {
   })
 
   it('has nowhere further to go from the last planet', () => {
-    const last = pilotWith({ planet: 10, highestPlanet: 10, pieces: { 10: 3 }, upgrades: { scanner: 0, shields: 0, robot: 0, engines: 9 } })
+    const last = pilotWith({ planet: 10, highestPlanet: 10, pieces: { 10: 3 }, upgrades: { ...NO_UPGRADES, scanner: 0, shields: 0, robot: 0, engines: 9 } })
     expect(launchCheck(last).next).toBeNull()
     expect(launch(last)).toBeNull()
   })
 
   it('lets a pilot fly back to any planet already visited, and no further', () => {
-    const far = pilotWith({ planet: 4, highestPlanet: 4, upgrades: { scanner: 0, shields: 0, robot: 0, engines: 3 } })
+    const far = pilotWith({ planet: 4, highestPlanet: 4, upgrades: { ...NO_UPGRADES, scanner: 0, shields: 0, robot: 0, engines: 3 } })
     expect(travelTo(far, 2)?.planet).toBe(2)
     expect(travelTo(far, 5)).toBeNull()
     expect(travelTo(far, 0)).toBeNull()

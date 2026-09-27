@@ -46,24 +46,59 @@ costs anything, so one key you can't find won't empty the tank. Shields take
 the hit first. Run out and a tow-drone brings you home: you keep your stardust
 but not the piece. There are no timers anywhere.
 
-**Stardust** pays for four helpers at the **space station**:
+**Stardust** is spent at the **space station**, which has five counters.
+
+*Helpers* help you find the next piece. Higher levels come into stock as you
+fly further out.
 
 | Helper  | What it does |
 |---|---|
 | Scanner | See further along the trail |
 | Shields | Soak up slips before they cost fuel |
 | Robot   | Press ↑ to grab stardust sparkles as they drift past (a kid watching their hands misses them) |
+| Fuel tank | More cans in the tank: room for more slips |
+| Star map | Counts the words left to the piece; level 2 shows their shape too |
+| Stardust magnet | +10% stardust from every letter, per level |
 | Engines | Fly to the next planet |
+
+*Gadgets* are loaded onto the ship and used up on the next hunt: emergency
+fuel (an extra can), a shield booster, a star flare (see 3 more letters) and
+a lucky clover (double stardust from every letter). Their prices rise the
+further out you've flown, so a clover stays a gamble rather than a stardust
+printer. Extra fuel and shields wait until the training flights are over.
+
+*Makeovers* are just for fun: paint, five ships (star dart, retro rocket,
+flying saucer, space shuttle, star cruiser), trail colours, engine flames, and
+a horn that plays when you find a piece. Try one on for free before buying.
+Trail colours are never amber, because amber marks a slip (and a slipped
+letter also gets a dot beneath it).
+
+*Pets* ride along, one at a time, and each brings a little stardust with its
+trick. The space cat purrs on every 10 clean letters in a row, the moon puppy
+fetches a sparkle on every trail, the baby alien waves at every word, and the
+baby star dragon puffs a stardust ring when a piece is found without using any
+fuel from the tank.
+
+*Name a star*: pay 50 stardust and a star with any name you like twinkles on
+the galaxy map (up to 12).
+
+Everything but helpers is always in stock, so there's always something to
+save up for. **Mission Control** sits at the top of the station and shows how
+close the next engine is. It also suggests the helper that would help most:
+shields or a bigger tank for a pilot who's slipping a lot or was just towed,
+and a scanner for a steady one.
 
 The on-screen keyboard and finger guide are free, always. They fade as a
 pilot gets better and come back when they struggle.
 
 **The notebook's rule.** Each Secret Thing gets harder to find. Trails get longer with
 every piece and planet, and further planets are darker, so you see less of
-the trail. Every three helper upgrades also take you a step deeper, where
-it's darker and the trails are longer but the stardust is richer. Trail
-length is always capped by what the pilot's recent accuracy and fuel can
-cover, so a tow is real but occasional.
+the trail. Every three scanner, shield, robot or fuel-tank upgrades also take
+you a step deeper, where it's darker and the trails are longer but the
+stardust is richer. The star map and magnet don't count: one only shows
+where you are, and the other only brings money, which the notebook says is
+"not something that helps you". Trail length is always capped by what the
+pilot's recent accuracy and fuel can cover, so a tow is real but occasional.
 
 **Keeping it kind.** The first three hunts are training flights and can't run
 dry. Tows in a row shorten the next trail and add spare fuel. After five misses
@@ -82,7 +117,9 @@ data:
 | Planet names and colours | `data/planets.ts`. A test checks each name still hides its planet's new letters. |
 | The story, and where the Lost Ship takes you at the end | `data/story.ts` and `data/ending.ts` |
 | Ship part names | `data/ship.ts` |
-| Prices, fuel, trail lengths and every other number | `engine/balance.ts` |
+| Makeovers (names, colours, prices) | `data/makeovers.ts` |
+| Pets (names, what they do, prices) | `data/pets.ts`, with what their tricks are worth in `engine/balance.ts` |
+| Prices, fuel, gadgets, trail lengths and every other number | `engine/balance.ts` |
 
 Two dials in `engine/balance.ts` change the feel most:
 
@@ -91,18 +128,22 @@ Two dials in `engine/balance.ts` change the feel most:
   on each set of keys.
 
 `engine/journey.test.ts` flies simulated kids from 97% to 60% accuracy through
-the whole galaxy with the real game. If a change makes it unfair (or
-impossible to fail), a test goes red. `JOURNEY_REPORT=1 npx vitest run journey`
-prints the numbers.
+the whole galaxy with the real game. Most buy one helper per planet, the one
+Mission Control suggests. If a change makes it unfair (or impossible to
+fail), a test goes red. `JOURNEY_REPORT=1 npx vitest run journey` prints the
+numbers.
 
 ## Layout
 
 ```
-data/        planets (from Typing Teacher's curriculum), sentences, ship, shop text, ending
+data/        planets (from Typing Teacher's curriculum), sentences, ship, shop text, makeovers,
+             pets, ending
 engine/      pure rules, all unit-tested: the trail reducer, keys, trail choice, difficulty,
-             economy, planning and settling a hunt, keyboard help, sparkles, sound, useTrail
+             economy (helpers, engines, launching), shop (gadgets, makeovers, pets, stars),
+             planning and settling a hunt, keyboard help, sparkles, sound, useTrail
 store/       the save (schema.ts: sanitised, never throws), safe storage, the zustand store
-components/  neon keyboard and hands, the trail, gauges, sprites, the Lost Ship blueprint
+components/  neon keyboard and hands, the trail, gauges, the pilot's ship, pets, sprites,
+             the Lost Ship blueprint
 screens/     Hangar, Galaxy, Arrival, Hunt, Found/Towed, SpaceStation, LostShip/Ending
 ```
 

@@ -15,6 +15,7 @@ import {
   desiredLength,
   nextSlipRate,
   plannedSlipRate,
+  slack,
   trailTarget,
   visibleLetters,
 } from './difficulty'
@@ -109,6 +110,7 @@ describe('trail length', () => {
 
 describe('The notebook’s rule: helpers make the next hunt harder, but it pays more', () => {
   const kit = (scanner: number, shields: number, robot: number, engines = 0): Upgrades => ({
+    ...NO_UPGRADES,
     scanner,
     shields,
     robot,
@@ -125,6 +127,22 @@ describe('The notebook’s rule: helpers make the next hunt harder, but it pays 
     expect(darknessFor(1, kit(1, 1, 0))).toBe(0)
     expect(darknessFor(1, kit(1, 1, 1))).toBe(1)
     expect(darknessFor(9, kit(4, 4, 3))).toBe(planetBalance(9).darkness + 3)
+    // A bigger fuel tank helps too, so it counts.
+    expect(darknessFor(1, { ...kit(1, 1, 0), tank: 1 })).toBe(1)
+  })
+
+  it('doesn’t count the star map or the magnet: one only shows where you are, the other only brings stardust', () => {
+    const extras = { ...NO_UPGRADES, map: 2, magnet: 3 }
+    expect(darknessFor(1, extras)).toBe(0)
+    expect(desiredLength(3, 0, extras)).toBe(desiredLength(3, 0, NO_UPGRADES))
+  })
+
+  it('gives a bigger fuel tank room for more slips, and so a longer trail for a shaky pilot', () => {
+    expect(slack({ ...NO_UPGRADES, tank: 1 })).toBe(slack(NO_UPGRADES) + 1)
+    const shaky = { ...steady, planetId: 5, slipRate: 0.3 }
+    expect(trailTarget({ ...shaky, upgrades: { ...NO_UPGRADES, tank: 3 } }).length).toBeGreaterThan(
+      trailTarget({ ...shaky, upgrades: NO_UPGRADES }).length,
+    )
   })
 
   it('never lets a scanner upgrade show fewer letters, even when it takes you deeper', () => {

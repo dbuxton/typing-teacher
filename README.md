@@ -171,8 +171,10 @@ A second, quite different typing game lives at **`/typing-teacher/star-trail/`**
 (its own page, its own save, no links between the two). You fly a little ship
 along a trail of glowing letters. Only the next letter shows, and the letters
 build into words and then a message that leads to a piece of the Lost Ship.
-Stardust buys a scanner, shields, a robot sidekick and bigger engines. Wrong
-keys burn fuel, and running dry means a tow home. It's all drawn in neon, in
+Stardust buys helpers (a scanner, shields, a robot sidekick, a bigger fuel
+tank, a star map, a stardust magnet and bigger engines), one-hunt gadgets,
+ship makeovers, a pet that rides along, and stars to name. Wrong keys burn
+fuel, and running dry means a tow home. It's all drawn in neon, in
 code, with no image files.
 
 It teaches keys from scratch in the same order as the lessons here, and shares

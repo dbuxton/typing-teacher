@@ -1,5 +1,5 @@
 import { keysFor } from '../data/planets'
-import { MISSES_BEFORE_SKIP, SHIELD_REGEN_STREAK } from './balance'
+import { CAT_STREAK, MISSES_BEFORE_SKIP, SHIELD_REGEN_STREAK, type PetId } from './balance'
 
 /**
  * One hunt, keystroke by keystroke: the pure heart of Star Trail.
@@ -13,7 +13,7 @@ import { MISSES_BEFORE_SKIP, SHIELD_REGEN_STREAK } from './balance'
  *    from the tank. An empty tank means a tow home — unless it's a training
  *    flight, where the last can never runs out.
  *  - Stardust is banked each time a word is finished, so a tow never takes
- *    back what was already earned.
+ *    back what was already earned. A pet's tricks are banked the same way.
  *
  * Time is passed in with each action rather than read here, so the reducer is
  * pure: React's StrictMode can run it twice, and tests can replay a whole hunt.
@@ -31,7 +31,17 @@ export type TrailSetup = {
   stardustPerLetter: number
   /** Stardust one robot catch is worth, or null when there's no robot to catch with. */
   lootPerCatch: number | null
+  /** The pet riding along, if any. */
+  pet: PetSetup | null
 }
+
+/**
+ * A pet and what each of its tricks is worth. The space cat purrs on every run
+ * of clean letters, the baby alien waves at every word, the moon puppy fetches
+ * once (at `fetchAt`), and the star dragon puffs a ring if the piece is found
+ * without touching the fuel tank.
+ */
+export type PetSetup = { id: PetId; bonus: number; fetchAt: number | null }
 
 /** How each letter of the trail was typed. */
 export type Mark = 'clean' | 'slipped' | 'skipped'
@@ -52,6 +62,7 @@ export type TrailEventKind =
   | 'regen'
   | 'skip'
   | 'catch'
+  | 'pet'
   | 'found'
   | 'towed'
   | 'caps'
@@ -84,6 +95,9 @@ export type TrailState = {
   banked: number
   /** Stardust the robot has caught. */
   loot: number
+  /** Stardust the pet has brought, and how many tricks it took. */
+  petBonus: number
+  petTricks: number
   sparkle: { id: number } | null
   sparklesShown: number
   sparklesCaught: number
@@ -128,6 +142,8 @@ export function initTrail(setup: TrailSetup): TrailState {
     wordsDone: 0,
     banked: 0,
     loot: 0,
+    petBonus: 0,
+    petTricks: 0,
     sparkle: null,
     sparklesShown: 0,
     sparklesCaught: 0,
@@ -172,31 +188,46 @@ function withoutSparkle(state: TrailState): Pick<TrailState, 'sparkle' | 'sparkl
 }
 
 export function makeTrailReducer(setup: TrailSetup) {
-  const { text } = setup
+  const { text, pet } = setup
   // Sparkles only count as "shown" when there's a robot that could have caught them.
   const countsSparkles = setup.lootPerCatch !== null
 
-  /** Move on past the current letter, banking a word if it's the end of one. */
-  function advance(state: TrailState, mark: Mark, now: number, kind: TrailEventKind): TrailState {
+  /**
+   * Move on past the current letter, banking a word if it's the end of one.
+   * `purrs` is the cat's trick, which only the caller can see (it needs the
+   * streak); every other pet's trick happens here.
+   */
+  function advance(state: TrailState, mark: Mark, now: number, kind: TrailEventKind, purrs = 0): TrailState {
     const index = state.cursor
     const marks = [...state.marks]
     marks[index] = mark
     const endsWord = finishesWord(text, index)
+    const cursor = index + 1
+    const found = cursor >= text.length
+
+    let tricks = purrs
+    if (pet?.id === 'alien' && endsWord) tricks++
+    if (pet?.id === 'puppy' && cursor === pet.fetchAt) tricks++
+    if (pet?.id === 'dragon' && found && state.tank === setup.tank) tricks++
+
     const moved: TrailState = {
       ...state,
       marks,
-      cursor: index + 1,
+      cursor,
       missesHere: 0,
       chargedHere: false,
       offerSkip: false,
       capsHint: false,
       banked: endsWord ? state.banked + Math.round(setup.stardustPerLetter * wordLetters(text, index)) : state.banked,
       wordsDone: endsWord ? state.wordsDone + 1 : state.wordsDone,
+      petBonus: state.petBonus + tricks * (pet?.bonus ?? 0),
+      petTricks: state.petTricks + tricks,
     }
-    if (moved.cursor >= text.length) {
+    if (found) {
       return { ...moved, ...withoutSparkle(state), status: 'found', finishedAt: now, event: emit(state, 'found') }
     }
-    return { ...moved, event: emit(state, kind === 'hit' && endsWord ? 'word' : kind) }
+    const event = tricks > 0 ? 'pet' : kind === 'hit' && endsWord ? 'word' : kind
+    return { ...moved, event: emit(state, event) }
   }
 
   function typeKey(state: TrailState, char: string, capsLock: boolean, now: number): TrailState {
@@ -209,6 +240,7 @@ export function makeTrailReducer(setup: TrailSetup) {
       const cleanStreak = firstTry ? state.cleanStreak + 1 : 0
       const regain =
         cleanStreak >= SHIELD_REGEN_STREAK && !state.shieldRegained && state.shields < setup.maxShields
+      const purrs = pet?.id === 'cat' && firstTry && cleanStreak % CAT_STREAK === 0 ? 1 : 0
       const next = advance(
         {
           ...state,
@@ -221,6 +253,7 @@ export function makeTrailReducer(setup: TrailSetup) {
         firstTry ? 'clean' : 'slipped',
         now,
         'hit',
+        purrs,
       )
       return regain && next.status === 'flying' ? { ...next, event: emit(state, 'regen') } : next
     }
@@ -359,6 +392,23 @@ export function messageSoFar(state: TrailState, setup: TrailSetup): string {
   return lastSpace < 0 ? '' : typed.slice(0, lastSpace)
 }
 
+/**
+ * The words still to type, as their lengths: the one under way (if any) and
+ * every one after it. The star map counts them, and at level 2 draws them.
+ */
+export function wordsAhead(state: TrailState, setup: TrailSetup): number[] {
+  if (state.status !== 'flying') return []
+  const { text } = setup
+  // Back up to the start of the word under way — unless the ship sits on a
+  // space, when the last word is already done.
+  const start = text[state.cursor] === ' ' ? state.cursor : text.lastIndexOf(' ', state.cursor - 1) + 1
+  return text
+    .slice(start)
+    .split(' ')
+    .filter((word) => word.length > 0)
+    .map((word) => word.length)
+}
+
 export function lettersLeft(state: TrailState, setup: TrailSetup): number {
   return setup.text.length - state.cursor
 }
@@ -394,6 +444,8 @@ export type HuntOutcome = {
   keyErrors: Record<string, number>
   banked: number
   loot: number
+  petBonus: number
+  petTricks: number
   /** Fuel cans left in the tank (spares don't count). */
   tankLeft: number
   sparklesShown: number
@@ -415,6 +467,8 @@ export function outcomeOf(state: TrailState, now: number): HuntOutcome {
     keyErrors: state.keyErrors,
     banked: state.banked,
     loot: state.loot,
+    petBonus: state.petBonus,
+    petTricks: state.petTricks,
     tankLeft: state.tank,
     sparklesShown: state.sparklesShown,
     sparklesCaught: state.sparklesCaught,

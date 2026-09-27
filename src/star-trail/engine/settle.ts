@@ -1,6 +1,6 @@
 import { PLANET_COUNT, getPlanet } from '../data/planets'
 import { today, type HuntRecord, type KeyStat, type Pilot } from '../store/schema'
-import { HISTORY_LIMIT, MIN_LETTERS_TO_LEARN_FROM, PIECES_PER_PLANET } from './balance'
+import { GADGETS, HISTORY_LIMIT, MIN_LETTERS_TO_LEARN_FROM, PIECES_PER_PLANET, type GadgetId } from './balance'
 import { nextSlipRate } from './difficulty'
 import { payoutFor, type Payout } from './economy'
 import { helpAfterHunt, type HelpLevel } from './help'
@@ -38,6 +38,18 @@ export type HuntSummary = {
   shipComplete: boolean
   helpBefore: HelpLevel
   helpAfter: HelpLevel
+  /** Gadgets used up on this hunt. */
+  gadgets: Record<GadgetId, number>
+  /** The pet that rode along (by id), and how many tricks it did. */
+  pet: string | null
+  petTricks: number
+}
+
+/** What's left in the cargo hold once a hunt has used its gadgets. */
+function unload(cargo: Record<GadgetId, number>, used: Record<GadgetId, number>): Record<GadgetId, number> {
+  const left = { ...cargo }
+  for (const gadget of GADGETS) left[gadget] = Math.max(0, cargo[gadget] - used[gadget])
+  return left
 }
 
 export function mergeKeyStats(
@@ -83,6 +95,9 @@ export function settleHunt(
     shipComplete: partComplete && totalPieces(next) === TOTAL_PIECES,
     helpBefore: pilot.help,
     helpAfter: next.help,
+    gadgets: plan.gadgets,
+    pet: pilot.look.pet,
+    petTricks: outcome.petTricks,
   })
 
   // Backing out before typing anything changes nothing at all.
@@ -128,6 +143,7 @@ export function settleHunt(
     timesTowed: outcome.result === 'towed' ? pilot.timesTowed + 1 : pilot.timesTowed,
     help: counts ? helpAfterHunt(history, pilot.help) : pilot.help,
     history,
+    cargo: unload(pilot.cargo, plan.gadgets),
   }
   return { pilot: next, summary: summary(next) }
 }

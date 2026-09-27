@@ -3,6 +3,9 @@ import { maxLevel, type Pilot } from '../store/schema'
 import {
   DUST_BONUS_PER_DEEP_STEP,
   ENGINE_PRICE_SCALE,
+  MAGNET_BONUS,
+  MAGNET_LEVELS,
+  MAP_LEVELS,
   NAV_ACCURACY,
   NAV_FLOOR,
   NAV_MIN_TRIES,
@@ -13,7 +16,9 @@ import {
   PLANET_BALANCE,
   ROBOT_LEVELS,
   SCANNER_LEVELS,
+  SHAKY_SLIP_RATE,
   SHIELD_LEVELS,
+  TANK_LEVELS,
   planetBalance,
   type StockLevel,
   type TrackId,
@@ -31,8 +36,10 @@ import type { HuntOutcome } from './trail'
  * first planet saving up — practice, yes, but on the same eight keys.
  */
 
+/** Deeper space pays more, and so does a stardust magnet. */
 export function stardustPerLetter(planetId: number, upgrades: Upgrades): number {
-  return planetBalance(planetId).stardustPerLetter * (1 + DUST_BONUS_PER_DEEP_STEP * deepSteps(upgrades))
+  const bonus = DUST_BONUS_PER_DEEP_STEP * deepSteps(upgrades) + MAGNET_BONUS[upgrades.magnet]
+  return planetBalance(planetId).stardustPerLetter * (1 + bonus)
 }
 
 /** What one robot catch is worth, or null with no robot. */
@@ -50,6 +57,8 @@ export type Payout = {
   fuel: number
   /** Caught by the robot. */
   loot: number
+  /** Brought by the pet. */
+  pet: number
   total: number
 }
 
@@ -58,8 +67,9 @@ export function payoutFor(planetId: number, practice: boolean, outcome: HuntOutc
   const found = outcome.result === 'found'
   const piece = found && !practice ? balance.pieceBonus : 0
   const fuel = found ? balance.fuelBonus * outcome.tankLeft : 0
+  const { banked: trail, loot, petBonus: pet } = outcome
   // A tow or a trip back to base keeps what was already banked: nothing earned is taken away.
-  return { trail: outcome.banked, piece, fuel, loot: outcome.loot, total: outcome.banked + piece + fuel + outcome.loot }
+  return { trail, piece, fuel, loot, pet, total: trail + piece + fuel + loot + pet }
 }
 
 // ─── The space station ─────────────────────────────────────────────────────
@@ -74,6 +84,12 @@ function stockFor(track: TrackId): readonly StockLevel[] {
       return SHIELD_LEVELS
     case 'robot':
       return ROBOT_LEVELS
+    case 'tank':
+      return TANK_LEVELS
+    case 'map':
+      return MAP_LEVELS
+    case 'magnet':
+      return MAGNET_LEVELS
     case 'engines':
       // Engine level n reaches planet n + 1, and is sold once you're on planet n.
       return PLANET_BALANCE.slice(0, PLANET_COUNT - 1).map((balance, index) => ({
@@ -113,6 +129,23 @@ export function buyUpgrade(pilot: Pilot, track: TrackId): Pilot | null {
     stardust: pilot.stardust - stock.next.price,
     upgrades: { ...pilot.upgrades, [track]: stock.next.level },
   }
+}
+
+/**
+ * Mission Control's tip: the helper worth saving up for next. A pilot who is
+ * slipping a lot, or was just towed, needs room for slips (shields, a bigger
+ * tank); a steady pilot does best reading further ahead. Only helpers that make
+ * a hunt easier are ever suggested, and only ones in stock.
+ */
+export function suggestHelper(pilot: Pilot): TrackId | null {
+  const shaky = pilot.slipRate >= SHAKY_SLIP_RATE || pilot.failStreak > 0
+  const order: TrackId[] = shaky ? ['shields', 'tank', 'scanner', 'robot'] : ['scanner', 'shields', 'tank', 'robot']
+  return (
+    order.find((track) => {
+      const status = stockStatus(pilot, track).status
+      return status === 'buy' || status === 'too-dear'
+    }) ?? null
+  )
 }
 
 // ─── Launching to the next planet ──────────────────────────────────────────

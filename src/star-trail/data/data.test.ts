@@ -5,6 +5,10 @@ import { PLANETS, isTypeableOn, keysFor, newKeysIn } from './planets'
 import { SENTENCES } from './sentences'
 import { SHIP_PARTS } from './ship'
 import { ENDING } from './ending'
+import { DEFAULT_LOOK, KIND_INFO, MAKEOVERS, MAKEOVER_KINDS, makeoversOf } from './makeovers'
+import { PETS } from './pets'
+import { GADGET_INFO, TRACK_INFO } from './shop'
+import { GADGETS, TRACKS } from '../engine/balance'
 import { CREW, STORY } from './story'
 import { SHIP_SHAPES } from '../components/shipShapes'
 
@@ -136,6 +140,71 @@ describe('the Lost Ship', () => {
     for (const member of CREW) {
       expect(STORY.premise, member).toContain(member)
       expect(ENDING.lines.join(' '), member).toContain(member)
+    }
+  })
+})
+
+/** A colour's hue in degrees, from #rrggbb. */
+function hue(hex: string): number {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  if (max === min) return 0
+  const d = max - min
+  const h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4
+  return (h * 60 + 360) % 360
+}
+
+/** How saturated a colour is: whites and pale ices have next to no hue at all. */
+function saturation(hex: string): number {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+  return Math.max(r, g, b) - Math.min(r, g, b)
+}
+
+describe('the space station', () => {
+  it('describes every track and every gadget it sells', () => {
+    for (const track of TRACKS) expect(TRACK_INFO[track].name.length, track).toBeGreaterThan(0)
+    for (const gadget of GADGETS) expect(GADGET_INFO[gadget].name.length, gadget).toBeGreaterThan(0)
+  })
+
+  it('gives every makeover a unique id, named for its kind, and a price', () => {
+    const ids = MAKEOVERS.map((item) => item.id)
+    expect(new Set(ids).size).toBe(ids.length)
+    for (const item of MAKEOVERS) {
+      expect(item.id.startsWith(`${item.kind}:`), item.id).toBe(true)
+      expect(item.price, item.id).toBeGreaterThanOrEqual(0)
+    }
+  })
+
+  it('starts every ship with one free makeover of each kind, and charges for all the rest', () => {
+    for (const kind of MAKEOVER_KINDS) {
+      const [free, ...rest] = makeoversOf(kind)
+      expect(free.price, kind).toBe(0)
+      expect(DEFAULT_LOOK[kind]).toBe(free.id)
+      expect(rest.length, `${kind} has nothing to buy`).toBeGreaterThan(0)
+      for (const item of rest) expect(item.price, item.id).toBeGreaterThan(0)
+      expect(KIND_INFO[kind].name.length).toBeGreaterThan(0)
+    }
+  })
+
+  it('never paints a trail amber, the colour that marks a slip', () => {
+    const amber = hue('#ffb547')
+    for (const trail of makeoversOf('trail')) {
+      for (const colour of trail.colours) {
+        if (saturation(colour) < 0.3) continue
+        const gap = Math.min(Math.abs(hue(colour) - amber), 360 - Math.abs(hue(colour) - amber))
+        expect(gap, `${trail.name} ${colour}`).toBeGreaterThanOrEqual(15)
+      }
+    }
+  })
+
+  it('has pets with unique ids, a price and something to do', () => {
+    const ids = PETS.map((pet) => pet.id)
+    expect(new Set(ids).size).toBe(ids.length)
+    for (const pet of PETS) {
+      expect(pet.id).toBe(`pet:${pet.pet}`)
+      expect(pet.price).toBeGreaterThan(0)
+      expect(pet.did(2).length).toBeGreaterThan(0)
     }
   })
 })

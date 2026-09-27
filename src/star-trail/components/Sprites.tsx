@@ -1,22 +1,11 @@
 import { useId } from 'react'
 
 /**
- * The little neon things that fly about: the pilot's ship, the robot sidekick,
- * stardust sparkles, the tow-drone and planets. All plain SVG outlines; the glow
+ * The little neon things that fly about: the robot sidekick, stardust
+ * sparkles, the tow-drone and planets. The pilot's ship has a file of its own
+ * (PilotShip.tsx), and so do the pets. All plain SVG outlines; the glow
  * comes from CSS drop-shadows in the element's own colour.
  */
-
-export function ShipSprite({ size = 64, flame = true, className = '' }: { size?: number; flame?: boolean; className?: string }) {
-  return (
-    <svg width={size} height={size / 2} viewBox="-8 0 72 32" className={`st-glow ${className}`} aria-hidden>
-      {flame && <path className="st-flame" d="M6 12 L-6 16 L6 20 Z" fill="#ffb547" stroke="#ffe36e" strokeWidth="1" />}
-      <path d="M6 16 L18 7 H42 Q56 9 62 16 Q56 23 42 25 H18 Z" fill="#0b1236" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" />
-      <path d="M20 7 L13 1 H23 L30 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-      <path d="M20 25 L13 31 H23 L30 25" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-      <circle cx="45" cy="16" r="4.2" fill="#0b1236" stroke="#ff6fd8" strokeWidth="2" />
-    </svg>
-  )
-}
 
 export function RobotSprite({ size = 36, beeping = false }: { size?: number; beeping?: boolean }) {
   return (

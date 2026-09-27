@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
+import type { HornTune } from '../data/makeovers'
 import { intentFor, layoutDiffers, preventsDefault } from './keys'
 import type { HuntPlan } from './plan'
-import { playSound, type SoundKind } from './sound'
+import { playHorn, playPetSound, playSound, type SoundKind } from './sound'
 import {
   initTrail,
   isNearEnd,
@@ -36,7 +37,6 @@ const SOUND_FOR: Partial<Record<TrailEventKind, SoundKind>> = {
   rescued: 'slip',
   regen: 'regen',
   catch: 'catch',
-  found: 'found',
   towed: 'towed',
 }
 
@@ -49,10 +49,13 @@ export function useTrail({
   plan,
   onFinish,
   sound,
+  horn = 'chime',
 }: {
   plan: HuntPlan
   onFinish: (outcome: HuntOutcome) => void
   sound: boolean
+  /** What plays when the piece is found. */
+  horn?: HornTune
 }) {
   const reducer = useMemo(() => makeTrailReducer(plan), [plan])
   const [state, dispatch] = useReducer(reducer, plan, initTrail)
@@ -144,12 +147,17 @@ export function useTrail({
     return () => clearTimeout(timer)
   }, [state.recentlyMissed, state.wrongPresses])
 
-  // Sounds, one per event.
+  // Sounds, one per event. Finding the piece plays the pilot's own horn, and a
+  // pet's trick its own noise.
   useEffect(() => {
     if (!sound || !state.event) return
-    const kind = SOUND_FOR[state.event.kind]
-    if (kind) playSound(kind)
-  }, [sound, state.event])
+    if (state.event.kind === 'found') playHorn(horn)
+    else if (state.event.kind === 'pet' && plan.pet) playPetSound(plan.pet.id)
+    else {
+      const kind = SOUND_FOR[state.event.kind]
+      if (kind) playSound(kind)
+    }
+  }, [sound, state.event, horn, plan.pet])
 
   // The finish.
   useEffect(() => {
